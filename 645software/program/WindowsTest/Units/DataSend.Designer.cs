@@ -1,0 +1,429 @@
+﻿using TX.Framework.WindowUI.Controls;
+
+namespace LeafSoft.Units
+{
+    partial class DataSend
+    {
+        /// <summary> 
+        /// 必需的设计器变量。
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary> 
+        /// 清理所有正在使用的资源。
+        /// </summary>
+        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region 组件设计器生成的代码
+
+        /// <summary> 
+        /// 设计器支持所需的方法 - 不要
+        /// 使用代码编辑器修改此方法的内容。
+        /// </summary>
+        private void InitializeComponent()
+        {
+			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			this.dgCMD = new System.Windows.Forms.DataGridView();
+			this.IsAutoSend = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+			this.CType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.CMDText = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnSend = new System.Windows.Forms.DataGridViewButtonColumn();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.MS_Add = new System.Windows.Forms.ToolStripMenuItem();
+			this.MS_Edit = new System.Windows.Forms.ToolStripMenuItem();
+			this.MS_Delete = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnAutoSend = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
+			this.nmDelay = new System.Windows.Forms.NumericUpDown();
+			this.label2 = new System.Windows.Forms.Label();
+			this.lblCount = new System.Windows.Forms.LinkLabel();
+			this.label4 = new System.Windows.Forms.Label();
+			this.bPass = new TX.Framework.WindowUI.Controls.TXButton();
+			this.bVersion = new TX.Framework.WindowUI.Controls.TXButton();
+			this.label57 = new System.Windows.Forms.Label();
+			this.btnInputF460 = new TX.Framework.WindowUI.Controls.TXButton();
+			this.tbFilePath = new System.Windows.Forms.TextBox();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+			this.btn_升级 = new TX.Framework.WindowUI.Controls.TXButton();
+			this.pbProgressF460 = new System.Windows.Forms.ProgressBar();
+			this.llAllCout = new System.Windows.Forms.LinkLabel();
+			this.label3 = new System.Windows.Forms.Label();
+			this.txcbTransshipment = new TX.Framework.WindowUI.Controls.TXComboBox();
+			this.txcTransshipment = new TX.Framework.WindowUI.Controls.TXCheckBox();
+			((System.ComponentModel.ISupportInitialize)(this.dgCMD)).BeginInit();
+			this.contextMenuStrip1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.nmDelay)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// dgCMD
+			// 
+			this.dgCMD.AllowUserToAddRows = false;
+			this.dgCMD.AllowUserToDeleteRows = false;
+			this.dgCMD.AllowUserToResizeRows = false;
+			this.dgCMD.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.dgCMD.BackgroundColor = System.Drawing.Color.White;
+			dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			this.dgCMD.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			this.dgCMD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgCMD.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.IsAutoSend,
+            this.CType,
+            this.CMDText,
+            this.btnSend});
+			this.dgCMD.ContextMenuStrip = this.contextMenuStrip1;
+			this.dgCMD.Location = new System.Drawing.Point(179, 44);
+			this.dgCMD.MultiSelect = false;
+			this.dgCMD.Name = "dgCMD";
+			dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+			dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+			dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+			dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+			this.dgCMD.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+			this.dgCMD.RowHeadersVisible = false;
+			this.dgCMD.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+			this.dgCMD.RowTemplate.Height = 23;
+			this.dgCMD.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.dgCMD.Size = new System.Drawing.Size(103, 52);
+			this.dgCMD.TabIndex = 0;
+			this.dgCMD.Visible = false;
+			this.dgCMD.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgCMD_CellContentClick);
+			this.dgCMD.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dgCMD_RowsAdded);
+			// 
+			// IsAutoSend
+			// 
+			this.IsAutoSend.HeaderText = "参与循环";
+			this.IsAutoSend.Name = "IsAutoSend";
+			this.IsAutoSend.Width = 60;
+			// 
+			// CType
+			// 
+			this.CType.DataPropertyName = "ContentTypeName";
+			dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+			dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+			this.CType.DefaultCellStyle = dataGridViewCellStyle2;
+			this.CType.HeaderText = "类型";
+			this.CType.Name = "CType";
+			this.CType.ReadOnly = true;
+			this.CType.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+			this.CType.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+			this.CType.Width = 60;
+			// 
+			// CMDText
+			// 
+			this.CMDText.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.CMDText.DataPropertyName = "Text";
+			this.CMDText.HeaderText = "命令";
+			this.CMDText.Name = "CMDText";
+			this.CMDText.ReadOnly = true;
+			// 
+			// btnSend
+			// 
+			this.btnSend.HeaderText = "发送";
+			this.btnSend.Name = "btnSend";
+			this.btnSend.ReadOnly = true;
+			this.btnSend.Text = "发送";
+			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MS_Add,
+            this.MS_Edit,
+            this.MS_Delete});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(101, 70);
+			// 
+			// MS_Add
+			// 
+			this.MS_Add.Name = "MS_Add";
+			this.MS_Add.Size = new System.Drawing.Size(100, 22);
+			// 
+			// MS_Edit
+			// 
+			this.MS_Edit.Name = "MS_Edit";
+			this.MS_Edit.Size = new System.Drawing.Size(100, 22);
+			// 
+			// MS_Delete
+			// 
+			this.MS_Delete.Name = "MS_Delete";
+			this.MS_Delete.Size = new System.Drawing.Size(100, 22);
+			this.MS_Delete.Text = "删除";
+			this.MS_Delete.Click += new System.EventHandler(this.MS_Delete_Click);
+			// 
+			// btnAutoSend
+			// 
+			this.btnAutoSend.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.btnAutoSend.Location = new System.Drawing.Point(323, 56);
+			this.btnAutoSend.Name = "btnAutoSend";
+			this.btnAutoSend.Size = new System.Drawing.Size(91, 33);
+			this.btnAutoSend.TabIndex = 1;
+			this.btnAutoSend.Text = "循环发送";
+			this.btnAutoSend.UseVisualStyleBackColor = true;
+			this.btnAutoSend.Visible = false;
+			this.btnAutoSend.Click += new System.EventHandler(this.btnAutoSend_Click);
+			// 
+			// label1
+			// 
+			this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(166, 68);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(65, 12);
+			this.label1.TabIndex = 2;
+			this.label1.Text = "发送间隔：";
+			this.label1.Visible = false;
+			// 
+			// nmDelay
+			// 
+			this.nmDelay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.nmDelay.Location = new System.Drawing.Point(225, 64);
+			this.nmDelay.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+			this.nmDelay.Name = "nmDelay";
+			this.nmDelay.Size = new System.Drawing.Size(70, 21);
+			this.nmDelay.TabIndex = 3;
+			this.nmDelay.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+			this.nmDelay.Visible = false;
+			this.nmDelay.ValueChanged += new System.EventHandler(this.nmDelay_ValueChanged);
+			// 
+			// label2
+			// 
+			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(299, 68);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(29, 12);
+			this.label2.TabIndex = 4;
+			this.label2.Text = "毫秒";
+			this.label2.Visible = false;
+			// 
+			// lblCount
+			// 
+			this.lblCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.lblCount.AutoSize = true;
+			this.lblCount.Location = new System.Drawing.Point(92, 106);
+			this.lblCount.Name = "lblCount";
+			this.lblCount.Size = new System.Drawing.Size(11, 12);
+			this.lblCount.TabIndex = 8;
+			this.lblCount.TabStop = true;
+			this.lblCount.Text = "0";
+			this.lblCount.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblCount_LinkClicked);
+			// 
+			// label4
+			// 
+			this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(10, 106);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(89, 12);
+			this.label4.TabIndex = 7;
+			this.label4.Text = "已发送字节数：";
+			// 
+			// bPass
+			// 
+			this.bPass.Image = null;
+			this.bPass.Location = new System.Drawing.Point(12, 10);
+			this.bPass.Name = "bPass";
+			this.bPass.Size = new System.Drawing.Size(91, 28);
+			this.bPass.TabIndex = 9;
+			this.bPass.Text = "透传";
+			this.bPass.UseVisualStyleBackColor = true;
+			this.bPass.Click += new System.EventHandler(this.bPass_Click);
+			// 
+			// bVersion
+			// 
+			this.bVersion.Image = null;
+			this.bVersion.Location = new System.Drawing.Point(124, 10);
+			this.bVersion.Name = "bVersion";
+			this.bVersion.Size = new System.Drawing.Size(91, 28);
+			this.bVersion.TabIndex = 10;
+			this.bVersion.Text = "读取版本";
+			this.bVersion.UseVisualStyleBackColor = true;
+			this.bVersion.Click += new System.EventHandler(this.bVersion_Click);
+			// 
+			// label57
+			// 
+			this.label57.AutoSize = true;
+			this.label57.Location = new System.Drawing.Point(10, 56);
+			this.label57.Name = "label57";
+			this.label57.Size = new System.Drawing.Size(59, 12);
+			this.label57.TabIndex = 56;
+			this.label57.Text = "固件选择:";
+			// 
+			// btnInputF460
+			// 
+			this.btnInputF460.ForeColor = System.Drawing.Color.Black;
+			this.btnInputF460.Image = null;
+			this.btnInputF460.Location = new System.Drawing.Point(433, 50);
+			this.btnInputF460.Name = "btnInputF460";
+			this.btnInputF460.Size = new System.Drawing.Size(44, 24);
+			this.btnInputF460.TabIndex = 54;
+			this.btnInputF460.Text = "导入";
+			this.btnInputF460.UseVisualStyleBackColor = true;
+			this.btnInputF460.Click += new System.EventHandler(this.btnInputF460_Click);
+			// 
+			// tbFilePath
+			// 
+			this.tbFilePath.Location = new System.Drawing.Point(75, 53);
+			this.tbFilePath.Name = "tbFilePath";
+			this.tbFilePath.Size = new System.Drawing.Size(352, 21);
+			this.tbFilePath.TabIndex = 55;
+			// 
+			// openFileDialog1
+			// 
+			this.openFileDialog1.FileName = "openFileDialog1";
+			// 
+			// btn_升级
+			// 
+			this.btn_升级.Image = null;
+			this.btn_升级.Location = new System.Drawing.Point(254, 9);
+			this.btn_升级.Name = "btn_升级";
+			this.btn_升级.Size = new System.Drawing.Size(91, 28);
+			this.btn_升级.TabIndex = 57;
+			this.btn_升级.Text = "开始升级";
+			this.btn_升级.UseVisualStyleBackColor = true;
+			this.btn_升级.Click += new System.EventHandler(this.btn_升级_Click);
+			// 
+			// pbProgressF460
+			// 
+			this.pbProgressF460.Location = new System.Drawing.Point(12, 81);
+			this.pbProgressF460.Margin = new System.Windows.Forms.Padding(4);
+			this.pbProgressF460.Name = "pbProgressF460";
+			this.pbProgressF460.Size = new System.Drawing.Size(445, 21);
+			this.pbProgressF460.TabIndex = 62;
+			this.pbProgressF460.Visible = false;
+			// 
+			// llAllCout
+			// 
+			this.llAllCout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.llAllCout.AutoSize = true;
+			this.llAllCout.Location = new System.Drawing.Point(248, 106);
+			this.llAllCout.Name = "llAllCout";
+			this.llAllCout.Size = new System.Drawing.Size(11, 12);
+			this.llAllCout.TabIndex = 64;
+			this.llAllCout.TabStop = true;
+			this.llAllCout.Text = "0";
+			// 
+			// label3
+			// 
+			this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(166, 106);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(89, 12);
+			this.label3.TabIndex = 63;
+			this.label3.Text = "升级总字节数：";
+			// 
+			// txcbTransshipment
+			// 
+			this.txcbTransshipment.FormattingEnabled = true;
+			this.txcbTransshipment.Items.AddRange(new object[] {
+            "COM4"});
+			this.txcbTransshipment.Location = new System.Drawing.Point(281, 103);
+			this.txcbTransshipment.Name = "txcbTransshipment";
+			this.txcbTransshipment.Size = new System.Drawing.Size(64, 20);
+			this.txcbTransshipment.TabIndex = 65;
+			this.txcbTransshipment.Text = "COM3";
+			this.txcbTransshipment.Visible = false;
+			// 
+			// txcTransshipment
+			// 
+			this.txcTransshipment.AutoSize = true;
+			this.txcTransshipment.Location = new System.Drawing.Point(368, 103);
+			this.txcTransshipment.MinimumSize = new System.Drawing.Size(20, 20);
+			this.txcTransshipment.Name = "txcTransshipment";
+			this.txcTransshipment.Size = new System.Drawing.Size(72, 20);
+			this.txcTransshipment.TabIndex = 66;
+			this.txcTransshipment.Text = "中转服务";
+			this.txcTransshipment.UseVisualStyleBackColor = true;
+			this.txcTransshipment.Visible = false;
+			this.txcTransshipment.CheckedChanged += new System.EventHandler(this.txcTransshipment_CheckedChanged);
+			// 
+			// DataSend
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.Controls.Add(this.txcTransshipment);
+			this.Controls.Add(this.txcbTransshipment);
+			this.Controls.Add(this.llAllCout);
+			this.Controls.Add(this.label3);
+			this.Controls.Add(this.pbProgressF460);
+			this.Controls.Add(this.btn_升级);
+			this.Controls.Add(this.label57);
+			this.Controls.Add(this.btnInputF460);
+			this.Controls.Add(this.tbFilePath);
+			this.Controls.Add(this.bVersion);
+			this.Controls.Add(this.bPass);
+			this.Controls.Add(this.lblCount);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.label2);
+			this.Controls.Add(this.nmDelay);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.btnAutoSend);
+			this.Controls.Add(this.dgCMD);
+			this.Name = "DataSend";
+			this.Size = new System.Drawing.Size(483, 135);
+			((System.ComponentModel.ISupportInitialize)(this.dgCMD)).EndInit();
+			this.contextMenuStrip1.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.nmDelay)).EndInit();
+			this.ResumeLayout(false);
+			this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.DataGridView dgCMD;
+        private System.Windows.Forms.Button btnAutoSend;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown nmDelay;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem MS_Add;
+        private System.Windows.Forms.ToolStripMenuItem MS_Edit;
+        private System.Windows.Forms.ToolStripMenuItem MS_Delete;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn IsAutoSend;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CMDText;
+        private System.Windows.Forms.DataGridViewButtonColumn btnSend;
+        private System.Windows.Forms.LinkLabel lblCount;
+        private System.Windows.Forms.Label label4;
+		private TX.Framework.WindowUI.Controls.TXButton bPass;
+		private TX.Framework.WindowUI.Controls.TXButton bVersion;
+		private System.Windows.Forms.Label label57;
+		private TX.Framework.WindowUI.Controls.TXButton btnInputF460;
+		private System.Windows.Forms.TextBox tbFilePath;
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
+		private TX.Framework.WindowUI.Controls.TXButton btn_升级;
+		private System.Windows.Forms.ProgressBar pbProgressF460;
+		private System.Windows.Forms.LinkLabel llAllCout;
+		private System.Windows.Forms.Label label3;
+		private TXComboBox txcbTransshipment;
+		private TXCheckBox txcTransshipment;
+	}
+}

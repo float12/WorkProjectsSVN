@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{86B6AF02-7C7A-4CA9-A3C2-3B92EEF8DB3A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test</RootNamespace>
+    <AssemblyName>威思顿低压台区维护软件</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>发布\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;//User,Project,//Special,//lr,//wsd,License,//ShortUpGrade</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ico.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Aspose.Cells, Version=4.8.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.WindowsRuntime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Properties\System.Runtime.WindowsRuntime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TX.Framework.WindowUI, Version=1.0.0.3, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\TX.Framework.WindowUI.dll</HintPath>
+    </Reference>
+    <Reference Include="windows">
+      <HintPath>Properties\windows.winmd</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Analyze\AnalyseData.cs" />
+    <Compile Include="Communication\BLE_Info.cs" />
+    <Compile Include="DB\DB_AccessTool.cs" />
+    <Compile Include="DB\Log.cs" />
+    <Compile Include="DB\Users.cs" />
+    <Compile Include="Encrypt\SCUProxy.cs" />
+    <Compile Include="Factory\FormReadStorage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Factory\FormReadStorage.Designer.cs">
+      <DependentUpon>FormReadStorage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Factory\FromContinuedFreezeTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Factory\FromContinuedFreezeTest.Designer.cs">
+      <DependentUpon>FromContinuedFreezeTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Factory\FormChipRegisters.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Factory\FormChipRegisters.Designer.cs">
+      <DependentUpon>FormChipRegisters.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\FromMenu\ClockForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\FromMenu\ClockForm.designer.cs">
+      <DependentUpon>ClockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\FromMenu\ActComChaParser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\FromMenu\ActComChaParser.Designer.cs">
+      <DependentUpon>ActComChaParser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\FromMenu\FromLoadProFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\FromMenu\FromLoadProFile.Designer.cs">
+      <DependentUpon>FromLoadProFile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGrid\GDIHelper.cs" />
+    <Compile Include="Protocol\UpdataCRC32.cs" />
+    <Compile Include="Source\Hscom.cs" />
+    <Compile Include="Tools\AsposeExcelTools.cs" />
+    <Compile Include="PropertyGrid\CustomControl1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PropertyGrid\CustomControl1.Designer.cs">
+      <DependentUpon>CustomControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\DataConvert.cs" />
+    <Compile Include="Protocol\DLT645.cs" />
+    <Compile Include="PropertyGrid\DropDownListConverter.cs" />
+    <Compile Include="Protocol\EnumHelper.cs" />
+    <Compile Include="Factory\FormReadMeterSystemEvent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Factory\FormReadMeterSystemEvent.Designer.cs">
+      <DependentUpon>FormReadMeterSystemEvent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Factory\FormAdjustMeter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Factory\FormAdjustMeter.Designer.cs">
+      <DependentUpon>FormAdjustMeter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Protocol\Form_DisplayDataBlock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Protocol\Form_DisplayDataBlock.Designer.cs">
+      <DependentUpon>Form_DisplayDataBlock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\Help.cs" />
+    <Compile Include="Communication\NetTcpTool.cs" />
+    <Compile Include="PropertyGrid\Property.cs" />
+    <Compile Include="PropertyGrid\PropertyManageCls.cs" />
+    <Compile Include="Communication\SerialTool.cs" />
+    <Compile Include="PropertyGrid\TestData.cs" />
+    <Compile Include="Tools\Computer.cs" />
+    <Compile Include="Froms\FromMenu\FormControlClear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\FromMenu\FormControlClear.Designer.cs">
+      <DependentUpon>FormControlClear.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\FromMenu\FormAdjustTime.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\FromMenu\FormAdjustTime.Designer.cs">
+      <DependentUpon>FormAdjustTime.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\IniClass.cs" />
+    <Compile Include="Tools\Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\Register.designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Protocol\WSDFCS16.cs" />
+    <Compile Include="Froms\winMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\winMain.Designer.cs">
+      <DependentUpon>winMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\WriteLog.cs" />
+    <Compile Include="Units\DataReceive.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Units\DataReceive.designer.cs">
+      <DependentUpon>DataReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Units\DataSend.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Units\DataSend.designer.cs">
+      <DependentUpon>DataSend.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Units\ICommunication.cs" />
+    <Compile Include="Units\Lib\EnumType.cs" />
+    <Compile Include="Units\Lib\LeafEvent.cs" />
+    <Compile Include="Units\Lib\SnifferSocket.cs" />
+    <Compile Include="Units\Model\CMD.cs" />
+    <Compile Include="Units\Model\IPPacket.cs" />
+    <Compile Include="Units\Model\LeafTCPClient.cs" />
+    <Compile Include="Units\Model\LeafUDPClient.cs" />
+    <Compile Include="Units\NetTCPServer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Units\NetTCPServer.designer.cs">
+      <DependentUpon>NetTCPServer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Units\PartPanel\BasePanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Units\PartPanel\TCPServerPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Units\PartPanel\TCPServerPanel.designer.cs">
+      <DependentUpon>TCPServerPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Units\TabDataReceive.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Units\TabDataReceive.designer.cs">
+      <DependentUpon>TabDataReceive.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Factory\FormReadStorage.resx">
+      <DependentUpon>FormReadStorage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Factory\FromContinuedFreezeTest.resx">
+      <DependentUpon>FromContinuedFreezeTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Factory\FormChipRegisters.resx">
+      <DependentUpon>FormChipRegisters.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Factory\FormReadMeterSystemEvent.resx">
+      <DependentUpon>FormReadMeterSystemEvent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Factory\FormAdjustMeter.resx">
+      <DependentUpon>FormAdjustMeter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FromMenu\ActComChaParser.resx">
+      <DependentUpon>ActComChaParser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FromMenu\ClockForm.resx">
+      <DependentUpon>ClockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FromMenu\FromLoadProFile.resx">
+      <DependentUpon>FromLoadProFile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Protocol\Form_DisplayDataBlock.resx">
+      <DependentUpon>Form_DisplayDataBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FromMenu\FormControlClear.resx">
+      <DependentUpon>FormControlClear.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FromMenu\FormAdjustTime.resx">
+      <DependentUpon>FormAdjustTime.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\winMain.resx">
+      <DependentUpon>winMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Units\DataReceive.resx">
+      <DependentUpon>DataReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Units\DataSend.resx">
+      <DependentUpon>DataSend.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Units\NetTCPServer.resx">
+      <DependentUpon>NetTCPServer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Units\PartPanel\TCPServerPanel.resx">
+      <DependentUpon>TCPServerPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Units\TabDataReceive.resx">
+      <DependentUpon>TabDataReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close_normalImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lpf.ico" />
+    <None Include="Resources\chip.ico" />
+    <None Include="Resources\Switch.ico" />
+    <None Include="Resources\Rec.ico" />
+    <None Include="Resources\Service.ico" />
+    <None Include="Resources\search-icon1.png" />
+    <None Include="Resources\search-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SnowFreeze.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

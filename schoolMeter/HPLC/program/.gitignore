@@ -1,0 +1,4 @@
+*.svn
+debug/
+output/
+

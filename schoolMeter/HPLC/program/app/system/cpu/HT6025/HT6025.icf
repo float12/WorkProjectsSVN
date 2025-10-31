@@ -1,0 +1,54 @@
+/*###ICF### Section handled by ICF editor, don't touch! ****/
+/*-Editor annotation file-*/
+/* IcfEditorFile="$TOOLKIT_DIR$\config\ide\IcfEditor\cortex_v1_0.xml" */
+/*-Specials-*/
+
+define symbol __ICFEDIT_intvec_start__   = 0x00004000;
+define symbol __ICFEDIT_password_start__ = 0x00000FC0;
+
+/*-Memory Regions-*/
+define symbol __ICFEDIT_region_ROM_start__   = 0x00004000;
+define symbol __ICFEDIT_PROG_NORMAL_end__    = 0x0003EFFF;
+define symbol __ICFEDIT_PROG_CONST_A_start__ = (__ICFEDIT_PROG_NORMAL_end__+1);
+define symbol __ICFEDIT_PROG_CONST_A_end__   = 0x0003FBFF;
+define symbol __ICFEDIT_PROG_CONST_B_start__ = (__ICFEDIT_PROG_CONST_A_end__+1);
+define symbol __ICFEDIT_PROG_CONST_B_end__   = 0x0003FC03;
+define symbol __ICFEDIT_PROG_CONST_C_start__ = (__ICFEDIT_PROG_CONST_B_end__+1);
+define symbol __ICFEDIT_region_ROM_end__     = 0x0003FFFF;
+
+define symbol __ICFEDIT_region_RAM_start__ = 0x20000000;
+define symbol __ICFEDIT_region_RAM_end__   = 0x20007FFF;
+/*-Sizes-*/
+define symbol __ICFEDIT_size_cstack__ = 0x1000;
+define symbol __ICFEDIT_size_heap__   = 200;
+/**** End of ICF editor section. ###ICF###*/
+
+
+define memory mem with size = 4G;
+
+define region ROM_region   			= mem:[from __ICFEDIT_region_ROM_start__   to __ICFEDIT_PROG_NORMAL_end__];
+define region ROM_CONST_A_region  	= mem:[from __ICFEDIT_PROG_CONST_A_start__   to __ICFEDIT_PROG_CONST_A_end__];
+define region ROM_CONST_B_region  	= mem:[from __ICFEDIT_PROG_CONST_B_start__  to __ICFEDIT_PROG_CONST_B_end__];
+define region ROM_CONST_C_region  	= mem:[from __ICFEDIT_PROG_CONST_C_start__  to __ICFEDIT_region_ROM_end__];
+
+define region RAM_region   = mem:[from __ICFEDIT_region_RAM_start__   to __ICFEDIT_region_RAM_end__];
+
+define block CSTACK    with alignment = 8, size = __ICFEDIT_size_cstack__   { };
+define block HEAP      with alignment = 8, size = __ICFEDIT_size_heap__     { };
+
+initialize by copy { readwrite };
+do not initialize  { section .noinit };
+
+place at address mem:__ICFEDIT_intvec_start__ { readonly section .intvec };
+place at address mem:__ICFEDIT_password_start__ { readonly section .password };
+
+place in ROM_CONST_A_region  {readonly section .rodata object DefaultConstPara_3Phase.o};
+place in ROM_CONST_A_region  {readonly section .rodata object DefaultConstPara_single.o};
+place in ROM_CONST_A_region  {readonly section PRG_CONST_A};
+place in ROM_CONST_B_region  {readonly section PRG_CONST_B};
+place in ROM_CONST_C_region  {readonly section PRG_CONST_C};
+
+place in ROM_region   { readonly };
+place in RAM_region   { readwrite,
+                        block HEAP};
+place at end of RAM_region	{block CSTACK};

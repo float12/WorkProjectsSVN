@@ -1,0 +1,7 @@
+output/
+*.svn
+*.vscode
+*.zip
+*.rar
+/modbus
+settings/
