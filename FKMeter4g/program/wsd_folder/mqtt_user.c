@@ -970,7 +970,8 @@ void  SubMqttTopic_user( MQTTClient *UserClient )
 	int rc;
 	BYTE qos = 0;
 	char Sub_topic[64] = {0};
-	char version[64] = {0};
+	TRealTimer Time = {0};
+	char BuilTime[20] = {0};
 
 	InitMqttTopic_user();
 	for (int i = 0; i <sizeof(user_sub_topics_tail)/sizeof(user_sub_topics_tail[0]); i++)
@@ -992,8 +993,9 @@ void  SubMqttTopic_user( MQTTClient *UserClient )
 	//订阅根据版本升级的主题
 	memset(user_sub_topic_addr, 0, sizeof(user_sub_topic_addr));
 	strcat(user_sub_topic_addr,"/devices/version");
-	sprintf(version, "%s,%s", __DATE__, __TIME__);
-	strcat(user_sub_topic_addr, version);
+	api_GetSoftBuildTime(&Time);
+	sprintf((char *)BuilTime, "%04d%02d%02d%02d%02d", Time.wYear, Time.Mon, Time.Day, Time.Hour, Time.Min);
+	strcat(user_sub_topic_addr, BuilTime);
 	strcat(user_sub_topic_addr, "/upGrade");
 	nwy_ext_echo("\r\n version upgrad topic_sub_user:[%s]", user_sub_topic_addr);
 	rc = MQTTSubscribe(UserClient, user_sub_topic_addr, qos, VersionUpgradeMessageArr);

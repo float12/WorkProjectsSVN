@@ -43,6 +43,7 @@ extern MQTTClient paho_user_client;
 //-----------------------------------------------
 // 				º¯ÊýÉùÃ÷
 //-----------------------------------------------
+void api_GetSoftBuildTime(TRealTimer *pT);
 void UsermessageArrived(MessageData *md);
 void  SubMqttTopic_user( MQTTClient *UserClient );
 //--------------------------------------------------
