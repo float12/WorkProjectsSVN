@@ -515,7 +515,6 @@ namespace WindowsTest
             this.txbAfterUpGrade = new TX.Framework.WindowUI.Controls.TXButton();
             this.txbBeforeUpGrade = new TX.Framework.WindowUI.Controls.TXButton();
             this.tpTCP = new System.Windows.Forms.TabPage();
-            this.tcpServerPanel1 = new LeafSoft.PartPanel.TCPServerPanel();
             this.tpEncryptTest = new System.Windows.Forms.TabPage();
             this.txTabControl3 = new TX.Framework.WindowUI.Controls.TXTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -779,7 +778,6 @@ namespace WindowsTest
             this.btn_电表通信串口 = new TX.Framework.WindowUI.Controls.TXButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timerSystem = new System.Windows.Forms.Timer(this.components);
-            this.DataSend1 = new LeafSoft.Units.DataSend();
             this.txTabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -884,7 +882,6 @@ namespace WindowsTest
             this.groupBox5.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.PartUpgrade.SuspendLayout();
-            this.tpTCP.SuspendLayout();
             this.tpEncryptTest.SuspendLayout();
             this.txTabControl3.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -1004,7 +1001,7 @@ namespace WindowsTest
             this.txTabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.txTabControl1.Name = "txTabControl1";
             this.txTabControl1.SelectedIndex = 0;
-            this.txTabControl1.Size = new System.Drawing.Size(1898, 633);
+            this.txTabControl1.Size = new System.Drawing.Size(1707, 610);
             this.txTabControl1.TabClosd = false;
             this.txTabControl1.TabCornerRadius = 3;
             this.txTabControl1.TabIndex = 0;
@@ -1018,7 +1015,7 @@ namespace WindowsTest
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(1890, 596);
+            this.tabPage3.Size = new System.Drawing.Size(1699, 573);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "读写参数";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1039,8 +1036,8 @@ namespace WindowsTest
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer1.Size = new System.Drawing.Size(1882, 588);
-            this.splitContainer1.SplitterDistance = 219;
+            this.splitContainer1.Size = new System.Drawing.Size(1691, 565);
+            this.splitContainer1.SplitterDistance = 196;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
             // 
@@ -1052,7 +1049,7 @@ namespace WindowsTest
             this.treeView1.Location = new System.Drawing.Point(0, 26);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(219, 562);
+            this.treeView1.Size = new System.Drawing.Size(196, 539);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -1065,14 +1062,14 @@ namespace WindowsTest
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(219, 26);
+            this.panel3.Size = new System.Drawing.Size(196, 26);
             this.panel3.TabIndex = 5;
             // 
             // btnSarch
             // 
             this.btnSarch.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnSarch.Image = global::Test.Properties.Resources.search_icon1;
-            this.btnSarch.Location = new System.Drawing.Point(191, 0);
+            this.btnSarch.Location = new System.Drawing.Point(168, 0);
             this.btnSarch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSarch.Name = "btnSarch";
             this.btnSarch.Size = new System.Drawing.Size(28, 26);
@@ -1088,7 +1085,7 @@ namespace WindowsTest
             this.tbSearch.Location = new System.Drawing.Point(0, 0);
             this.tbSearch.Margin = new System.Windows.Forms.Padding(0);
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(218, 25);
+            this.tbSearch.Size = new System.Drawing.Size(195, 25);
             this.tbSearch.TabIndex = 0;
             this.tbSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbSearch_KeyDown);
             // 
@@ -1124,8 +1121,8 @@ namespace WindowsTest
             this.splitContainer5.Panel2.Controls.Add(this.btn_设置);
             this.splitContainer5.Panel2.Controls.Add(this.btn_抄读);
             this.splitContainer5.Panel2MinSize = 35;
-            this.splitContainer5.Size = new System.Drawing.Size(1658, 588);
-            this.splitContainer5.SplitterDistance = 389;
+            this.splitContainer5.Size = new System.Drawing.Size(1490, 565);
+            this.splitContainer5.SplitterDistance = 366;
             this.splitContainer5.SplitterWidth = 5;
             this.splitContainer5.TabIndex = 1;
             // 
@@ -1166,7 +1163,7 @@ namespace WindowsTest
             this.dgv_RW.Name = "dgv_RW";
             this.dgv_RW.RowHeadersWidth = 62;
             this.dgv_RW.RowTemplate.Height = 23;
-            this.dgv_RW.Size = new System.Drawing.Size(1658, 389);
+            this.dgv_RW.Size = new System.Drawing.Size(1490, 366);
             this.dgv_RW.TabIndex = 1;
             this.dgv_RW.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_RW_CellDoubleClick);
             this.dgv_RW.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_RW_CellMouseClick);
@@ -1539,7 +1536,7 @@ namespace WindowsTest
             this.tabPage6.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage6.Size = new System.Drawing.Size(1890, 596);
+            this.tabPage6.Size = new System.Drawing.Size(1699, 573);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "报文解析";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1559,8 +1556,8 @@ namespace WindowsTest
             // splitContainer6.Panel2
             // 
             this.splitContainer6.Panel2.Controls.Add(this.dgvExplain);
-            this.splitContainer6.Size = new System.Drawing.Size(1882, 588);
-            this.splitContainer6.SplitterDistance = 202;
+            this.splitContainer6.Size = new System.Drawing.Size(1691, 565);
+            this.splitContainer6.SplitterDistance = 194;
             this.splitContainer6.SplitterWidth = 5;
             this.splitContainer6.TabIndex = 45;
             // 
@@ -1571,7 +1568,7 @@ namespace WindowsTest
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1882, 202);
+            this.panel5.Size = new System.Drawing.Size(1691, 194);
             this.panel5.TabIndex = 46;
             // 
             // splitContainer21
@@ -1589,8 +1586,8 @@ namespace WindowsTest
             // 
             this.splitContainer21.Panel2.Controls.Add(this.txbSendmessages);
             this.splitContainer21.Panel2.Controls.Add(this.btnPasteExplain);
-            this.splitContainer21.Size = new System.Drawing.Size(1882, 202);
-            this.splitContainer21.SplitterDistance = 1191;
+            this.splitContainer21.Size = new System.Drawing.Size(1691, 194);
+            this.splitContainer21.SplitterDistance = 1070;
             this.splitContainer21.SplitterWidth = 5;
             this.splitContainer21.TabIndex = 45;
             // 
@@ -1601,7 +1598,7 @@ namespace WindowsTest
             this.rtbExplain.Location = new System.Drawing.Point(0, 0);
             this.rtbExplain.Margin = new System.Windows.Forms.Padding(5);
             this.rtbExplain.Name = "rtbExplain";
-            this.rtbExplain.Size = new System.Drawing.Size(1191, 202);
+            this.rtbExplain.Size = new System.Drawing.Size(1070, 194);
             this.rtbExplain.TabIndex = 44;
             this.rtbExplain.Text = "";
             // 
@@ -1609,10 +1606,10 @@ namespace WindowsTest
             // 
             this.txbSendmessages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.txbSendmessages.Image = null;
-            this.txbSendmessages.Location = new System.Drawing.Point(0, 166);
+            this.txbSendmessages.Location = new System.Drawing.Point(0, 158);
             this.txbSendmessages.Margin = new System.Windows.Forms.Padding(4);
             this.txbSendmessages.Name = "txbSendmessages";
-            this.txbSendmessages.Size = new System.Drawing.Size(686, 36);
+            this.txbSendmessages.Size = new System.Drawing.Size(616, 36);
             this.txbSendmessages.TabIndex = 46;
             this.txbSendmessages.Text = "发送报文";
             this.txbSendmessages.UseVisualStyleBackColor = true;
@@ -1625,7 +1622,7 @@ namespace WindowsTest
             this.btnPasteExplain.Location = new System.Drawing.Point(0, 0);
             this.btnPasteExplain.Margin = new System.Windows.Forms.Padding(4);
             this.btnPasteExplain.Name = "btnPasteExplain";
-            this.btnPasteExplain.Size = new System.Drawing.Size(686, 36);
+            this.btnPasteExplain.Size = new System.Drawing.Size(616, 36);
             this.btnPasteExplain.TabIndex = 45;
             this.btnPasteExplain.Text = "粘贴后解析";
             this.btnPasteExplain.UseVisualStyleBackColor = true;
@@ -1657,7 +1654,7 @@ namespace WindowsTest
             this.dgvExplain.RowHeadersWidth = 62;
             this.dgvExplain.RowTemplate.Height = 23;
             this.dgvExplain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvExplain.Size = new System.Drawing.Size(1882, 381);
+            this.dgvExplain.Size = new System.Drawing.Size(1691, 366);
             this.dgvExplain.TabIndex = 122;
             this.dgvExplain.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvExplain_CellClick);
             // 
@@ -1720,7 +1717,7 @@ namespace WindowsTest
             this.tpReadData.Margin = new System.Windows.Forms.Padding(4);
             this.tpReadData.Name = "tpReadData";
             this.tpReadData.Padding = new System.Windows.Forms.Padding(4);
-            this.tpReadData.Size = new System.Drawing.Size(1890, 596);
+            this.tpReadData.Size = new System.Drawing.Size(1699, 573);
             this.tpReadData.TabIndex = 0;
             this.tpReadData.Text = "数据抄读";
             this.tpReadData.UseVisualStyleBackColor = true;
@@ -3770,7 +3767,7 @@ namespace WindowsTest
             // txbReadDataExcel
             // 
             this.txbReadDataExcel.Image = null;
-            this.txbReadDataExcel.Location = new System.Drawing.Point(192, 11);
+            this.txbReadDataExcel.Location = new System.Drawing.Point(279, 12);
             this.txbReadDataExcel.Name = "txbReadDataExcel";
             this.txbReadDataExcel.Size = new System.Drawing.Size(72, 28);
             this.txbReadDataExcel.TabIndex = 9;
@@ -3787,7 +3784,7 @@ namespace WindowsTest
             this.txtbReadDataExcel.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.txtbReadDataExcel.Image = null;
             this.txtbReadDataExcel.ImageSize = new System.Drawing.Size(0, 0);
-            this.txtbReadDataExcel.Location = new System.Drawing.Point(84, 14);
+            this.txtbReadDataExcel.Location = new System.Drawing.Point(123, 12);
             this.txtbReadDataExcel.Name = "txtbReadDataExcel";
             this.txtbReadDataExcel.Padding = new System.Windows.Forms.Padding(2);
             this.txtbReadDataExcel.PasswordChar = '\0';
@@ -6603,7 +6600,6 @@ namespace WindowsTest
             // 
             // tpTCP
             // 
-            this.tpTCP.Controls.Add(this.tcpServerPanel1);
             this.tpTCP.Location = new System.Drawing.Point(4, 33);
             this.tpTCP.Name = "tpTCP";
             this.tpTCP.Padding = new System.Windows.Forms.Padding(3);
@@ -6611,16 +6607,6 @@ namespace WindowsTest
             this.tpTCP.TabIndex = 8;
             this.tpTCP.Text = "TCP";
             this.tpTCP.UseVisualStyleBackColor = true;
-            // 
-            // tcpServerPanel1
-            // 
-            this.tcpServerPanel1.AutoSize = true;
-            this.tcpServerPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcpServerPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tcpServerPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tcpServerPanel1.Name = "tcpServerPanel1";
-            this.tcpServerPanel1.Size = new System.Drawing.Size(172, 14);
-            this.tcpServerPanel1.TabIndex = 0;
             // 
             // tpEncryptTest
             // 
@@ -8065,7 +8051,7 @@ namespace WindowsTest
             // txbStartTeleindication
             // 
             this.txbStartTeleindication.Image = null;
-            this.txbStartTeleindication.Location = new System.Drawing.Point(251, 12);
+            this.txbStartTeleindication.Location = new System.Drawing.Point(192, 11);
             this.txbStartTeleindication.Name = "txbStartTeleindication";
             this.txbStartTeleindication.Size = new System.Drawing.Size(72, 28);
             this.txbStartTeleindication.TabIndex = 9;
@@ -8082,7 +8068,7 @@ namespace WindowsTest
             this.txtbTeleindicationNum.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.txtbTeleindicationNum.Image = null;
             this.txtbTeleindicationNum.ImageSize = new System.Drawing.Size(0, 0);
-            this.txtbTeleindicationNum.Location = new System.Drawing.Point(120, 12);
+            this.txtbTeleindicationNum.Location = new System.Drawing.Point(84, 14);
             this.txtbTeleindicationNum.Name = "txtbTeleindicationNum";
             this.txtbTeleindicationNum.Padding = new System.Windows.Forms.Padding(2);
             this.txtbTeleindicationNum.PasswordChar = '\0';
@@ -9675,8 +9661,8 @@ namespace WindowsTest
             // 
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer3.Panel2.Controls.Add(this.splitter1);
-            this.splitContainer3.Size = new System.Drawing.Size(1898, 1047);
-            this.splitContainer3.SplitterDistance = 633;
+            this.splitContainer3.Size = new System.Drawing.Size(1707, 1024);
+            this.splitContainer3.SplitterDistance = 610;
             this.splitContainer3.SplitterWidth = 5;
             this.splitContainer3.TabIndex = 33;
             // 
@@ -9693,8 +9679,8 @@ namespace WindowsTest
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.ReceieveMinus33);
-            this.splitContainer2.Size = new System.Drawing.Size(1895, 409);
-            this.splitContainer2.SplitterDistance = 1766;
+            this.splitContainer2.Size = new System.Drawing.Size(1704, 409);
+            this.splitContainer2.SplitterDistance = 1588;
             this.splitContainer2.TabIndex = 1;
             // 
             // rtb_log
@@ -9702,7 +9688,7 @@ namespace WindowsTest
             this.rtb_log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_log.Location = new System.Drawing.Point(0, 0);
             this.rtb_log.Name = "rtb_log";
-            this.rtb_log.Size = new System.Drawing.Size(1766, 409);
+            this.rtb_log.Size = new System.Drawing.Size(1588, 409);
             this.rtb_log.TabIndex = 0;
             this.rtb_log.Text = "";
             // 
@@ -9710,7 +9696,7 @@ namespace WindowsTest
             // 
             this.ReceieveMinus33.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ReceieveMinus33.Image = null;
-            this.ReceieveMinus33.Location = new System.Drawing.Point(34, 153);
+            this.ReceieveMinus33.Location = new System.Drawing.Point(21, 153);
             this.ReceieveMinus33.Name = "ReceieveMinus33";
             this.ReceieveMinus33.Size = new System.Drawing.Size(91, 33);
             this.ReceieveMinus33.TabIndex = 16;
@@ -9746,7 +9732,7 @@ namespace WindowsTest
             this.tsmiLoadProFile});
             this.menuStrip.Location = new System.Drawing.Point(8, 42);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(2117, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1926, 28);
             this.menuStrip.TabIndex = 34;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -9858,7 +9844,7 @@ namespace WindowsTest
             this.panel1.PanelStyle = TX.Framework.WindowUI.Controls.PanelStyle.Office2007;
             this.panel1.ShowExpandIcon = true;
             this.panel1.ShowXPanderPanelProfessionalStyle = true;
-            this.panel1.Size = new System.Drawing.Size(219, 1047);
+            this.panel1.Size = new System.Drawing.Size(219, 1024);
             this.panel1.TabIndex = 32;
             this.panel1.Text = "配置参数";
             this.panel1.ToolTipTextCloseIcon = null;
@@ -9872,7 +9858,7 @@ namespace WindowsTest
             this.ppg_基本参数.Location = new System.Drawing.Point(1, 51);
             this.ppg_基本参数.Name = "ppg_基本参数";
             this.ppg_基本参数.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-            this.ppg_基本参数.Size = new System.Drawing.Size(217, 995);
+            this.ppg_基本参数.Size = new System.Drawing.Size(217, 972);
             this.ppg_基本参数.TabIndex = 20;
             this.ppg_基本参数.ToolbarVisible = false;
             this.ppg_基本参数.SelectedObjectsChanged += new System.EventHandler(this.ppg_基本参数_SelectedObjectsChanged);
@@ -9899,14 +9885,6 @@ namespace WindowsTest
             // 
             this.timerSystem.Tick += new System.EventHandler(this.timerSystem_Tick);
             // 
-            // DataSend1
-            // 
-            this.DataSend1.Location = new System.Drawing.Point(0, 0);
-            this.DataSend1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.DataSend1.Name = "DataSend1";
-            this.DataSend1.Size = new System.Drawing.Size(471, 188);
-            this.DataSend1.TabIndex = 0;
-            // 
             // winMain
             // 
             this.AllowDrop = true;
@@ -9914,7 +9892,7 @@ namespace WindowsTest
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CaptionFont = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.CaptionHeight = 34;
-            this.ClientSize = new System.Drawing.Size(2133, 1125);
+            this.ClientSize = new System.Drawing.Size(1942, 1102);
             this.Controls.Add(this.splitContainer3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip);
@@ -10053,8 +10031,6 @@ namespace WindowsTest
             this.tabPage10.PerformLayout();
             this.PartUpgrade.ResumeLayout(false);
             this.PartUpgrade.PerformLayout();
-            this.tpTCP.ResumeLayout(false);
-            this.tpTCP.PerformLayout();
             this.tpEncryptTest.ResumeLayout(false);
             this.txTabControl3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
