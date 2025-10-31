@@ -13757,27 +13757,21 @@ namespace WindowsTest
 			try
 			{
 				DataTable adtData = new DataTable();
+
                 for (int j = 0; j < i64MessageTestCount && bMessageTestExcel; j++)
                 {
+                    int colunmnIndex = 0;
+                    adtData.Rows.Add();
                     for (int i = 0; i < dgvReadDataExcel.Rows.Count && bMessageTestExcel; i++)
                     {
                         if ((bool)dgvReadDataExcel.Rows[i].Cells[0].Value == true)
                         {
-                            // 动态添加列
-                            //while (adtData.Columns.Count <= i)
-                            //{
+                            
                             string colName = dgvReadDataExcel.Rows[i].Cells[6].Value?.ToString() ?? $"Col{i}";
                             if (!adtData.Columns.Contains(colName))
 							{
 								adtData.Columns.Add(colName, typeof(string));
 							}
-                            //}
-
-                            // 动态添加行
-                            while (adtData.Rows.Count <= j)
-                            {
-                                adtData.Rows.Add();
-                            }
 
                             // 处理数据
                             lstrDataMark.Clear();
@@ -13793,16 +13787,18 @@ namespace WindowsTest
                                 strData = Helps.fnAgainst(strData);
                                 dgvReadDataExcel.Rows[i].Cells[1].Value = strData;
                                 dgvReadDataExcel.Rows[i].Cells[3].Value = "成功";
-                                adtData.Rows[j][i] = strData;
+                                adtData.Rows[j][colunmnIndex] = strData;
+                                colunmnIndex++;
                             }
                             else
                             {
                                 adtData.Rows[j][i] = strErr;
                                 dgvReadDataExcel.Rows[i].Cells[3].Value = "失败!";
                             }
+                            fnWait(Int64.Parse(pmc[10].Value.ToString()));
                         }
 
-                        fnWait(Int64.Parse(pmc[10].Value.ToString()));
+                        
                     }
 				}
 
