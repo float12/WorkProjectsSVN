@@ -1,5 +1,7 @@
 # -*- coding: gbk -*-
 import binascii
+import glob
+import pathlib
 import struct
 import sys
 import time
@@ -9,6 +11,7 @@ from PyQt5.QtWidgets import (QApplication, QWidget, QVBoxLayout, QHBoxLayout,
                              QPushButton, QLabel, QComboBox, QLineEdit,
                              QFileDialog, QMessageBox, QTextEdit, QSplitter, QGridLayout, QSizePolicy, QCheckBox)
 import pyqtgraph as pg
+from FormatConvert import FormatConverter
 import PlotDataTheard
 from SaveToCsvTheard import SaveToCsvTheard
 import os
@@ -105,6 +108,11 @@ class WaveDataProcessUI(QWidget):
         self.phase_select.setCurrentIndex(0)  # 默认选择一相（1）
         self.left_layout.addWidget(QLabel("选择相数:"))
         self.left_layout.addWidget(self.phase_select)
+        # 增加文本输入框
+        self.text_input_label = QLabel("输入格式转换文件目录或文件：")
+        self.text_input = QLineEdit()
+        self.left_layout.addWidget(self.text_input_label)
+        self.left_layout.addWidget(self.text_input)
         # 格式选择
         self.format_select = QComboBox()
         self.format_select.addItems(["", str("wlb_waveRecord_with_NO"), str("698"),str("wlb_waveRecord")])
@@ -138,9 +146,11 @@ class WaveDataProcessUI(QWidget):
         self.save_btn = QPushButton("保存数据")
         self.plot_btn = QPushButton("绘制图形")
         self.ConvertTo1P = QPushButton("转成单相")
+        self.ConvertToDataTransmit = QPushButton("带序号录波格式->数据传输格式")
         btn_layout.addWidget(self.save_btn)
         btn_layout.addWidget(self.plot_btn)
         btn_layout.addWidget(self.ConvertTo1P)
+        btn_layout.addWidget(self.ConvertToDataTransmit)
         self.left_layout.addLayout(btn_layout)
 
         # 最大值显示
@@ -182,6 +192,7 @@ class WaveDataProcessUI(QWidget):
         self.save_btn.clicked.connect(self.save_to_csv)
         self.plot_btn.clicked.connect(self.plot_data)
         self.ConvertTo1P.clicked.connect(self.convert_to_1p)
+        self.ConvertToDataTransmit.clicked.connect(self.convert_to_data_transmit)
         self.format_select.currentIndexChanged.connect(self.update_format)
         #重定向print到文本框
         sys.stdout = self.text_show
@@ -190,6 +201,38 @@ class WaveDataProcessUI(QWidget):
         if self.data_file_path != None:
             converter = phaseNumConverter(mode="3p_to_1p", chunk_size=782,input_3p_file =self.data_file_path)
             converter.run()
+        else:
+            print("请选择文件")
+    #转成数据传输格式按钮回调函数
+    def convert_to_data_transmit(self):
+        data_file_path = self.text_input.text()
+        if data_file_path != None:
+            if os.path.isfile(data_file_path):
+                # 输入的是单个文件
+                bin_files = [data_file_path]
+            elif os.path.isdir(data_file_path):
+                # 输入的是目录，遍历该目录下所有bin文件
+                bin_files = glob.glob(os.path.join(data_file_path, "*.bin"))
+            else:
+                print("请输入正确的文件路径或目录")
+                return
+            output_dir = pathlib.Path("wlb_waveRecord_output")
+            converter = FormatConverter()
+            for input_file in bin_files:
+                input_file = pathlib.Path(input_file)  # 转成 Path 对象
+                output_dir = pathlib.Path("wlb_WaveRecord_output")
+                output_file = FormatConverter.ensure_output_folder_and_unique_file(output_dir,input_file.name.replace(".bin", "_wlb_waveRecord.bin"))
+                converter.delete_wlbWaveRecord_NO(input_file, output_file, 782, 778)
+                # 提取 output_file 的文件名（去掉上级目录），再去掉 "_wlb_waveRecord"
+                clean_stem = pathlib.Path(output_file).name.replace("_wlb_waveRecord", "").replace(".bin", "")
+                output_dir = pathlib.Path("wlb_Transmit_output")
+                transimit_output_file = FormatConverter.ensure_output_folder_and_unique_file(output_dir,clean_stem + "_wlb_Transmit.bin")
+                # print(f"转换 {output_file} → {transimit_output_file}")
+                converter.convert_record_to_transmit(output_file, transimit_output_file, 778, 778)
+                # INSERT_YOUR_CODE
+                if os.path.exists(output_file):
+                    os.remove(output_file)
+            print("转换结束")
         else:
             print("请选择文件")
     #保存数据按钮回调函数

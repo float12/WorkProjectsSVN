@@ -51,7 +51,7 @@
 #define POWER_DOWN_VOLTAGE						1200			//掉电阈值 可插拔模块 值为1200 内置模块2500 
 
 #define COMM_485_LED							27				//485通信灯
-#define DIRECT_CON_485							2				//485方向控制管脚
+#define DIRECT_CON_485							0				//485方向控制管脚
 #define ENABLE_HARD_SCI_SEND					nwy_gpio_set_value(DIRECT_CON_485, 1)
 #define ENABLE_HARD_SCI_RECV					nwy_gpio_set_value(DIRECT_CON_485, 0)
 
