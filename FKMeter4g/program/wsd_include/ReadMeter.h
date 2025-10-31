@@ -26,6 +26,14 @@
 //-----------------------------------------------
 //				结构体，共用体，枚举
 //-----------------------------------------------
+typedef enum
+{
+	eREAD_METER_STANDARD = 0,
+	eREAD_METER_EXTENDED = 1,
+	eSET_METER_STANDARD = 2,
+	eSET_METER_EXTENDED = 3,
+} e645Type;//放前面给TReadMeterInfo结构体使用
+
 typedef union
 {
 	BYTE RelayCmdData[8];//继电器命令
@@ -93,13 +101,7 @@ typedef struct tMeterRead_t
 	double *Buf; //数据存放地址
 } tMeterRead;
 
-typedef enum
-{
-	eREAD_METER_STANDARD = 0,
-	eREAD_METER_EXTENDED = 1,
-	eSET_METER_STANDARD = 2,
-	eSET_METER_EXTENDED = 3,
-} e645Type;
+
 
 typedef enum
 {

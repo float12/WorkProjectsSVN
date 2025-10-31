@@ -317,7 +317,10 @@ void CollectMeterTask(void)
 //--------------------------------------------------
 void ToMqttByCycle(void)
 {
-	BYTE bTime, i, j;
+	BYTE bTime;
+	#if (CYCLE_METER_READING == PROTOCOL_645)
+	BYTE i, j;
+	#endif
 	TRealTimer TempTimer = {0};
 
 	get_N176_time(&TempTimer);
@@ -649,6 +652,34 @@ void DetectReadMeterStasus(void)
 	PowerOnReadMeter = 1;
 }
 //--------------------------------------------------
+// 功能描述:  接收来自 mqtt user线程的数据
+//
+// 参数: ReadMeterInfo 读表信息
+//
+// 返回值:
+//
+// 备注:
+//--------------------------------------------------
+void HandleMsgFromMqttUser(TReadMeterInfo *ReadMeterInfo)
+{
+	if (ReadMeterInfo->Type == eREAD_METER_EXTENDED)
+	{
+		CommWithMeter_DBDF(READ_METER_CONTROL_BYTE, 0, (BYTE *)&ReadMeterInfo->Extended645ID, NULL);
+	}
+	else if (ReadMeterInfo->Type == eSET_METER_EXTENDED)
+	{
+		CommWithMeter_DBDF(SET_METER_CONTROL_BYTE, ReadMeterInfo->DataLen, (BYTE *)&ReadMeterInfo->Extended645ID, (BYTE *)&ReadMeterInfo->Data);
+	}
+	else if (ReadMeterInfo->Type == eREAD_METER_STANDARD)
+	{
+		Dlt645_Tx_Read(ReadMeterInfo->Standard645ID);
+	}
+	else if (ReadMeterInfo->Type == eSET_METER_STANDARD)
+	{
+		Dlt645_Tx_Write(ReadMeterInfo->Standard645ID, ReadMeterInfo->DataLen, (BYTE *)&ReadMeterInfo->Data, ReadMeterInfo->Control);
+	}
+}
+//--------------------------------------------------
 //功能描述:  接收来自 tcp线程的下行数据 
 //         
 //参数:      
@@ -697,23 +728,7 @@ void  RecvMsgQueFromTcp( void )
 	{
 		nwy_ext_echo("\r\n recv from mqtt user:%08x", ReadMeterInfo.Standard645ID);
 		api_SetSysStatus(eSYS_STASUS_START_COLLECT);
-		if (ReadMeterInfo.Type == eREAD_METER_EXTENDED)
-		{
-			CommWithMeter_DBDF(READ_METER_CONTROL_BYTE, 0, (BYTE*)&ReadMeterInfo.Extended645ID, NULL);
-		}
-		else if (ReadMeterInfo.Type == eSET_METER_EXTENDED)
-		{
-			CommWithMeter_DBDF(SET_METER_CONTROL_BYTE, ReadMeterInfo.DataLen, (BYTE*)&ReadMeterInfo.Extended645ID, (BYTE*)&ReadMeterInfo.Data);
-		}
-		else if (ReadMeterInfo.Type == eREAD_METER_STANDARD)
-		{
-			Dlt645_Tx_Read(ReadMeterInfo.Standard645ID);
-		}
-		else if (ReadMeterInfo.Type == eSET_METER_STANDARD)
-		{
-			Dlt645_Tx_Write(ReadMeterInfo.Standard645ID, ReadMeterInfo.DataLen, (BYTE*)&ReadMeterInfo.Data,ReadMeterInfo.Control);
-		}
-		
+		HandleMsgFromMqttUser(&ReadMeterInfo);
 	}
 }
 //--------------------------------------------------
