@@ -116,7 +116,7 @@ static void HandleRelayCommand(const char* cmdStr, cJSON *pRoot, BYTE isOpenCmd)
     BYTE channel = 0;
 	BYTE channelStr[1] = {0};
 	TReadMeterInfo ReadMeterInfo = {0};
-	BYTE buf[7] = {0x00,0x18,0x54,0x15,0x09,0x10,0x50};//控制继电器时间
+	BYTE buf[7] = {0x00,0x18,0x54,0x15,0x09,0x10,0x50};//控制继电器时间 需要大于当前时间，目前为2050年
     // 获取 channel 字段
 	cJSON_GetObjectValue(pRoot, "channel", ecJSON_String, channelStr, sizeof(channelStr));
 	channel = atoi((char *)channelStr);

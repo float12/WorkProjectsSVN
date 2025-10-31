@@ -924,13 +924,6 @@ BOOL DealDLT645_2007(DWORD dwID, BYTE *pBuf, BYTE Len) //直接拷贝多字节数据 无需
 		tTime.Day = lib_BBCDToBin(pBuf[4]);
 		tTime.Mon = lib_BBCDToBin(pBuf[5]);
 		tTime.wYear = 2000 + lib_BBCDToBin(pBuf[6]);
-		if (api_CheckClock(&tTime) == TRUE)
-		{
-			set_N176_time(&tTime);
-			nwy_ext_echo("\r\n enter set time ");
-			bReceiveBit = 1;
-			api_WriteSysUNMsg(SYSUN_POWER_ON);
-		}
 		if (IsMqttComMeterFlag == 1)
 		{
 			nwy_ext_echo("\r\n read time data");
@@ -938,6 +931,16 @@ BOOL DealDLT645_2007(DWORD dwID, BYTE *pBuf, BYTE Len) //直接拷贝多字节数据 无需
 			memcpy(&UartToMqttData.Data.ReadTimeData, &tTime, sizeof(tTime));
 			nwy_put_msg_que(UartReplyToMqttMsgQue, &UartToMqttData, 0xffffffff);
 			IsMqttComMeterFlag = 0;
+		}
+		else
+		{
+			if (api_CheckClock(&tTime) == TRUE)
+			{
+				set_N176_time(&tTime);
+				nwy_ext_echo("\r\n enter set time ");
+				bReceiveBit = 1;
+				api_WriteSysUNMsg(SYSUN_POWER_ON);
+			}
 		}
 	}
 	else if (dwID == TCP_REQ_NET)
