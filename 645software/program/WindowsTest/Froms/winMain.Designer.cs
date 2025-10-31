@@ -515,6 +515,7 @@ namespace WindowsTest
             this.txbAfterUpGrade = new TX.Framework.WindowUI.Controls.TXButton();
             this.txbBeforeUpGrade = new TX.Framework.WindowUI.Controls.TXButton();
             this.tpTCP = new System.Windows.Forms.TabPage();
+            this.tcpServerPanel1 = new LeafSoft.PartPanel.TCPServerPanel();
             this.tpEncryptTest = new System.Windows.Forms.TabPage();
             this.txTabControl3 = new TX.Framework.WindowUI.Controls.TXTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -778,7 +779,6 @@ namespace WindowsTest
             this.btn_电表通信串口 = new TX.Framework.WindowUI.Controls.TXButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timerSystem = new System.Windows.Forms.Timer(this.components);
-            this.tcpServerPanel1 = new LeafSoft.PartPanel.TCPServerPanel();
             this.DataSend1 = new LeafSoft.Units.DataSend();
             this.txTabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -1004,7 +1004,7 @@ namespace WindowsTest
             this.txTabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.txTabControl1.Name = "txTabControl1";
             this.txTabControl1.SelectedIndex = 0;
-            this.txTabControl1.Size = new System.Drawing.Size(1898, 634);
+            this.txTabControl1.Size = new System.Drawing.Size(1898, 633);
             this.txTabControl1.TabClosd = false;
             this.txTabControl1.TabCornerRadius = 3;
             this.txTabControl1.TabIndex = 0;
@@ -1018,7 +1018,7 @@ namespace WindowsTest
             this.tabPage3.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage3.Size = new System.Drawing.Size(1890, 597);
+            this.tabPage3.Size = new System.Drawing.Size(1890, 596);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "读写参数";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -1039,7 +1039,7 @@ namespace WindowsTest
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer5);
-            this.splitContainer1.Size = new System.Drawing.Size(1882, 589);
+            this.splitContainer1.Size = new System.Drawing.Size(1882, 588);
             this.splitContainer1.SplitterDistance = 219;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 1;
@@ -1052,7 +1052,7 @@ namespace WindowsTest
             this.treeView1.Location = new System.Drawing.Point(0, 26);
             this.treeView1.Margin = new System.Windows.Forms.Padding(4);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(219, 563);
+            this.treeView1.Size = new System.Drawing.Size(219, 562);
             this.treeView1.TabIndex = 0;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
@@ -1124,8 +1124,8 @@ namespace WindowsTest
             this.splitContainer5.Panel2.Controls.Add(this.btn_设置);
             this.splitContainer5.Panel2.Controls.Add(this.btn_抄读);
             this.splitContainer5.Panel2MinSize = 35;
-            this.splitContainer5.Size = new System.Drawing.Size(1658, 589);
-            this.splitContainer5.SplitterDistance = 391;
+            this.splitContainer5.Size = new System.Drawing.Size(1658, 588);
+            this.splitContainer5.SplitterDistance = 389;
             this.splitContainer5.SplitterWidth = 5;
             this.splitContainer5.TabIndex = 1;
             // 
@@ -1166,7 +1166,7 @@ namespace WindowsTest
             this.dgv_RW.Name = "dgv_RW";
             this.dgv_RW.RowHeadersWidth = 62;
             this.dgv_RW.RowTemplate.Height = 23;
-            this.dgv_RW.Size = new System.Drawing.Size(1658, 391);
+            this.dgv_RW.Size = new System.Drawing.Size(1658, 389);
             this.dgv_RW.TabIndex = 1;
             this.dgv_RW.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_RW_CellDoubleClick);
             this.dgv_RW.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgv_RW_CellMouseClick);
@@ -1189,7 +1189,7 @@ namespace WindowsTest
             this.Column13.Name = "Column13";
             this.Column13.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column13.Visible = false;
-            this.Column13.Width = 8;
+            this.Column13.Width = 125;
             // 
             // Column14
             // 
@@ -1200,7 +1200,7 @@ namespace WindowsTest
             this.Column14.Name = "Column14";
             this.Column14.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column14.Visible = false;
-            this.Column14.Width = 8;
+            this.Column14.Width = 125;
             // 
             // Column2
             // 
@@ -1231,7 +1231,7 @@ namespace WindowsTest
             this.父数据标识.ReadOnly = true;
             this.父数据标识.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.父数据标识.Visible = false;
-            this.父数据标识.Width = 90;
+            this.父数据标识.Width = 125;
             // 
             // Column4
             // 
@@ -1252,7 +1252,7 @@ namespace WindowsTest
             this.Column5.Name = "Column5";
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column5.Visible = false;
-            this.Column5.Width = 90;
+            this.Column5.Width = 125;
             // 
             // Column6
             // 
@@ -1263,6 +1263,7 @@ namespace WindowsTest
             this.Column6.Name = "Column6";
             this.Column6.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column6.Visible = false;
+            this.Column6.Width = 125;
             // 
             // Column7
             // 
@@ -1283,7 +1284,7 @@ namespace WindowsTest
             this.Column8.Name = "Column8";
             this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.Column8.Visible = false;
-            this.Column8.Width = 8;
+            this.Column8.Width = 125;
             // 
             // Column9
             // 
@@ -1538,7 +1539,7 @@ namespace WindowsTest
             this.tabPage6.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage6.Name = "tabPage6";
             this.tabPage6.Padding = new System.Windows.Forms.Padding(4);
-            this.tabPage6.Size = new System.Drawing.Size(1890, 597);
+            this.tabPage6.Size = new System.Drawing.Size(1890, 596);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "报文解析";
             this.tabPage6.UseVisualStyleBackColor = true;
@@ -1558,8 +1559,8 @@ namespace WindowsTest
             // splitContainer6.Panel2
             // 
             this.splitContainer6.Panel2.Controls.Add(this.dgvExplain);
-            this.splitContainer6.Size = new System.Drawing.Size(1882, 589);
-            this.splitContainer6.SplitterDistance = 203;
+            this.splitContainer6.Size = new System.Drawing.Size(1882, 588);
+            this.splitContainer6.SplitterDistance = 202;
             this.splitContainer6.SplitterWidth = 5;
             this.splitContainer6.TabIndex = 45;
             // 
@@ -1570,7 +1571,7 @@ namespace WindowsTest
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Margin = new System.Windows.Forms.Padding(4);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1882, 203);
+            this.panel5.Size = new System.Drawing.Size(1882, 202);
             this.panel5.TabIndex = 46;
             // 
             // splitContainer21
@@ -1588,7 +1589,7 @@ namespace WindowsTest
             // 
             this.splitContainer21.Panel2.Controls.Add(this.txbSendmessages);
             this.splitContainer21.Panel2.Controls.Add(this.btnPasteExplain);
-            this.splitContainer21.Size = new System.Drawing.Size(1882, 203);
+            this.splitContainer21.Size = new System.Drawing.Size(1882, 202);
             this.splitContainer21.SplitterDistance = 1191;
             this.splitContainer21.SplitterWidth = 5;
             this.splitContainer21.TabIndex = 45;
@@ -1600,7 +1601,7 @@ namespace WindowsTest
             this.rtbExplain.Location = new System.Drawing.Point(0, 0);
             this.rtbExplain.Margin = new System.Windows.Forms.Padding(5);
             this.rtbExplain.Name = "rtbExplain";
-            this.rtbExplain.Size = new System.Drawing.Size(1191, 203);
+            this.rtbExplain.Size = new System.Drawing.Size(1191, 202);
             this.rtbExplain.TabIndex = 44;
             this.rtbExplain.Text = "";
             // 
@@ -1608,7 +1609,7 @@ namespace WindowsTest
             // 
             this.txbSendmessages.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.txbSendmessages.Image = null;
-            this.txbSendmessages.Location = new System.Drawing.Point(0, 167);
+            this.txbSendmessages.Location = new System.Drawing.Point(0, 166);
             this.txbSendmessages.Margin = new System.Windows.Forms.Padding(4);
             this.txbSendmessages.Name = "txbSendmessages";
             this.txbSendmessages.Size = new System.Drawing.Size(686, 36);
@@ -1719,7 +1720,7 @@ namespace WindowsTest
             this.tpReadData.Margin = new System.Windows.Forms.Padding(4);
             this.tpReadData.Name = "tpReadData";
             this.tpReadData.Padding = new System.Windows.Forms.Padding(4);
-            this.tpReadData.Size = new System.Drawing.Size(1890, 597);
+            this.tpReadData.Size = new System.Drawing.Size(1890, 596);
             this.tpReadData.TabIndex = 0;
             this.tpReadData.Text = "数据抄读";
             this.tpReadData.UseVisualStyleBackColor = true;
@@ -1932,7 +1933,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn26.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
             this.dataGridViewTextBoxColumn26.Visible = false;
-            this.dataGridViewTextBoxColumn26.Width = 113;
+            this.dataGridViewTextBoxColumn26.Width = 125;
             // 
             // dataGridViewTextBoxColumn27
             // 
@@ -2860,7 +2861,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn37.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn37.Name = "dataGridViewTextBoxColumn37";
             this.dataGridViewTextBoxColumn37.Visible = false;
-            this.dataGridViewTextBoxColumn37.Width = 98;
+            this.dataGridViewTextBoxColumn37.Width = 125;
             // 
             // dataGridViewTextBoxColumn38
             // 
@@ -2880,7 +2881,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn39.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn39.Name = "dataGridViewTextBoxColumn39";
             this.dataGridViewTextBoxColumn39.Visible = false;
-            this.dataGridViewTextBoxColumn39.Width = 68;
+            this.dataGridViewTextBoxColumn39.Width = 125;
             // 
             // dataGridViewTextBoxColumn40
             // 
@@ -2890,7 +2891,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn40.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn40.Name = "dataGridViewTextBoxColumn40";
             this.dataGridViewTextBoxColumn40.Visible = false;
-            this.dataGridViewTextBoxColumn40.Width = 113;
+            this.dataGridViewTextBoxColumn40.Width = 125;
             // 
             // dataGridViewTextBoxColumn41
             // 
@@ -3252,7 +3253,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn77.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn77.Name = "dataGridViewTextBoxColumn77";
             this.dataGridViewTextBoxColumn77.Visible = false;
-            this.dataGridViewTextBoxColumn77.Width = 98;
+            this.dataGridViewTextBoxColumn77.Width = 125;
             // 
             // dataGridViewTextBoxColumn78
             // 
@@ -3272,7 +3273,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn79.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn79.Name = "dataGridViewTextBoxColumn79";
             this.dataGridViewTextBoxColumn79.Visible = false;
-            this.dataGridViewTextBoxColumn79.Width = 68;
+            this.dataGridViewTextBoxColumn79.Width = 125;
             // 
             // dataGridViewTextBoxColumn80
             // 
@@ -3282,7 +3283,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn80.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn80.Name = "dataGridViewTextBoxColumn80";
             this.dataGridViewTextBoxColumn80.Visible = false;
-            this.dataGridViewTextBoxColumn80.Width = 113;
+            this.dataGridViewTextBoxColumn80.Width = 125;
             // 
             // dataGridViewTextBoxColumn81
             // 
@@ -3432,7 +3433,7 @@ namespace WindowsTest
             this.dataGridViewCheckBoxColumn10.MinimumWidth = 8;
             this.dataGridViewCheckBoxColumn10.Name = "dataGridViewCheckBoxColumn10";
             this.dataGridViewCheckBoxColumn10.Visible = false;
-            this.dataGridViewCheckBoxColumn10.Width = 8;
+            this.dataGridViewCheckBoxColumn10.Width = 125;
             // 
             // dataGridViewTextBoxColumn88
             // 
@@ -3497,7 +3498,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn94.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn94.Name = "dataGridViewTextBoxColumn94";
             this.dataGridViewTextBoxColumn94.Visible = false;
-            this.dataGridViewTextBoxColumn94.Width = 113;
+            this.dataGridViewTextBoxColumn94.Width = 125;
             // 
             // dataGridViewTextBoxColumn95
             // 
@@ -3516,7 +3517,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn96.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn96.Name = "dataGridViewTextBoxColumn96";
             this.dataGridViewTextBoxColumn96.Visible = false;
-            this.dataGridViewTextBoxColumn96.Width = 98;
+            this.dataGridViewTextBoxColumn96.Width = 125;
             // 
             // dataGridViewTextBoxColumn97
             // 
@@ -3535,7 +3536,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn98.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn98.Name = "dataGridViewTextBoxColumn98";
             this.dataGridViewTextBoxColumn98.Visible = false;
-            this.dataGridViewTextBoxColumn98.Width = 68;
+            this.dataGridViewTextBoxColumn98.Width = 125;
             // 
             // dataGridViewTextBoxColumn99
             // 
@@ -3906,7 +3907,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn108.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn108.Name = "dataGridViewTextBoxColumn108";
             this.dataGridViewTextBoxColumn108.Visible = false;
-            this.dataGridViewTextBoxColumn108.Width = 113;
+            this.dataGridViewTextBoxColumn108.Width = 125;
             // 
             // dataGridViewTextBoxColumn109
             // 
@@ -3975,7 +3976,7 @@ namespace WindowsTest
             this.tabPage4.Location = new System.Drawing.Point(4, 33);
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(1890, 597);
+            this.tabPage4.Size = new System.Drawing.Size(1890, 596);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "无线通讯测试";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -5417,7 +5418,7 @@ namespace WindowsTest
             this.tabPage2.Location = new System.Drawing.Point(4, 33);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1890, 597);
+            this.tabPage2.Size = new System.Drawing.Size(1890, 596);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "程序升级  ";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -5441,7 +5442,7 @@ namespace WindowsTest
             this.TXtabUpdata.Location = new System.Drawing.Point(3, 3);
             this.TXtabUpdata.Name = "TXtabUpdata";
             this.TXtabUpdata.SelectedIndex = 0;
-            this.TXtabUpdata.Size = new System.Drawing.Size(1884, 591);
+            this.TXtabUpdata.Size = new System.Drawing.Size(1884, 590);
             this.TXtabUpdata.TabClosd = false;
             this.TXtabUpdata.TabCornerRadius = 3;
             this.TXtabUpdata.TabIndex = 55;
@@ -5463,7 +5464,7 @@ namespace WindowsTest
             this.tp6025Updata.Location = new System.Drawing.Point(4, 33);
             this.tp6025Updata.Name = "tp6025Updata";
             this.tp6025Updata.Padding = new System.Windows.Forms.Padding(3);
-            this.tp6025Updata.Size = new System.Drawing.Size(1876, 554);
+            this.tp6025Updata.Size = new System.Drawing.Size(1876, 553);
             this.tp6025Updata.TabIndex = 0;
             this.tp6025Updata.Text = "6025升级";
             this.tp6025Updata.UseVisualStyleBackColor = true;
@@ -5600,7 +5601,7 @@ namespace WindowsTest
             this.tp6025Updata4G.Location = new System.Drawing.Point(4, 33);
             this.tp6025Updata4G.Name = "tp6025Updata4G";
             this.tp6025Updata4G.Padding = new System.Windows.Forms.Padding(3);
-            this.tp6025Updata4G.Size = new System.Drawing.Size(1876, 554);
+            this.tp6025Updata4G.Size = new System.Drawing.Size(178, 20);
             this.tp6025Updata4G.TabIndex = 1;
             this.tp6025Updata4G.Text = "6025升级4G";
             this.tp6025Updata4G.UseVisualStyleBackColor = true;
@@ -5722,7 +5723,7 @@ namespace WindowsTest
             this.tpF460Updata.Location = new System.Drawing.Point(4, 33);
             this.tpF460Updata.Name = "tpF460Updata";
             this.tpF460Updata.Padding = new System.Windows.Forms.Padding(3);
-            this.tpF460Updata.Size = new System.Drawing.Size(1876, 554);
+            this.tpF460Updata.Size = new System.Drawing.Size(178, 20);
             this.tpF460Updata.TabIndex = 2;
             this.tpF460Updata.Text = "外部Flash升级";
             this.tpF460Updata.UseVisualStyleBackColor = true;
@@ -5743,7 +5744,7 @@ namespace WindowsTest
             // splitContainer8.Panel2
             // 
             this.splitContainer8.Panel2.Controls.Add(this.gbF460AllowVersion);
-            this.splitContainer8.Size = new System.Drawing.Size(1870, 548);
+            this.splitContainer8.Size = new System.Drawing.Size(172, 14);
             this.splitContainer8.SplitterDistance = 25;
             this.splitContainer8.TabIndex = 80;
             // 
@@ -5763,7 +5764,7 @@ namespace WindowsTest
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox7.Location = new System.Drawing.Point(0, 0);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(1870, 25);
+            this.groupBox7.Size = new System.Drawing.Size(186, 25);
             this.groupBox7.TabIndex = 59;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "一键升级";
@@ -5881,7 +5882,7 @@ namespace WindowsTest
             this.gbF460AllowVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbF460AllowVersion.Location = new System.Drawing.Point(0, 0);
             this.gbF460AllowVersion.Name = "gbF460AllowVersion";
-            this.gbF460AllowVersion.Size = new System.Drawing.Size(1870, 519);
+            this.gbF460AllowVersion.Size = new System.Drawing.Size(186, 28);
             this.gbF460AllowVersion.TabIndex = 65;
             this.gbF460AllowVersion.TabStop = false;
             this.gbF460AllowVersion.Text = "F460支持升级的版本";
@@ -5911,7 +5912,7 @@ namespace WindowsTest
             this.dgvVersionF460.ReadOnly = true;
             this.dgvVersionF460.RowHeadersWidth = 62;
             this.dgvVersionF460.RowTemplate.Height = 23;
-            this.dgvVersionF460.Size = new System.Drawing.Size(1864, 495);
+            this.dgvVersionF460.Size = new System.Drawing.Size(180, 4);
             this.dgvVersionF460.TabIndex = 64;
             // 
             // dataGridViewCheckBoxColumn2
@@ -6014,7 +6015,7 @@ namespace WindowsTest
             this.tp7326Updata.Controls.Add(this.splitContainer7);
             this.tp7326Updata.Location = new System.Drawing.Point(4, 33);
             this.tp7326Updata.Name = "tp7326Updata";
-            this.tp7326Updata.Size = new System.Drawing.Size(1876, 554);
+            this.tp7326Updata.Size = new System.Drawing.Size(178, 20);
             this.tp7326Updata.TabIndex = 3;
             this.tp7326Updata.Text = "SOC升级";
             this.tp7326Updata.UseVisualStyleBackColor = true;
@@ -6035,7 +6036,7 @@ namespace WindowsTest
             // splitContainer7.Panel2
             // 
             this.splitContainer7.Panel2.Controls.Add(this.gbRN7326AllowVersion);
-            this.splitContainer7.Size = new System.Drawing.Size(1876, 554);
+            this.splitContainer7.Size = new System.Drawing.Size(178, 20);
             this.splitContainer7.SplitterDistance = 25;
             this.splitContainer7.TabIndex = 62;
             // 
@@ -6054,7 +6055,7 @@ namespace WindowsTest
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 0);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(1876, 25);
+            this.groupBox4.Size = new System.Drawing.Size(192, 25);
             this.groupBox4.TabIndex = 60;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "一键升级";
@@ -6173,7 +6174,7 @@ namespace WindowsTest
             this.gbRN7326AllowVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbRN7326AllowVersion.Location = new System.Drawing.Point(0, 0);
             this.gbRN7326AllowVersion.Name = "gbRN7326AllowVersion";
-            this.gbRN7326AllowVersion.Size = new System.Drawing.Size(1876, 525);
+            this.gbRN7326AllowVersion.Size = new System.Drawing.Size(192, 34);
             this.gbRN7326AllowVersion.TabIndex = 66;
             this.gbRN7326AllowVersion.TabStop = false;
             this.gbRN7326AllowVersion.Text = "支持升级的版本";
@@ -6203,7 +6204,7 @@ namespace WindowsTest
             this.dgvVersion7326.ReadOnly = true;
             this.dgvVersion7326.RowHeadersWidth = 62;
             this.dgvVersion7326.RowTemplate.Height = 23;
-            this.dgvVersion7326.Size = new System.Drawing.Size(1870, 501);
+            this.dgvVersion7326.Size = new System.Drawing.Size(186, 10);
             this.dgvVersion7326.TabIndex = 61;
             // 
             // dataGridViewCheckBoxColumn1
@@ -6248,7 +6249,7 @@ namespace WindowsTest
             this.tpUpdataZX.Location = new System.Drawing.Point(4, 33);
             this.tpUpdataZX.Name = "tpUpdataZX";
             this.tpUpdataZX.Padding = new System.Windows.Forms.Padding(3);
-            this.tpUpdataZX.Size = new System.Drawing.Size(1876, 554);
+            this.tpUpdataZX.Size = new System.Drawing.Size(178, 20);
             this.tpUpdataZX.TabIndex = 4;
             this.tpUpdataZX.Text = "志翔算法升级";
             this.tpUpdataZX.UseVisualStyleBackColor = true;
@@ -6266,7 +6267,7 @@ namespace WindowsTest
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox5.Location = new System.Drawing.Point(3, 3);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(1870, 548);
+            this.groupBox5.Size = new System.Drawing.Size(172, 14);
             this.groupBox5.TabIndex = 61;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "一键升级";
@@ -6367,7 +6368,7 @@ namespace WindowsTest
             this.tabPage10.Location = new System.Drawing.Point(4, 33);
             this.tabPage10.Name = "tabPage10";
             this.tabPage10.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage10.Size = new System.Drawing.Size(1876, 554);
+            this.tabPage10.Size = new System.Drawing.Size(178, 20);
             this.tabPage10.TabIndex = 5;
             this.tabPage10.Text = "F460升级固件信息";
             this.tabPage10.UseVisualStyleBackColor = true;
@@ -6505,7 +6506,7 @@ namespace WindowsTest
             this.PartUpgrade.Controls.Add(this.txbBeforeUpGrade);
             this.PartUpgrade.Location = new System.Drawing.Point(4, 33);
             this.PartUpgrade.Name = "PartUpgrade";
-            this.PartUpgrade.Size = new System.Drawing.Size(1876, 554);
+            this.PartUpgrade.Size = new System.Drawing.Size(178, 20);
             this.PartUpgrade.TabIndex = 6;
             this.PartUpgrade.Text = "短报文升级";
             this.PartUpgrade.UseVisualStyleBackColor = true;
@@ -6606,17 +6607,27 @@ namespace WindowsTest
             this.tpTCP.Location = new System.Drawing.Point(4, 33);
             this.tpTCP.Name = "tpTCP";
             this.tpTCP.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTCP.Size = new System.Drawing.Size(1876, 554);
+            this.tpTCP.Size = new System.Drawing.Size(178, 20);
             this.tpTCP.TabIndex = 8;
             this.tpTCP.Text = "TCP";
             this.tpTCP.UseVisualStyleBackColor = true;
+            // 
+            // tcpServerPanel1
+            // 
+            this.tcpServerPanel1.AutoSize = true;
+            this.tcpServerPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcpServerPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tcpServerPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcpServerPanel1.Name = "tcpServerPanel1";
+            this.tcpServerPanel1.Size = new System.Drawing.Size(172, 14);
+            this.tcpServerPanel1.TabIndex = 0;
             // 
             // tpEncryptTest
             // 
             this.tpEncryptTest.Controls.Add(this.txTabControl3);
             this.tpEncryptTest.Location = new System.Drawing.Point(4, 33);
             this.tpEncryptTest.Name = "tpEncryptTest";
-            this.tpEncryptTest.Size = new System.Drawing.Size(1890, 597);
+            this.tpEncryptTest.Size = new System.Drawing.Size(1890, 596);
             this.tpEncryptTest.TabIndex = 6;
             this.tpEncryptTest.Text = "加密测试&蓝牙";
             this.tpEncryptTest.UseVisualStyleBackColor = true;
@@ -6634,7 +6645,7 @@ namespace WindowsTest
             this.txTabControl3.Location = new System.Drawing.Point(0, 0);
             this.txTabControl3.Name = "txTabControl3";
             this.txTabControl3.SelectedIndex = 0;
-            this.txTabControl3.Size = new System.Drawing.Size(1890, 597);
+            this.txTabControl3.Size = new System.Drawing.Size(1890, 596);
             this.txTabControl3.TabClosd = false;
             this.txTabControl3.TabCornerRadius = 3;
             this.txTabControl3.TabIndex = 1;
@@ -6645,7 +6656,7 @@ namespace WindowsTest
             this.tabPage1.Location = new System.Drawing.Point(4, 33);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1882, 560);
+            this.tabPage1.Size = new System.Drawing.Size(1882, 559);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "加密测试";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -6671,7 +6682,7 @@ namespace WindowsTest
             // splitContainer12.Panel2
             // 
             this.splitContainer12.Panel2.Controls.Add(this.splitContainer14);
-            this.splitContainer12.Size = new System.Drawing.Size(1876, 554);
+            this.splitContainer12.Size = new System.Drawing.Size(1876, 553);
             this.splitContainer12.SplitterDistance = 473;
             this.splitContainer12.TabIndex = 0;
             // 
@@ -6861,8 +6872,8 @@ namespace WindowsTest
             // splitContainer14.Panel2
             // 
             this.splitContainer14.Panel2.Controls.Add(this.txtbOutputText);
-            this.splitContainer14.Size = new System.Drawing.Size(1399, 554);
-            this.splitContainer14.SplitterDistance = 252;
+            this.splitContainer14.Size = new System.Drawing.Size(1399, 553);
+            this.splitContainer14.SplitterDistance = 251;
             this.splitContainer14.TabIndex = 4;
             // 
             // splitContainer15
@@ -6880,8 +6891,8 @@ namespace WindowsTest
             // 
             this.splitContainer15.Panel2.Controls.Add(this.txbBase64De);
             this.splitContainer15.Panel2.Controls.Add(this.txbBase64En);
-            this.splitContainer15.Size = new System.Drawing.Size(1399, 252);
-            this.splitContainer15.SplitterDistance = 206;
+            this.splitContainer15.Size = new System.Drawing.Size(1399, 251);
+            this.splitContainer15.SplitterDistance = 205;
             this.splitContainer15.TabIndex = 4;
             // 
             // txtbInputText
@@ -6901,7 +6912,7 @@ namespace WindowsTest
             this.txtbInputText.PasswordChar = '\0';
             this.txtbInputText.Required = false;
             this.txtbInputText.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.txtbInputText.Size = new System.Drawing.Size(1399, 206);
+            this.txtbInputText.Size = new System.Drawing.Size(1399, 205);
             this.txtbInputText.TabIndex = 0;
             // 
             // txbBase64De
@@ -6952,7 +6963,7 @@ namespace WindowsTest
             this.tabPage8.Location = new System.Drawing.Point(4, 33);
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage8.Size = new System.Drawing.Size(1882, 560);
+            this.tabPage8.Size = new System.Drawing.Size(184, 26);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "蓝牙";
             this.tabPage8.UseVisualStyleBackColor = true;
@@ -6972,7 +6983,7 @@ namespace WindowsTest
             // splitContainer17.Panel2
             // 
             this.splitContainer17.Panel2.Controls.Add(this.lv_device);
-            this.splitContainer17.Size = new System.Drawing.Size(1876, 552);
+            this.splitContainer17.Size = new System.Drawing.Size(178, 20);
             this.splitContainer17.SplitterDistance = 149;
             this.splitContainer17.TabIndex = 0;
             // 
@@ -6986,7 +6997,7 @@ namespace WindowsTest
             this.groupBox9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox9.Location = new System.Drawing.Point(0, 302);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(149, 250);
+            this.groupBox9.Size = new System.Drawing.Size(149, 0);
             this.groupBox9.TabIndex = 15;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "LTU (2.0) 485通信 ";
@@ -7313,7 +7324,7 @@ namespace WindowsTest
             this.lv_device.Location = new System.Drawing.Point(0, 0);
             this.lv_device.Margin = new System.Windows.Forms.Padding(2);
             this.lv_device.Name = "lv_device";
-            this.lv_device.Size = new System.Drawing.Size(1723, 552);
+            this.lv_device.Size = new System.Drawing.Size(25, 20);
             this.lv_device.TabIndex = 1;
             this.lv_device.UseCompatibleStateImageBehavior = false;
             this.lv_device.View = System.Windows.Forms.View.Details;
@@ -7340,7 +7351,7 @@ namespace WindowsTest
             this.tpTopoZX.Location = new System.Drawing.Point(4, 33);
             this.tpTopoZX.Name = "tpTopoZX";
             this.tpTopoZX.Padding = new System.Windows.Forms.Padding(3);
-            this.tpTopoZX.Size = new System.Drawing.Size(1890, 597);
+            this.tpTopoZX.Size = new System.Drawing.Size(1890, 596);
             this.tpTopoZX.TabIndex = 7;
             this.tpTopoZX.Text = "拓扑测试";
             this.tpTopoZX.UseVisualStyleBackColor = true;
@@ -7358,7 +7369,7 @@ namespace WindowsTest
             this.txTabControl2.Location = new System.Drawing.Point(3, 3);
             this.txTabControl2.Name = "txTabControl2";
             this.txTabControl2.SelectedIndex = 0;
-            this.txTabControl2.Size = new System.Drawing.Size(1884, 591);
+            this.txTabControl2.Size = new System.Drawing.Size(1884, 590);
             this.txTabControl2.TabClosd = false;
             this.txTabControl2.TabCornerRadius = 3;
             this.txTabControl2.TabIndex = 113;
@@ -7369,7 +7380,7 @@ namespace WindowsTest
             this.tabPage7.Location = new System.Drawing.Point(4, 33);
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage7.Size = new System.Drawing.Size(1876, 554);
+            this.tabPage7.Size = new System.Drawing.Size(1876, 553);
             this.tabPage7.TabIndex = 1;
             this.tabPage7.Text = "配电版本";
             this.tabPage7.UseVisualStyleBackColor = true;
@@ -7389,7 +7400,7 @@ namespace WindowsTest
             // splitContainer9.Panel2
             // 
             this.splitContainer9.Panel2.Controls.Add(this.groupBox8);
-            this.splitContainer9.Size = new System.Drawing.Size(1870, 548);
+            this.splitContainer9.Size = new System.Drawing.Size(1870, 547);
             this.splitContainer9.SplitterDistance = 25;
             this.splitContainer9.TabIndex = 0;
             // 
@@ -7549,7 +7560,7 @@ namespace WindowsTest
             this.groupBox8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox8.Location = new System.Drawing.Point(0, 0);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(1870, 519);
+            this.groupBox8.Size = new System.Drawing.Size(1870, 518);
             this.groupBox8.TabIndex = 123;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "拓扑数据";
@@ -7579,7 +7590,7 @@ namespace WindowsTest
             this.dgvTopoZX.RowHeadersVisible = false;
             this.dgvTopoZX.RowHeadersWidth = 62;
             this.dgvTopoZX.RowTemplate.Height = 23;
-            this.dgvTopoZX.Size = new System.Drawing.Size(1864, 495);
+            this.dgvTopoZX.Size = new System.Drawing.Size(1864, 494);
             this.dgvTopoZX.TabIndex = 122;
             // 
             // dataGridViewTextBoxColumn15
@@ -7641,7 +7652,7 @@ namespace WindowsTest
             this.tabPage5.Location = new System.Drawing.Point(4, 33);
             this.tabPage5.Name = "tabPage5";
             this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(1876, 554);
+            this.tabPage5.Size = new System.Drawing.Size(178, 20);
             this.tabPage5.TabIndex = 0;
             this.tabPage5.Text = "山东LTU1.0";
             this.tabPage5.UseVisualStyleBackColor = true;
@@ -7652,7 +7663,7 @@ namespace WindowsTest
             this.gbTopoRead.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gbTopoRead.Location = new System.Drawing.Point(3, 3);
             this.gbTopoRead.Name = "gbTopoRead";
-            this.gbTopoRead.Size = new System.Drawing.Size(1870, 546);
+            this.gbTopoRead.Size = new System.Drawing.Size(172, 14);
             this.gbTopoRead.TabIndex = 112;
             this.gbTopoRead.TabStop = false;
             this.gbTopoRead.Text = "拓扑测试";
@@ -7691,7 +7702,7 @@ namespace WindowsTest
             // splitContainer10.Panel2
             // 
             this.splitContainer10.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer10.Size = new System.Drawing.Size(1864, 522);
+            this.splitContainer10.Size = new System.Drawing.Size(166, 0);
             this.splitContainer10.SplitterDistance = 25;
             this.splitContainer10.TabIndex = 129;
             // 
@@ -8018,7 +8029,7 @@ namespace WindowsTest
             this.tpFunction.Location = new System.Drawing.Point(4, 33);
             this.tpFunction.Name = "tpFunction";
             this.tpFunction.Padding = new System.Windows.Forms.Padding(3);
-            this.tpFunction.Size = new System.Drawing.Size(1890, 597);
+            this.tpFunction.Size = new System.Drawing.Size(1890, 596);
             this.tpFunction.TabIndex = 8;
             this.tpFunction.Text = "功能测试";
             this.tpFunction.UseVisualStyleBackColor = true;
@@ -8054,7 +8065,7 @@ namespace WindowsTest
             // txbStartTeleindication
             // 
             this.txbStartTeleindication.Image = null;
-            this.txbStartTeleindication.Location = new System.Drawing.Point(192, 11);
+            this.txbStartTeleindication.Location = new System.Drawing.Point(251, 12);
             this.txbStartTeleindication.Name = "txbStartTeleindication";
             this.txbStartTeleindication.Size = new System.Drawing.Size(72, 28);
             this.txbStartTeleindication.TabIndex = 9;
@@ -8071,7 +8082,7 @@ namespace WindowsTest
             this.txtbTeleindicationNum.HeightLightBolorColor = System.Drawing.Color.FromArgb(((int)(((byte)(140)))), ((int)(((byte)(67)))), ((int)(((byte)(165)))), ((int)(((byte)(220)))));
             this.txtbTeleindicationNum.Image = null;
             this.txtbTeleindicationNum.ImageSize = new System.Drawing.Size(0, 0);
-            this.txtbTeleindicationNum.Location = new System.Drawing.Point(84, 14);
+            this.txtbTeleindicationNum.Location = new System.Drawing.Point(120, 12);
             this.txtbTeleindicationNum.Name = "txtbTeleindicationNum";
             this.txtbTeleindicationNum.Padding = new System.Windows.Forms.Padding(2);
             this.txtbTeleindicationNum.PasswordChar = '\0';
@@ -8127,7 +8138,7 @@ namespace WindowsTest
             this.dataGridViewCheckBoxColumn6.MinimumWidth = 8;
             this.dataGridViewCheckBoxColumn6.Name = "dataGridViewCheckBoxColumn6";
             this.dataGridViewCheckBoxColumn6.Visible = false;
-            this.dataGridViewCheckBoxColumn6.Width = 8;
+            this.dataGridViewCheckBoxColumn6.Width = 125;
             // 
             // dataGridViewTextBoxColumn48
             // 
@@ -8192,7 +8203,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn54.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn54.Name = "dataGridViewTextBoxColumn54";
             this.dataGridViewTextBoxColumn54.Visible = false;
-            this.dataGridViewTextBoxColumn54.Width = 113;
+            this.dataGridViewTextBoxColumn54.Width = 125;
             // 
             // dataGridViewTextBoxColumn55
             // 
@@ -8261,7 +8272,7 @@ namespace WindowsTest
             this.tpCAN.Location = new System.Drawing.Point(4, 33);
             this.tpCAN.Name = "tpCAN";
             this.tpCAN.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCAN.Size = new System.Drawing.Size(1890, 597);
+            this.tpCAN.Size = new System.Drawing.Size(1890, 596);
             this.tpCAN.TabIndex = 9;
             this.tpCAN.Text = "CAN";
             this.tpCAN.UseVisualStyleBackColor = true;
@@ -8279,7 +8290,7 @@ namespace WindowsTest
             // splitContainer19.Panel2
             // 
             this.splitContainer19.Panel2.Controls.Add(this.txTabControl4);
-            this.splitContainer19.Size = new System.Drawing.Size(1884, 591);
+            this.splitContainer19.Size = new System.Drawing.Size(1884, 590);
             this.splitContainer19.SplitterDistance = 252;
             this.splitContainer19.TabIndex = 0;
             // 
@@ -8304,8 +8315,8 @@ namespace WindowsTest
             this.splitContainer20.Panel2.Controls.Add(this.label74);
             this.splitContainer20.Panel2.Controls.Add(this.txbInputCan);
             this.splitContainer20.Panel2.Controls.Add(this.txcbCANSerial);
-            this.splitContainer20.Size = new System.Drawing.Size(252, 591);
-            this.splitContainer20.SplitterDistance = 255;
+            this.splitContainer20.Size = new System.Drawing.Size(252, 590);
+            this.splitContainer20.SplitterDistance = 254;
             this.splitContainer20.TabIndex = 34;
             // 
             // txtbSeachCAN
@@ -8314,7 +8325,7 @@ namespace WindowsTest
             this.txtbSeachCAN.Image = global::Test.Properties.Resources.search_icon1;
             this.txtbSeachCAN.Location = new System.Drawing.Point(227, 0);
             this.txtbSeachCAN.Name = "txtbSeachCAN";
-            this.txtbSeachCAN.Size = new System.Drawing.Size(25, 255);
+            this.txtbSeachCAN.Size = new System.Drawing.Size(25, 254);
             this.txtbSeachCAN.TabIndex = 33;
             this.txtbSeachCAN.UseVisualStyleBackColor = true;
             this.txtbSeachCAN.Click += new System.EventHandler(this.txtbSeachCAN_Click);
@@ -8326,7 +8337,7 @@ namespace WindowsTest
             this.tbSeachCAN.Margin = new System.Windows.Forms.Padding(0);
             this.tbSeachCAN.Multiline = true;
             this.tbSeachCAN.Name = "tbSeachCAN";
-            this.tbSeachCAN.Size = new System.Drawing.Size(252, 255);
+            this.tbSeachCAN.Size = new System.Drawing.Size(252, 254);
             this.tbSeachCAN.TabIndex = 32;
             // 
             // txcbLoop
@@ -8418,7 +8429,7 @@ namespace WindowsTest
             this.txTabControl4.Location = new System.Drawing.Point(0, 0);
             this.txTabControl4.Name = "txTabControl4";
             this.txTabControl4.SelectedIndex = 0;
-            this.txTabControl4.Size = new System.Drawing.Size(1628, 591);
+            this.txTabControl4.Size = new System.Drawing.Size(1628, 590);
             this.txTabControl4.TabClosd = false;
             this.txTabControl4.TabCornerRadius = 3;
             this.txTabControl4.TabIndex = 6;
@@ -8429,7 +8440,7 @@ namespace WindowsTest
             this.tpCANTestManual.Location = new System.Drawing.Point(4, 33);
             this.tpCANTestManual.Name = "tpCANTestManual";
             this.tpCANTestManual.Padding = new System.Windows.Forms.Padding(3);
-            this.tpCANTestManual.Size = new System.Drawing.Size(1620, 554);
+            this.tpCANTestManual.Size = new System.Drawing.Size(1620, 553);
             this.tpCANTestManual.TabIndex = 0;
             this.tpCANTestManual.Text = "测试事件告警置位";
             this.tpCANTestManual.UseVisualStyleBackColor = true;
@@ -8466,7 +8477,7 @@ namespace WindowsTest
             this.dgvCAN.Name = "dgvCAN";
             this.dgvCAN.RowHeadersWidth = 62;
             this.dgvCAN.RowTemplate.Height = 23;
-            this.dgvCAN.Size = new System.Drawing.Size(1614, 548);
+            this.dgvCAN.Size = new System.Drawing.Size(1614, 547);
             this.dgvCAN.TabIndex = 5;
             this.dgvCAN.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgvCAN_CellMouseDoubleClick);
             // 
@@ -8556,7 +8567,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn75.MinimumWidth = 25;
             this.dataGridViewTextBoxColumn75.Name = "dataGridViewTextBoxColumn75";
             this.dataGridViewTextBoxColumn75.Visible = false;
-            this.dataGridViewTextBoxColumn75.Width = 25;
+            this.dataGridViewTextBoxColumn75.Width = 125;
             // 
             // tpMock
             // 
@@ -8564,7 +8575,7 @@ namespace WindowsTest
             this.tpMock.Location = new System.Drawing.Point(4, 33);
             this.tpMock.Name = "tpMock";
             this.tpMock.Padding = new System.Windows.Forms.Padding(3);
-            this.tpMock.Size = new System.Drawing.Size(1620, 554);
+            this.tpMock.Size = new System.Drawing.Size(149, 20);
             this.tpMock.TabIndex = 1;
             this.tpMock.Text = "模拟测试";
             this.tpMock.UseVisualStyleBackColor = true;
@@ -8601,7 +8612,7 @@ namespace WindowsTest
             this.DgvMockCAN.Name = "DgvMockCAN";
             this.DgvMockCAN.RowHeadersWidth = 62;
             this.DgvMockCAN.RowTemplate.Height = 23;
-            this.DgvMockCAN.Size = new System.Drawing.Size(1614, 546);
+            this.DgvMockCAN.Size = new System.Drawing.Size(143, 14);
             this.DgvMockCAN.TabIndex = 6;
             // 
             // dataGridViewCheckBoxColumn8
@@ -8696,7 +8707,7 @@ namespace WindowsTest
             this.tpRailMeter.Location = new System.Drawing.Point(4, 33);
             this.tpRailMeter.Name = "tpRailMeter";
             this.tpRailMeter.Padding = new System.Windows.Forms.Padding(3);
-            this.tpRailMeter.Size = new System.Drawing.Size(1890, 597);
+            this.tpRailMeter.Size = new System.Drawing.Size(1890, 596);
             this.tpRailMeter.TabIndex = 10;
             this.tpRailMeter.Text = "分离式导轨表调试";
             this.tpRailMeter.UseVisualStyleBackColor = true;
@@ -8877,7 +8888,7 @@ namespace WindowsTest
             this.tpPowerControl.Location = new System.Drawing.Point(4, 33);
             this.tpPowerControl.Name = "tpPowerControl";
             this.tpPowerControl.Padding = new System.Windows.Forms.Padding(3);
-            this.tpPowerControl.Size = new System.Drawing.Size(1890, 597);
+            this.tpPowerControl.Size = new System.Drawing.Size(1890, 596);
             this.tpPowerControl.TabIndex = 11;
             this.tpPowerControl.Text = "控源";
             // 
@@ -8894,7 +8905,7 @@ namespace WindowsTest
             this.txTabControl5.Location = new System.Drawing.Point(3, 3);
             this.txTabControl5.Name = "txTabControl5";
             this.txTabControl5.SelectedIndex = 0;
-            this.txTabControl5.Size = new System.Drawing.Size(1884, 591);
+            this.txTabControl5.Size = new System.Drawing.Size(1884, 590);
             this.txTabControl5.TabClosd = false;
             this.txTabControl5.TabCornerRadius = 3;
             this.txTabControl5.TabIndex = 0;
@@ -8916,7 +8927,7 @@ namespace WindowsTest
             this.tpXLAC.Location = new System.Drawing.Point(4, 33);
             this.tpXLAC.Name = "tpXLAC";
             this.tpXLAC.Padding = new System.Windows.Forms.Padding(3);
-            this.tpXLAC.Size = new System.Drawing.Size(1876, 554);
+            this.tpXLAC.Size = new System.Drawing.Size(1876, 553);
             this.tpXLAC.TabIndex = 0;
             this.tpXLAC.Text = "星龙交流";
             this.tpXLAC.UseVisualStyleBackColor = true;
@@ -9293,7 +9304,7 @@ namespace WindowsTest
             this.tpXLDC.Location = new System.Drawing.Point(4, 33);
             this.tpXLDC.Name = "tpXLDC";
             this.tpXLDC.Padding = new System.Windows.Forms.Padding(3);
-            this.tpXLDC.Size = new System.Drawing.Size(1876, 554);
+            this.tpXLDC.Size = new System.Drawing.Size(178, 20);
             this.tpXLDC.TabIndex = 1;
             this.tpXLDC.Text = "星龙直流";
             this.tpXLDC.UseVisualStyleBackColor = true;
@@ -9303,7 +9314,7 @@ namespace WindowsTest
             this.tpMeterHWDC.Controls.Add(this.splitContainer28);
             this.tpMeterHWDC.Location = new System.Drawing.Point(4, 33);
             this.tpMeterHWDC.Name = "tpMeterHWDC";
-            this.tpMeterHWDC.Size = new System.Drawing.Size(1890, 597);
+            this.tpMeterHWDC.Size = new System.Drawing.Size(1890, 596);
             this.tpMeterHWDC.TabIndex = 12;
             this.tpMeterHWDC.Text = "HW零漂表筛选";
             this.tpMeterHWDC.UseVisualStyleBackColor = true;
@@ -9332,8 +9343,8 @@ namespace WindowsTest
             // splitContainer28.Panel2
             // 
             this.splitContainer28.Panel2.Controls.Add(this.dgvHWDC);
-            this.splitContainer28.Size = new System.Drawing.Size(1890, 597);
-            this.splitContainer28.SplitterDistance = 232;
+            this.splitContainer28.Size = new System.Drawing.Size(1890, 596);
+            this.splitContainer28.SplitterDistance = 231;
             this.splitContainer28.TabIndex = 0;
             // 
             // label98
@@ -9532,7 +9543,7 @@ namespace WindowsTest
             this.dataGridViewTextBoxColumn118.HeaderText = "地址";
             this.dataGridViewTextBoxColumn118.MinimumWidth = 8;
             this.dataGridViewTextBoxColumn118.Name = "dataGridViewTextBoxColumn118";
-            this.dataGridViewTextBoxColumn118.Width = 68;
+            this.dataGridViewTextBoxColumn118.Width = 64;
             // 
             // cHighTemperatureI
             // 
@@ -9665,7 +9676,7 @@ namespace WindowsTest
             this.splitContainer3.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer3.Panel2.Controls.Add(this.splitter1);
             this.splitContainer3.Size = new System.Drawing.Size(1898, 1047);
-            this.splitContainer3.SplitterDistance = 634;
+            this.splitContainer3.SplitterDistance = 633;
             this.splitContainer3.SplitterWidth = 5;
             this.splitContainer3.TabIndex = 33;
             // 
@@ -9682,7 +9693,7 @@ namespace WindowsTest
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.ReceieveMinus33);
-            this.splitContainer2.Size = new System.Drawing.Size(1895, 408);
+            this.splitContainer2.Size = new System.Drawing.Size(1895, 409);
             this.splitContainer2.SplitterDistance = 1766;
             this.splitContainer2.TabIndex = 1;
             // 
@@ -9691,7 +9702,7 @@ namespace WindowsTest
             this.rtb_log.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rtb_log.Location = new System.Drawing.Point(0, 0);
             this.rtb_log.Name = "rtb_log";
-            this.rtb_log.Size = new System.Drawing.Size(1766, 408);
+            this.rtb_log.Size = new System.Drawing.Size(1766, 409);
             this.rtb_log.TabIndex = 0;
             this.rtb_log.Text = "";
             // 
@@ -9711,7 +9722,7 @@ namespace WindowsTest
             // 
             this.splitter1.Location = new System.Drawing.Point(0, 0);
             this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 408);
+            this.splitter1.Size = new System.Drawing.Size(3, 409);
             this.splitter1.TabIndex = 0;
             this.splitter1.TabStop = false;
             // 
@@ -9887,16 +9898,6 @@ namespace WindowsTest
             // timerSystem
             // 
             this.timerSystem.Tick += new System.EventHandler(this.timerSystem_Tick);
-            // 
-            // tcpServerPanel1
-            // 
-            this.tcpServerPanel1.AutoSize = true;
-            this.tcpServerPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcpServerPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tcpServerPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tcpServerPanel1.Name = "tcpServerPanel1";
-            this.tcpServerPanel1.Size = new System.Drawing.Size(1870, 548);
-            this.tcpServerPanel1.TabIndex = 0;
             // 
             // DataSend1
             // 

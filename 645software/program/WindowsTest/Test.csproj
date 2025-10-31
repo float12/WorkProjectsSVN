@@ -47,7 +47,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;//User,Project,//Special,//lr,//wsd,License,//ShortUpGrade</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;//User,//Project,//Special,//lr,wsd,License,//ShortUpGrade</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>true</Prefer32Bit>

@@ -8541,104 +8541,160 @@ namespace WindowsTest
 			dgvTeleindication.DataSource = dtTeleindication;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void txbStartTeleindication_Click(object sender, EventArgs e)
+		private Thread tdTeleindication = null;
+		private CancellationTokenSource teleindicationCts = null;
+
+	private void txbStartTeleindication_Click(object sender, EventArgs e)
+	{
+		if (btn_电表通信串口.Text == "打开串口")
 		{
-			if (btn_电表通信串口.Text == "打开串口")
-			{
-				MessageBox.Show("请先打开串口!");
-				return;
-			}
-
-			try
-			{
-				if (txbStartTeleindication.Text == "开始测试")
-				{
-					if (!int.TryParse(pmc[5].Value.ToString(), out int overTime))
-					{
-						MessageBox.Show("非法的等待超时时间！");
-						return;
-					}
-					SpMeter.OverTime = overTime;
-					drs = dtTeleindication.Select(string.Format("选择 = '{0}' ", "true"), "");
-					iTeleindicationTestCount = int.Parse(txtbTeleindicationNum.Text);
-					SpMeter.Working = true;
-					bTeleindicationTest = true;
-					txbStartTeleindication.Text = "停止测试";
-					uiSendCount = 0;
-					uiSendCorrentCount = 0;
-					#region Thread
-					Thread td = new Thread(new ThreadStart(tTestTeleindication));
-					td.IsBackground = true;
-					td.Start();
-					#endregion
-				}
-				else
-				{
-					SpMeter.Working = false;
-					bTeleindicationTest = false;
-					txbStartTeleindication.Text = "开始测试";
-				}
-			}
-			catch (Exception exception)
-			{
-				output("设置过程中出现错误：" + exception.Message, true, true);
-				SpMeter.Working = false;
-				bTeleindicationTest = false;
-				txbStartTeleindication.Text = "开始测试";
-			}
-			finally
-			{
-
-			}
+			MessageBox.Show("请先打开串口!");
+			return;
 		}
 
+		try
+		{
+			if (txbStartTeleindication.Text == "开始测试")
+			{
+				// 解析超时时间
+				if (!int.TryParse(pmc[5].Value.ToString(), out int overTime))
+				{
+					MessageBox.Show("非法的等待超时时间！");
+					return;
+				}
+
+				SpMeter.OverTime = overTime;
+				drs = dtTeleindication.Select("选择 = 'true'");
+				if (drs.Length == 0)
+				{
+					MessageBox.Show("未选择任何测试项！");
+					return;
+				}
+
+				if (!int.TryParse(txtbTeleindicationNum.Text, out iTeleindicationTestCount) || iTeleindicationTestCount <= 0)
+				{
+					MessageBox.Show("请输入有效的测试次数！");
+					return;
+				}
+
+				// 初始化状态
+				SpMeter.Working = true;
+				bTeleindicationTest = true;
+				uiSendCount = 0;
+				uiSendCorrentCount = 0;
+
+				// 按钮文字 & 状态切换
+				txbStartTeleindication.Text = "停止测试";
+				txbStartTeleindication.Enabled = false; // 防止重复点击
+
+                  // 创建可中断的线程任务
+                teleindicationCts = new CancellationTokenSource();
+				CancellationToken token = teleindicationCts.Token;
+
+                tdTeleindication = new Thread(() => tTestTeleindicationSafe(token));
+				tdTeleindication.IsBackground = true;
+				tdTeleindication.Start();
+
+				// 延迟恢复按钮可点
+				Task.Delay(500).ContinueWith(_ =>
+				{
+					if (txbStartTeleindication.InvokeRequired)
+						txbStartTeleindication.Invoke(new Action(() => txbStartTeleindication.Enabled = true));
+					else
+						txbStartTeleindication.Enabled = true;
+				});
+			}
+			else // 停止测试
+			{
+				StopTeleindicationTest();
+			}
+		}
+		catch (Exception ex)
+		{
+			output("设置过程中出现错误：" + ex.Message, true, true);
+			StopTeleindicationTest();
+		}
+	}
+	/// <summary>
+	/// 线程安全的测试函数包装，支持取消信号
+	/// </summary>
+	private void tTestTeleindicationSafe(CancellationToken token)
+	{
+		try
+		{
+			tTestTeleindication(token);
+		}
+		catch (OperationCanceledException)
+		{
+			output("测试线程被用户中止。", false, true);
+		}
+		catch (Exception ex)
+		{
+			output("测试线程出现异常：" + ex.Message, true, true);
+		}
+		finally
+		{
+			if (txbStartTeleindication.InvokeRequired)
+			{
+				txbStartTeleindication.Invoke(new Action(() =>
+				{
+					txbStartTeleindication.Text = "开始测试";
+					txbStartTeleindication.Enabled = true;
+				}));
+			}
+		}
+	}
+	
+	private void StopTeleindicationTest()
+	{
+		try
+		{
+			txbStartTeleindication.Enabled = false;
+
+			SpMeter.Working = false;
+			bTeleindicationTest = false;
+
+			teleindicationCts?.Cancel();
+			if (tdTeleindication != null && tdTeleindication.IsAlive)
+			{
+				if (!tdTeleindication.Join(2000))
+				{
+					tdTeleindication.Abort(); // 最后手段，不推荐但可兜底
+				}
+			}
+
+			txbStartTeleindication.Text = "开始测试";
+			output("测试已停止。", false, true);
+		}
+		catch (Exception ex)
+		{
+			output("停止测试时出现错误：" + ex.Message, true, true);
+		}
+		finally
+		{
+			txbStartTeleindication.Enabled = true;
+		}
+	}
 		/// <summary>
 		/// 
 		/// </summary>
-		private void tTestTeleindication()
+		private void tTestTeleindication(CancellationToken token)
 		{
 			try
 			{
 				DataTable dtDatas = new DataTable();
 				for (int m = 0; m < iTeleindicationTestCount && SpMeter.Working && bTeleindicationTest; m++)
 				{
-					lstrDataMark.Clear();
-					lstrDataMark.Add("DBDF0201");
-					lstrDataMark.Add("04DFDFDB");
-					string strErr = FunDealMessage("01", DLT645.ControlType.Write, lstrDataMark, out string strData);
-					if (strErr != "")
-					{
-						if (strErr != "请先打开串口!")
-						{
-							MessageBox.Show(strErr);
-						}
-						bTeleindicationTest = false;
-						break;
-					}
-					Thread.Sleep(1000);
-					lstrDataMark.Clear();
-					lstrDataMark.Add("DBDF113A");
-					lstrDataMark.Add("04DFDFDB");
-					strErr = FunDealMessage("01", DLT645.ControlType.Write, lstrDataMark, out strData);
-					if (strErr != "")
-					{
-						if (strErr != "请先打开串口!")
-						{
-							MessageBox.Show(strErr);
-						}
-						bTeleindicationTest = false;
-						break;
-					}
-					Thread.Sleep(1000);
 					DLT645 dlt645 = new DLT645(Helps.fnAgainst(pmc[6].Value.ToString()));
-
-					for (int i = 0; i < dgvTeleindication.RowCount && SpMeter.Working && bTeleindicationTest; i++)
+					int sendCycle = 200;
+                    for (int i = 0; i < dgvTeleindication.RowCount && SpMeter.Working && bTeleindicationTest; i++)
 					{
+                        string sendCycleStr = pmc[10].Value.ToString();
+                        if (sendCycleStr != null)
+						{
+							sendCycle = int.Parse(sendCycleStr);
+						}
+                        Thread.Sleep(sendCycle);
 						if (dtDatas.Columns.Count < i + 1)
 						{
 							dtDatas.Columns.Add(dtTeleindication.Rows[i][1].ToString(), typeof(string));
@@ -8773,22 +8829,9 @@ namespace WindowsTest
 						}
 						#endregion
 					}
-					lstrDataMark.Clear();
-					lstrDataMark.Add("DBDF113c");
-					lstrDataMark.Add("04DFDFDB");
-					strErr = FunDealMessage("01", DLT645.ControlType.Write, lstrDataMark, out strData);
-					if (strErr != "")
-					{
-						if (strErr != "请先打开串口!")
-						{
-							MessageBox.Show(strErr);
-						}
-						bTeleindicationTest = false;
-						break;
-					}
 				}
 
-				Thread.Sleep(1000);
+				Thread.Sleep(200);
 				AsposeExcelTools.DataTableToExcel(dtDatas, string.Format("{0}", System.Environment.CurrentDirectory) + string.Format("\\LOG\\{0:yyyyMMdd HHmmss}" + ".xlsx", DateTime.Now), out string strErrs);
 				//output("累计发送报文" + uiSendCount.ToString() + "条," + "成功接收" + uiSendCorrentCount.ToString() + "条", true, false);
 			}
