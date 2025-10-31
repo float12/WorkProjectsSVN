@@ -678,6 +678,7 @@ void HandleMsgFromMqttUser(TReadMeterInfo *ReadMeterInfo)
 	{
 		Dlt645_Tx_Write(ReadMeterInfo->Standard645ID, ReadMeterInfo->DataLen, (BYTE *)&ReadMeterInfo->Data, ReadMeterInfo->Control);
 	}
+	IsMqttComMeterFlag = 1;
 }
 //--------------------------------------------------
 //功能描述:  接收来自 tcp线程的下行数据 
