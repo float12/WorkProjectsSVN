@@ -283,6 +283,11 @@
 #define HSDC4_ERR							0x803A
 //波形数据丢失
 #define SYSUN_SEND_WAVE_DATA_LOST			0x803B
+//EMMIF错误
+#define EMMIF1_ERR							0x803C
+#define EMMIF2_ERR							0x803D
+#define EMMIF3_ERR							0x803E
+#define EMMIF4_ERR							0x803F
 
 //写采样芯片寄存器8100+寄存器地址(一个字节)1
 #define MANUAL_MODIFIED_PARA			0x8100
