@@ -41,16 +41,7 @@ typedef enum
 	eSTATE_ONE_CHARGE_UPLOAD_FINISH, 	// 一次充电波形结束
 } eUploadFileState;
 
-typedef struct // 信息文件结构体
-{
-	BYTE WriteDataFileName[MAX_FILE_NAME_LEN];					// 上一个波形数据文件的文件名
-	WORD ReadOffset;											// 读偏移量
-	WORD WriteOffset;											// 写偏移量
-	WORD DeleteOffset;											//删除偏移位置
-	WORD ChargeCnt;   
-	FileInfoOfOneCharge FileInfoOfCharges[MAX_CHARGE_SAVE_NUM];	// 暂存待上传的充电行为，读文件名为全0表示无某次充电波形的数据文件，
-																// 否则发生了某次充电行为，读到结束帧后将该文件名置为全0表示已上传完成
-} TInfoFile;
+
 
 typedef struct
 {
@@ -67,6 +58,7 @@ typedef struct
 //-----------------------------------------------
 // 全局使用的变量、常量
 //-----------------------------------------------
+TInfoFile infoFile;
 BYTE WaveQueueFullFlag = 0;	// 波形数据队列是否满,满置1，用于长期监视
 BYTE RecLenExceed4096Flag = 0; // 接收波形数据长度超过4096字节标志
 BYTE RecLenNot815Flag = 0; // 接收波形数据长度不是815字节标志
@@ -864,7 +856,7 @@ void WriteFileTask(void)
 		}
 	}
 }
-TInfoFile infoFile;
+
 void CheckInfoFile(void)
 {
 	int fd = -1;

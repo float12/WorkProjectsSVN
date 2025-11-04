@@ -22,6 +22,7 @@ char PrintLogSign = 0;
 //-----------------------------------------------
 //				本文件使用的变量，常量
 //-----------------------------------------------
+DWORD ReadTfInfoOffset = 0;
 BYTE BleRecvByteTimeoutFlag = 0;
 T_DLT645 gPr645;
 tTranData bleTranDataToUart;
@@ -375,8 +376,10 @@ WORD ReadFactoryExtPro(BYTE *pBuf)
 	char buf2[100] = {0};
 	BYTE i = 0;
 	BYTE csq;
-
+	DWORD offset = 0;
 	WORD tw,wLen;
+	int fd = -1;
+	FileInfoOfOneCharge infoOfOneCharge = {0};
 	tw = pBuf[0];
 	wLen = 0;
 
@@ -584,6 +587,26 @@ WORD ReadFactoryExtPro(BYTE *pBuf)
 				wReturnLen = 0;
 			}
 		}
+		else if (pBuf[0] == 0x10)//读tf卡的info信息的偏移
+		{
+			memcpy(p, (BYTE *)&ReadTfInfoOffset, sizeof(ReadTfInfoOffset));
+			wReturnLen = sizeof(ReadTfInfoOffset);
+		}
+		else if (pBuf[0] == 0x11)//读tf卡的info信息
+		{
+			fd = nwy_sdk_fopen(INFO_FILE_PATH, NWY_RDONLY);
+			offset = sizeof(TInfoFileHead) + ReadTfInfoOffset * sizeof(FileInfoOfOneCharge);
+			nwy_sdk_fseek(fd, offset, NWY_SEEK_SET);
+			nwy_sdk_fread(fd, &infoOfOneCharge, sizeof(infoOfOneCharge));
+			nwy_sdk_fclose(fd);
+			//消除结构体字节对齐影响单独赋值
+			memcpy(p, (BYTE *)&infoOfOneCharge.FirstFileName, sizeof(infoOfOneCharge.FirstFileName));
+			memcpy(p+sizeof(infoOfOneCharge.FirstFileName), (BYTE *)&infoOfOneCharge.CNT, sizeof(infoOfOneCharge.CNT));
+			memcpy(p+sizeof(infoOfOneCharge.FirstFileName)+sizeof(infoOfOneCharge.CNT), (BYTE *)&infoOfOneCharge.Loop, sizeof(infoOfOneCharge.Loop));
+			wReturnLen = sizeof(infoOfOneCharge.FirstFileName) + sizeof(infoOfOneCharge.CNT) + sizeof(infoOfOneCharge.Loop);
+			ReadTfInfoOffset++;
+			ReadTfInfoOffset %= MAX_CHARGE_SAVE_NUM;
+		}
 		if (wReturnLen)
 		{
 			wReturnLen += 2;
@@ -770,6 +793,11 @@ WORD WriteFactoryExtPro(BYTE *pBuf)
 			{
 				wReturnLen = 0;
 			}
+		}
+		else if (pBuf[0] == 0x10)//tf卡的info信息的偏移
+		{
+			memcpy((BYTE *)&ReadTfInfoOffset,&pBuf[8],sizeof(ReadTfInfoOffset));
+			wReturnLen = sizeof(ReadTfInfoOffset);
 		}
 		wReturnLen = 1;
 		break;
