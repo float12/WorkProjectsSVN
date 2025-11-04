@@ -193,6 +193,7 @@ static void InitTimerA3_PWM1(void);
 //-----------------------------------------------
 //				全局使用的变量，常量
 //-----------------------------------------------
+BYTE SendWaveUartErr = 0;
 BYTE IsExitLowPower;	//模块内变量
 DWORD LowPowerSecCount; //低功耗累计秒数
 //volatile WORD MsTickCounter; //ms计数器
@@ -1656,16 +1657,19 @@ void UART_IRQ_Err_Service(void)
 	if (SET == USART_GetStatus(CM_USART1, USART_FLAG_FRAME_ERR))
 	{
 		USART_ClearStatus(CM_USART1, USART_FLAG_FRAME_ERR);
+		SendWaveUartErr = 1;
 	}
 
 	if (SET == USART_GetStatus(CM_USART1, USART_FLAG_PARITY_ERR))
 	{
 		USART_ClearStatus(CM_USART1, USART_FLAG_PARITY_ERR);
+		SendWaveUartErr = 1;
 	}
 
 	if (SET == USART_GetStatus(CM_USART1, USART_FLAG_OVERRUN))
 	{
 		USART_ClearStatus(CM_USART1, USART_FLAG_OVERRUN);
+		SendWaveUartErr = 1;
 	}
 
 	// UART2

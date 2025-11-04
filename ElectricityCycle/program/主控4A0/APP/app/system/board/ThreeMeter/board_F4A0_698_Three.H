@@ -671,6 +671,7 @@ typedef struct
 //				变量声明
 //-----------------------------------------------
 extern BYTE IsExitLowPower;//模块内变量
+extern BYTE SendWaveUartErr;
 extern const TypeDef_Pulic_SCI SerialMap[MAX_COM_CHANNEL_NUM];
 extern WORD WakeUpTimer;
 extern WORD MaxWakeupTimer;

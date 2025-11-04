@@ -272,22 +272,23 @@
 //tf卡缓冲区满，波形数据丢失
 #define SYSUN_TF_BUF_FULL				0x8032
 //收波形数据crc错误
-#define SYSUN_WAVE_DATA1_CRC_ERR			0x8033
-#define SYSUN_WAVE_DATA2_CRC_ERR			0x8034
-#define SYSUN_WAVE_DATA3_CRC_ERR			0x8035
-#define SYSUN_WAVE_DATA4_CRC_ERR			0x8036
+#define SYSUN_WAVE_DATA1_CRC_ERR		0x8033
+#define SYSUN_WAVE_DATA2_CRC_ERR		0x8034
+#define SYSUN_WAVE_DATA3_CRC_ERR		0x8035
+#define SYSUN_WAVE_DATA4_CRC_ERR		0x8036
 //HSDC接口错误
-#define HSDC1_ERR							0x8037
-#define HSDC2_ERR							0x8038
-#define HSDC3_ERR							0x8039
-#define HSDC4_ERR							0x803A
+#define HSDC1_ERR						0x8037
+#define HSDC2_ERR						0x8038
+#define HSDC3_ERR						0x8039
+#define HSDC4_ERR						0x803A
 //波形数据丢失
-#define SYSUN_SEND_WAVE_DATA_LOST			0x803B
+#define SYSUN_SEND_WAVE_DATA_LOST		0x803B
 //EMMIF错误
-#define EMMIF1_ERR							0x803C
-#define EMMIF2_ERR							0x803D
-#define EMMIF3_ERR							0x803E
-#define EMMIF4_ERR							0x803F
+#define EMMIF1_ERR						0x803C
+#define EMMIF2_ERR						0x803D
+#define EMMIF3_ERR						0x803E
+#define EMMIF4_ERR						0x803F
+#define SEND_WAVE_UART_ERR				0x8040
 
 //写采样芯片寄存器8100+寄存器地址(一个字节)1
 #define MANUAL_MODIFIED_PARA			0x8100

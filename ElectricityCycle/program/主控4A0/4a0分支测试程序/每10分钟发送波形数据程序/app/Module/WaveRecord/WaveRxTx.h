@@ -61,6 +61,7 @@ typedef struct
     DWORD ALlZeroCount; // 全0计数
     DWORD NormalCnt;
     BYTE WriteCrcEventCnt;//写crc异常事件计数
+    BYTE WriteHSDCErrEventCnt;//写hsdc异常事件计数
 } TWaveDataDeal;
 
 typedef enum

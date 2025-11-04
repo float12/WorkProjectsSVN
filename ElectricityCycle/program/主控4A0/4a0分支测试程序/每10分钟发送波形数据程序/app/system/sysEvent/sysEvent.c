@@ -155,7 +155,7 @@ void api_WriteSysUNMsg(WORD Msg)
 	//在堆栈中开1个结构的空间
 	TSysUNMsg TempBuf;
 	
-	//一天最大记录次数
+	//一次上电最多记录120次
 	if( SysUNMsgCounter < (MAX_SYS_UN_MSG-8) )
 	{
 		SysUNMsgCounter++;

@@ -138,15 +138,16 @@ const DWORD SampleCtrleAngle[][3] =
 const DWORD SampleCtrlTopo[][3]=
 {
 	{HSDCCTL_EMU,0x00000004,4},
+	{EMMIF2_EMU,0x00000000,4},//清除错误标志
 	{SYSCFG_EMU,0xEA00BA00,4},			//0X0178
 	{DMA_WAVECON3_EMU,0x00000000,4},
 	{SOFTRST_EMU,0x000000E1,1},
 	{SOFTRST_EMU,0x0000004C,1},
 	{DMA_WAVECON_EMU,0x00000000,4},
 	{WSAVECON_EMU,0x000000A0,1},		//0x0163
-	{HSDCCTL_EMU,0x0000021D,4},
 	{DMA_WAVECON3_EMU,0x00000001,4},
 	{DMA_WAVECON2_EMU,0x00000200,4},
+	{HSDCCTL_EMU,0x0000021D,4},
 };
 #endif
 
@@ -1449,6 +1450,12 @@ static void Task_Sec_Sample(void)
     BYTE res = 0;
 	static DWORD LastWrongHalfWaveCount[SAMPLE_CHIP_NUM];
 
+	if(SendWaveUartErr == 1)
+	{
+		SendWaveUartErr = 0;
+		api_WriteSysUNMsg(SEND_WAVE_UART_ERR);
+	}
+	
 	api_GetRtcDateTime(DATETIME_20YYMMDDhhmmss, (BYTE *)&t);
 	if (t.Sec == (eTASK_SAMPLE_ID * 3 + 3 + 2)) //5s后进行电压合格率累计，避免监测时间不为1440
 	{
@@ -1611,7 +1618,16 @@ void CheckHSDCTimer(TWaveDataDeal *pWaveData)
 		Link_ReadSampleReg(HSDCCTL_EMU, RegData.b, 4, pWaveData->SampleChipNo);
 		if((RegData.d & 0x00000001) == 0)
 		{
-			api_WriteSysUNMsg(HSDC1_ERR + pWaveData->SampleChipNo);
+			Link_ReadSampleReg(EMMIF2_EMU, RegData.b, 4, pWaveData->SampleChipNo);
+			if ((RegData.d & 0x00001000) != 0)
+			{
+				api_WriteSysUNMsg(EMMIF1_ERR + pWaveData->SampleChipNo);
+			}
+			if (pWaveData->WriteHSDCErrEventCnt < 5)
+			{
+				pWaveData->WriteHSDCErrEventCnt++;
+				api_WriteSysUNMsg(HSDC1_ERR + pWaveData->SampleChipNo);
+			}
 			//打开HSDC接口必须放在打开全局中断之后，否则会发生欠载
 			WriteSampleCombo((DWORD *)SampleCtrlTopo, sizeof(SampleCtrlTopo) / sizeof(DWORD), pWaveData->SampleChipNo);
 			CheckSampleSumRegPro(eUpDateSumCheck, pWaveData->SampleChipNo); //计算校验和
@@ -1667,6 +1683,7 @@ void api_SampleTask(void)
 			for (i = 0; i < SAMPLE_CHIP_NUM; i++)
 			{
 				WaveDataDeal[i].WriteCrcEventCnt = 0;
+				WaveDataDeal[i].WriteHSDCErrEventCnt = 0;
 			}
 			SysFREEMsgCounter = 0;
 			SysUNMsgCounter = 0;

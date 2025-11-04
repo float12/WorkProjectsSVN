@@ -1452,6 +1452,12 @@ static void Task_Sec_Sample(void)
     BYTE res = 0;
 	static DWORD LastWrongHalfWaveCount[SAMPLE_CHIP_NUM];
 
+	if(SendWaveUartErr == 1)
+	{
+		SendWaveUartErr = 0;
+		api_WriteSysUNMsg(SEND_WAVE_UART_ERR);
+	}
+	
 	api_GetRtcDateTime(DATETIME_20YYMMDDhhmmss, (BYTE *)&t);
 	if (t.Sec == (eTASK_SAMPLE_ID * 3 + 3 + 2)) //5s后进行电压合格率累计，避免监测时间不为1440
 	{
@@ -1612,7 +1618,7 @@ void CheckHSDCTimer(TWaveDataDeal *pWaveData)
 		IsRecWaveData &= ~(1<<(pWaveData->SampleChipNo));
 		api_TopWaveSpiInit(pWaveData->SampleChipNo);
 		Link_ReadSampleReg(HSDCCTL_EMU, RegData.b, 4, pWaveData->SampleChipNo);
-		if((RegData.d & 0x00000001) == 0)
+		if((RegData.d & 0x00000001) == 0)//发送波形开关位
 		{
 			Link_ReadSampleReg(EMMIF2_EMU, RegData.b, 4, pWaveData->SampleChipNo);
 			if ((RegData.d & 0x00001000) != 0)
