@@ -16,7 +16,7 @@
 #define SAMPLE_DOTS_PER_CYCLE 128
 #define MAX_WAVE_FILE_NUM 99999 // 文件名不能超过8字符
 #define FILE_SUFFIX ".bin"
-
+#define SYNC_FILE_CNT 64
 
 
 
@@ -618,7 +618,7 @@ FRESULT CreateNextWaveFile(void)
     FIL nameFile;//保存最新文件名的文件
     UINT bytesRead = 0;
     UINT bytesWrite = 0;
-
+	FRESULT preRes;
 
     // 尝试打开保存文件名的文件
     result = f_open(&nameFile, "lastfile.txt", FA_OPEN_EXISTING | FA_READ | FA_WRITE);
@@ -676,7 +676,7 @@ BYTE WriteDataToFile(FIL *file, const BYTE *buf, DWORD Size)
 	BYTE BoolResult = FALSE;
 	DWORD writtenBytes = 0, readBytes = 0;
 	FRESULT fr_result = FAT32_FR_OK;
-
+	static WORD WriteCnt = 0;
 	// 如果剩余空间不足以写入一次缓存数据，创建新文件并继续写入
 	if ((freeSpace < WAVE_FRAME_SIZE * WAVE_RECORD_PHASE_NUM * SAVE_TO_SD_CYCLE_NUM) || (freeSpace == 0))
 	{
@@ -707,6 +707,15 @@ BYTE WriteDataToFile(FIL *file, const BYTE *buf, DWORD Size)
 		MonitorResult = fr_result;
 		// 错误处理，写入失败
 		return FALSE;
+	}
+	else
+	{
+		WriteCnt++;
+		if (WriteCnt >= SYNC_FILE_CNT)
+		{
+			f_sync(file);//同步文件，防止数据丢失或者耗时过大
+		}
+		WriteCnt = 0;
 	}
 	return TRUE;
 }

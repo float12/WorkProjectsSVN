@@ -39,7 +39,7 @@
 //缓冲和文件大小
 #define SAVE_TO_SD_CYCLE_NUM 	12
 #define BUFF_COUNT 				6 // 缓冲区个数
-#define SINGLE_FILE_FULL_TIME   30 //一个文件一直存储直到满所需时间，min
+#define SINGLE_FILE_FULL_TIME   240 //一个文件一直存储直到满所需时间，min
 #define MAX_FILE_SIZE 			WAVE_FRAME_SIZE*WAVE_RECORD_PHASE_NUM*50*60*SINGLE_FILE_FULL_TIME // 文件最大大小
 //按键
 #if (HARDWARE_TYPE == SINGLE_PHASE_BOARD)

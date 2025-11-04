@@ -11,7 +11,7 @@ import os
 import glob
 import matplotlib.pyplot as plt
 class WlbWaveRecordWaveAdder:
-    def __init__(self, file1path, file2path, frame_size=778, uifactor1=(0.0003742375, 0, 0, 0.00001014207, 0, 0), uifactor2=(0.0003742375, 0, 0, 0.00001014207, 0, 0), add_frame_num=0, format=2,peak_value=0):
+    def __init__(self, file1path, file2path, frame_size=778, uifactor1=(0.0003742375, 0, 0, 0.00001014207, 0, 0), uifactor2=(0.0003742375, 0, 0, 0.00001014207, 0, 0), add_frame_num=0, format=2,peak_value=0, add_or_abstract=0):
         # 文件1路径
         self.file1path = file1path
         # 文件2路径
@@ -35,6 +35,7 @@ class WlbWaveRecordWaveAdder:
         self.rmsu2_started = False
         self.last_rmsu2 = 0
         self.peak_value = peak_value
+        self.add_or_abstract = add_or_abstract
     # 插值算法：输入data（长度任意），输出定长128点的6.4k采样数据
     def interpolate_to_128(self, data):
         """
@@ -153,9 +154,10 @@ class WlbWaveRecordWaveAdder:
         # 电流叠加
         i_sum = []
         for a, b in zip(ia_aligned_128, ib_aligned_128):
-            i_sum.append(a + b)
-        
-
+            if self.add_or_abstract == 0:
+                i_sum.append(a + b)
+            else:
+                i_sum.append(a - b)
         return ua_aligned_128, i_sum
 
     def parse_files(self):
@@ -244,7 +246,7 @@ class WlbWaveRecordWaveAdder:
                         break
                 self.last_rmsu2 = parser.rms_U
                 ua2_list.append(parser.voltage.copy())
-                if any(abs(x) > self.peak_value for x in parser.current) and self.uifactor2[3]<0: #电动车相减时去掉启动时的尖峰
+                if any(abs(x) > self.peak_value for x in parser.current) and self.add_or_abstract == 1: #电动车相减时去掉启动时的尖峰
                     continue
                 else:
                     ia2_list.append(parser.current.copy())
@@ -326,8 +328,9 @@ if __name__ == "__main__":
     # file2path = "D:\\work\\project\\WaveParse\\pre_zeroI_data_01_01_wlb_waveRecord.bin"
     # file1path = "D:\\WorkProjectsSVN\\WaveParse\\wlb_waveRecord_output\\03_01_wlb_waveRecord.bin"
     # file2path = "D:\\WorkProjectsSVN\\WaveParse\\wlb_waveRecord_output\\03_01_wlb_waveRecord.bin"
-    peak_value = 10 #电动车起始尖峰阈值,波形相减时（电流系数乘-1再叠加）去掉启动时的尖峰，波形相加不用管,电流系数为负表示相减,file2使用电动车
-    file1_Dir_or_path = r"D:\WorkProjectsSVN\WaveParse\endZeroData\120s_zeroI_data_热水壶_wlb_waveRecord.bin"
+    add_or_abstract = 0 #0波形相加，1波形相减（file1减file2）
+    peak_value = 10 #电动车起始尖峰阈值,波形相减时去掉启动时的尖峰，波形相加不用管,file2使用电动车
+    file1_Dir_or_path = r"D:\work\project\WaveParse\PreZeroData\150s_zeroI_data_12-1P_wlb_waveRecord.BIN"
     # file1path = r"C:\Users\宁浩\Desktop\addWave\电热毯一档（1分钟），电热毯一档+热得快运行（1-2分钟），电热毯二档+热得快运行（2-3分钟）.BIN"
     file2path = r"D:\WorkProjectsSVN\WaveParse\endZeroData\100s_zeroI_data_120s_pre_zeroI_data_03_01_wlb_waveRecord.bin"
     # file1path = "D:\\work\\project\\WaveParse\\school_format_without_No_output\\A_phase_school_without_NO_wlb_waveRecord_1.bin"
@@ -362,7 +365,8 @@ if __name__ == "__main__":
             uifactor1=uifactor1,
             uifactor2=uifactor2,
             add_frame_num=0,
-            peak_value=peak_value
+            peak_value=peak_value,
+            add_or_abstract=add_or_abstract
         )
 
         # 自动生成唯一输出文件名

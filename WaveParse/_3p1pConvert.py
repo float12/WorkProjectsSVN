@@ -76,6 +76,16 @@ class phaseNumConverter:
         """
         三相波形数据转成三个单相文件
         """
+
+        if self.chunk_size == 782:
+            with open(self.input_file, "rb") as f:
+                buffer = f.read(self.group_size * 3)
+                sequence_number1 = int.from_bytes(buffer[775:779], byteorder='little')
+                sequence_number2 = int.from_bytes(buffer[775+782:779+782], byteorder='little')
+                sequence_number3 = int.from_bytes(buffer[775+782*2:779+782*2], byteorder='little')
+                if sequence_number1 != sequence_number2 or sequence_number1 != sequence_number3:
+                    print("非三相文件")
+                    return
         # 删除已存在的输出文件
         for f in self.output_files:
             if os.path.exists(f):
@@ -180,7 +190,7 @@ class phaseNumConverter:
         print(f"三相文件已保存到：{self.output_file}")
 if __name__ == "__main__":
     # 示例：三相转单相
-    input_dir = "F:\\"  # 输入目录路径
+    input_dir = r"D:\work\project\WaveParse\3p-1p-output" # 输入目录路径
     for file_name in os.listdir(input_dir):
         if not file_name.lower().endswith(".bin"):
             continue

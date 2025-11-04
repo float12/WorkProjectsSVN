@@ -255,6 +255,7 @@ if __name__ == "__main__":
         filesuffix = ".bin"
     converter = FormatConverter()
     for input_file in bin_files:
+        input_file = Path(input_file)
         if input_format != "waveRecord_to_dataTransmit":
             output_file = FormatConverter.ensure_output_folder_and_unique_file(output_dir,input_file.stem + "_wlb_waveRecord.bin")
         else:
