@@ -219,6 +219,24 @@ void ReadMeterTask(BYTE bStep, BYTE *bAddr)
 	case eBIT_Freeze_698:
 		api_GetRequestRecordMethod1(BUF,NULL);
 		break;
+	case eBIT_GET_TIME_ZONE_NUM:
+		Dlt645_Tx_Read(TIME_ZONE_NUM);
+		break;
+	case eBIT_GET_TIME_SEG_TABLE_NUM:
+		Dlt645_Tx_Read(TIME_SEGTABLE_NUM);
+		break;
+	case eBIT_GET_TIME_SEG_NUM:
+		Dlt645_Tx_Read(TIME_SEG_NUM);
+		break;
+	case eBIT_GET_RATIO:
+		Dlt645_Tx_Read(TIME_RATIO);
+		break;
+	case eBIT_GET_TIME_SEG_TABLE:
+		Dlt645_Tx_Read(TIME_SEG_TABLE_DAY1+g_Date);
+		break;
+	case eBIT_test:
+		Dlt645_Tx_Read(TIME_ZONE_TABLE);
+		break;
 	default:
 		break;
 	}
@@ -678,6 +696,10 @@ void HandleMsgFromMqttUser(TReadMeterInfo *ReadMeterInfo)
 	{
 		Dlt645_Tx_Write(ReadMeterInfo->Standard645ID, ReadMeterInfo->DataLen, (BYTE *)&ReadMeterInfo->Data, ReadMeterInfo->Control);
 	}
+	else if(ReadMeterInfo->Type == eREAD_METER_FREEZE)//³­¶Á¶³½áÊý¾Ý
+	{
+		api_GetRequestRecordMethod1(ReadMeterInfo->Data.SetorGetTime,NULL);
+	}
 	IsMqttComMeterFlag = 1;
 }
 //--------------------------------------------------
@@ -776,7 +798,10 @@ void Uart_Task(void *parameter)
 		else
 		{
 			#if (CYCLE_METER_READING != PROTOCOL_NO)
-			ToMqttByCycle();
+			if(ReportPara.ReportMode == 1)
+			{
+				ToMqttByCycle();
+			}
 			#endif
 		}
 		api_ReceData_UartTask();

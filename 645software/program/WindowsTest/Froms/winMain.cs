@@ -159,8 +159,9 @@ namespace WindowsTest
 			this.tpFunction.Parent = null;
 			this.tpCAN.Parent = null;
 			this.tabPage10.Parent = null;
-			//控制清零
-			tsmiControlClear.Visible = false;
+            this.tpMeterHWDC.Parent = null;
+            //控制清零
+            tsmiControlClear.Visible = false;
 			//负荷记录
 			tsmiLoadProFile.Visible = false;
 			//厂内
@@ -13788,13 +13789,14 @@ namespace WindowsTest
                                 dgvReadDataExcel.Rows[i].Cells[1].Value = strData;
                                 dgvReadDataExcel.Rows[i].Cells[3].Value = "成功";
                                 adtData.Rows[j][colunmnIndex] = strData;
-                                colunmnIndex++;
+                               
                             }
                             else
                             {
-                                adtData.Rows[j][i] = strErr;
+                                adtData.Rows[j][colunmnIndex] = strErr;
                                 dgvReadDataExcel.Rows[i].Cells[3].Value = "失败!";
                             }
+ 							colunmnIndex++;
                             fnWait(Int64.Parse(pmc[10].Value.ToString()));
                         }
 

@@ -677,8 +677,9 @@ WORD WriteFactoryExtPro(BYTE *pBuf)
 				}
 				wReturnLen = 1;
 			}
-			#endif	
-			
+			#elif(CYCLE_METER_READING == PROTOCOL_698)
+			qwReadMeterFlag[0] |= (1 << eBIT_RealTime_698);
+			#endif				
 			wReturnLen = 1;
 			break;
 		case 0xF0:
@@ -1801,6 +1802,7 @@ void CalculateFlow(void)
 //--------------------------------------------------
 void  Factory_Task( void *param )
 {
+	BYTE timezone = 8;
 	#if( BLE_WH== YES)
 	WORD i = 0;
 	BYTE ret = 0;
@@ -1820,7 +1822,8 @@ void  Factory_Task( void *param )
 	#if (BLE_WH== YES)
 	BuleToothWH();
 	#endif
-
+	nwy_get_time(&poweronTimer, (char*)&timezone);
+	
 	while (1)
 	{
 		api_ReceData_WHTask();

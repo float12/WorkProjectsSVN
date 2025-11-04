@@ -359,7 +359,9 @@ static void prvThreadEntry(void *param)
 	#endif
 	UserTcpStatusChangeMsgQue= nwy_create_msg_Que(20, sizeof(BYTE));
 
-	UartReplyToMqttMsgQue = nwy_create_msg_Que(5, sizeof(double*));
+	// MqttReplyRealTimeDataMsgQue = nwy_create_msg_Que(5, sizeof(double*));
+	// MqttReplyFreezeDataMsgQue = nwy_create_msg_Que(5, sizeof(double*));
+	UartReplyToMqttMsgQue = nwy_create_msg_Que(5, sizeof(TUartToMqttData));
 	MQTTUserToUartMsgQue = nwy_create_msg_Que(20, sizeof(TReadMeterInfo));
 	nwy_sleep(5000);
 	// 创建使用的任务  注：使用事件的任务需要完成nwy_timer_init
