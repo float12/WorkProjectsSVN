@@ -48,6 +48,7 @@ typedef struct // 信息文件结构体
 //				变量声明
 //-----------------------------------------------
 extern BYTE WaveQueueFullFlag;
+extern BYTE RequestLoop;
 extern BYTE RecLenExceed4096Flag; // 接收波形数据长度超过4096字节标志
 extern BYTE RecLenNot815Flag; // 接收波形数据长度不是815字节
 extern TInfoFile infoFile;

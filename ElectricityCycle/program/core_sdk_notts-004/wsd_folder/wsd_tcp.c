@@ -504,7 +504,7 @@ void TCP_User_Task(void *param)
 	while (1)
 	{
 		ThreadRunCnt[eTcpThread]++;
-		nwy_sleep(100);
+		nwy_sleep(65);
 		// nwy_ext_echo("\r\ntcp task state:%d", tcpState);
 		if ((tcp_connect_flag[0] == 1))
 		{
@@ -599,6 +599,7 @@ void TCP_User_Task(void *param)
 					}
 					else
 					{
+						api_WriteSysUNMsg(SEND_REQUEST_FRAME_ERR);
 						nwy_ext_echo("\r\nrequset send err\r\n");
 					}
 				}
@@ -649,6 +650,11 @@ void TCP_User_Task(void *param)
 						if (Tcp_send(0, (char*)&LogInBuf, sizeof(LogInBuf)) == TRUE)
 						{
 							tcpState = eTCP_LOGIN_WAIT;
+						}
+						else
+						{
+							api_WriteSysUNMsg(SEND_REQUEST_FRAME_ERR);
+							nwy_ext_echo("\r\nrequset send err\r\n");
 						}
 					}
 					else if (WaveDataToServer.type == 0)

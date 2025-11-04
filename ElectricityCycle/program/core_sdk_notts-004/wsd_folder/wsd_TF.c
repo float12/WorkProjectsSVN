@@ -58,6 +58,7 @@ typedef struct
 //-----------------------------------------------
 // 全局使用的变量、常量
 //-----------------------------------------------
+BYTE RequestLoop = 0;
 TInfoFile infoFile;
 BYTE WaveQueueFullFlag = 0;	// 波形数据队列是否满,满置1，用于长期监视
 BYTE RecLenExceed4096Flag = 0; // 接收波形数据长度超过4096字节标志
@@ -424,6 +425,7 @@ void ReadFileTask(void)
 			if (RequestTimeUpFlag == 1)
 			{
 				DataToTcp.type = 1; //请求上传文件
+				RequestLoop = DataToTcp.LoopNum;
 				if (nwy_put_msg_que(WaveDataUploadMessageQueue, &DataToTcp, 0xffffffff) == TRUE)
 				{
 					nwy_ext_echo("\r\n send request ok");

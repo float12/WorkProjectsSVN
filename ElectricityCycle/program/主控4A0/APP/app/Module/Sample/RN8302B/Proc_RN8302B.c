@@ -1670,6 +1670,8 @@ void api_SampleTask(void)
 			{
 				WaveDataDeal[i].WriteCrcEventCnt = 0;
 			}
+			SysFREEMsgCounter = 0;
+			SysUNMsgCounter = 0;
 		}
 
 		api_ClrTaskFlag(eTASK_SAMPLE_ID, eFLAG_HOUR);
