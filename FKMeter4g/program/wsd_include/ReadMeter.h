@@ -32,12 +32,13 @@ typedef enum
 	eREAD_METER_EXTENDED = 1,
 	eSET_METER_STANDARD = 2,
 	eSET_METER_EXTENDED = 3,
-} e645Type;//放前面给TReadMeterInfo结构体使用
+	eREAD_METER_FREEZE,
+} eReadType;
 
 typedef union
 {
 	BYTE RelayCmdData[8];//继电器命令
-	BYTE SetTime[7];//设置时间
+	BYTE SetorGetTime[7];//设置时间或读取冻结时间
 	BYTE TimeZoneNum; //时区数
 	BYTE TimeSegTableNum; //时段表数
 	BYTE TimeSegNum; //时段数
@@ -50,7 +51,7 @@ typedef union
 
 typedef struct
 {
-	e645Type Type;//读取或设置
+	eReadType Type;//645读取/设置或698抄读
 	WORD Extended645ID;//645扩展采集标识  低两字节
 	DWORD Standard645ID;//645标准采集标识
 	uSetMeterData Data;//
@@ -60,8 +61,8 @@ typedef struct
 
 //费率参数相关
 typedef struct {
-    BYTE Time[TIME_STR_LEN];   // "HH:MM"
-    BYTE TimeSegTable;      // 对应年时区所指向的日时段表编号 (1-based)
+    char Time[TIME_STR_LEN];   // "HH:MM"
+    BYTE TimeSegTableorRate;      // 对应年时区所指向的日时段表编号 (1-based)
 } TTimeAreaEntry;
 
 typedef struct {
@@ -77,7 +78,7 @@ typedef struct {
 typedef struct {
     BYTE Date;                          // 第几日时段表 (1..TimeSegTableNum)
     BYTE SegCount;                      // 有效段数
-    TimeSegEntry Segs[MAX_TIME_SEG_NUM];   // SegCount <= MAX_TIME_SEG_NUM
+    TTimeAreaEntry Segs[MAX_TIME_SEG_NUM];   // SegCount <= MAX_TIME_SEG_NUM
 } TimeSegTableItem;
 
 typedef struct {

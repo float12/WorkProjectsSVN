@@ -11,19 +11,19 @@
 //-----------------------------------------------
 //				宏定义
 //-----------------------------------------------
-#define TCP_REQ_NET 				0x040013D1		//TCP IP地址和端口号
-#define TCP_REQ_USER_PD 			0x040013D6  	//TCP 用户名和密码
-#define MQTT_REQ_NET 				0x040013E1		//MQTT IP地址和端口号
-#define MQTT_REQ_USER_PD 			0x040013E6 		//MQTT 用户名和密码
-#define DAY_TIME 					0x0400010C		//日期和时间
-#define USED_CHANNEL_NUM 			0x04A00100 		//测量点使用回路数
+#define TCP_REQ_NET 		0x040013D1		//TCP IP地址和端口号
+#define TCP_REQ_USER_PD 	0x040013D6  	//TCP 用户名和密码
+#define MQTT_REQ_NET 		0x040013E1		//MQTT IP地址和端口号
+#define MQTT_REQ_USER_PD 	0x040013E6 		//MQTT 用户名和密码
+#define DAY_TIME 			0x0400010C		//日期和时间
+#define USED_CHANNEL_NUM 	0x04A00100 		//测量点使用回路数
 #define READ_RELAY_STATUS 			0x1126		    //检查继电器状态
-#define TIME_ZONE_NUM 				0x04000201		//时区数
-#define TIME_SEG_TABLE_NUM 			0x04000202		//时段表数
-#define TIME_SEG_NUM 				0x04000203		//时段数
-#define RATIO_NUM 					0x04000204		//费率数
-#define TTIME_AREA_TABLE 			0x04020000		//时区表
-#define TIME_SEG_TABLE_DAY1 		0x04020001		//第1日时段表,后续日加一
+#define TIME_ZONE_NUM		0x04000201		//年时区数
+#define TIME_SEGTABLE_NUM	0X04000202		//日时段表数
+#define TIME_SEG_NUM		0X04000203		//日时段数
+#define TIME_RATIO			0X04000204		//费率数据
+#define TIME_SEG_TABLE_DAY1		0x04020001		//1-日时段表叔
+#define TIME_ZONE_TABLE		0x04020000		//时区表数据
 #define TIME_ZONE_TABLE_CHANGE_TIME 0x04000106		//时区表切换时间
 #define TIME_SEG_TABLE_CHANGE_TIME  0x04000107		//时段表切换时间
 #define SET_METER_CONTROL_BYTE 		0x14			//设置表控制字
@@ -157,6 +157,8 @@ extern BYTE bReadMeterRetry;
 extern BYTE bUsedChannelNum; //被使用通道个数 上电需探测
 extern BYTE g_EpTcpUserNum;
 extern BYTE g_EpTcpUserChannel;//环保协议用户端主站通道bit
+extern TRatioPara RatioPara;
+extern BYTE g_Date ;
 //-----------------------------------------------
 // 				函数声明
 //-----------------------------------------------

@@ -56,6 +56,69 @@ static char user_sub_topics_tail[][64] =
 };
 
 char user_sub_topic_addr[PAHO_TOPIC_LEN_MAX+1];
+
+char RealTimeDataSign[][10]	=
+{
+	{"HZ" 	  },		//频率
+	{"UA" 	  },		//A相电压
+	{"UB" 	  },		//B相电压
+	{"UC" 	  },		//C相电压
+	{"LUAB"	  },		//AB相电压
+	{"LUBC"	  },		//BC相电压
+	{"LUCA"	  },		//CA相电压
+	{"IA" 	  },		//A相电流
+	{"IB" 	  },		//B相电流
+	{"IC" 	  },		//C相电流
+	{"PT" 	  },		//总有功
+	{"PA" 	  },		//A相有功功率
+	{"PB" 	  },		//B相有功功率
+	{"PC" 	  },		//C相有功功率
+	{"QT" 	  },		//总无功	
+	{"QA" 	  },		//A相无功功率
+	{"QB" 	  },		//B相无功功率
+	{"QC" 	  },		//C相无功功率
+	{"ST" 	  },		//总视在功率	
+	{"SA" 	  },		//A相视在功率
+	{"SB" 	  },		//B相视在功率
+	{"SC" 	  },		//C相视在功率
+	{"PFT"	  },		//总功率因数	
+	{"PFA"	  },		//A相功率因数
+	{"PFB"	  },		//B相功率因数
+	{"PFC"	  },		//C相功率因数
+	{"EPT"	  },		//正向有功电能总	
+	{"EP1"	  },		//正向有功电能费率1
+	{"EP2"	  },		//正向有功电能费率2
+	{"EP3"	  },		//正向有功电能费率3
+	{"EP4"	  },		//正向有功电能费率4
+	{"EP5"	  },		//正向有功电能费率5
+	{"ENT"	  },		//反向有功电能总	
+	{"EN1"	  },		//反向有功电能费率1
+	{"EN2"	  },		//反向有功电能费率2
+	{"EN3"	  },		//反向有功电能费率3
+	{"EN4"	  },		//反向有功电能费率4
+	{"EN5"	  },		//反向有功电能费率5
+	{"ERC1"	  },		//组合无功1总电能	
+	{"ERC2"	  },		//组合无功2总电能	
+	{"QD_TIME"},		//需量时标
+	{"QD_MAX" },		//最大需量
+};
+char FreezeDataSign[][10]	=
+{
+	{"EPT"	  },		//正向有功电能总	
+	// {"EP1"	  },		//正向有功电能费率1
+	// {"EP2"	  },		//正向有功电能费率2
+	// {"EP3"	  },		//正向有功电能费率3
+	// {"EP4"	  },		//正向有功电能费率4
+	// {"EP5"	  },		//正向有功电能费率5
+	{"ENT"	  },		//反向有功电能总	
+	// {"EN1"	  },		//反向有功电能费率1
+	// {"EN2"	  },		//反向有功电能费率2
+	// {"EN3"	  },		//反向有功电能费率3
+	// {"EN4"	  },		//反向有功电能费率4
+	// {"EN5"	  },		//反向有功电能费率5
+	{"ERC1"	  },		//组合无功1总电能	
+	{"ERC2"	  },		//组合无功2总电能	
+};
 //-----------------------------------------------
 //				内部函数声明
 //-----------------------------------------------
@@ -403,6 +466,140 @@ static BYTE ParseTableItem(char* ItemName,cJSON *value, BYTE *data)
 	return cnt;
 }
 //--------------------------------------------------
+// 功能描述:费率数据json组包
+//
+// 参数:
+//
+// 返回值:
+//
+// 备注:
+//--------------------------------------------------
+//
+cJSON* TimeAreaTable_to_json(const char* value_name,TTimeAreaEntry *TimeAreaTable, BYTE bNum)
+{
+	if (!value_name || !TimeAreaTable) {
+		return NULL;
+	}
+	// 创建数组
+	cJSON *array = cJSON_CreateArray();
+	if (!array) {
+		return NULL;
+	}
+		
+	// 填充数组
+	for (int i = 0; i < bNum; i++) {
+		cJSON *item = cJSON_CreateObject();
+		if (item) {
+			cJSON_AddStringToObject(item, "Time", TimeAreaTable[i].Time);
+			cJSON_AddNumberToObject(item, value_name, TimeAreaTable[i].TimeSegTableorRate);
+			cJSON_AddItemToArray(array, item);
+		}
+	}
+	return array;
+}
+//--------------------------------------------------
+//功能描述:  按不同主题回复用户
+//         
+//参数:      
+//         
+//返回值:    
+//         
+//备注:  
+//--------------------------------------------------
+void  pub_datatoUser( MQTTClient *UserClient ,double* dataAddr,eUserPubTopicIndex PubTopicIndex,BYTE TimeSegorTimeArea)
+{
+	cJSON *pJsonRoot,*reply = NULL;
+	char *c_message;
+	MQTTMessage pubmsg = {0};
+	TRealTimer tTime = {0};
+	BYTE i;
+
+	nwy_ext_echo("\r\n realtime success recved");
+	get_N176_time(&tTime);
+	memset(paho_mqtt_user_param.topic, 0, sizeof(paho_mqtt_user_param.topic));
+	strncpy(paho_mqtt_user_param.topic, &device_user_topics[PubTopicIndex][0], strlen(device_user_topics[PubTopicIndex]));
+	paho_mqtt_user_param.qos = 1;
+	paho_mqtt_user_param.retained = 10;
+
+	pJsonRoot = cJSON_CreateObject();
+	if (NULL == pJsonRoot)
+	{
+		return;
+	}
+	cJSON_AddNumberToObject(pJsonRoot, "T", getmktimems(&tTime));
+	if (PubTopicIndex == eGetFreezeAck)
+	{	
+		
+		cJSON_AddStringToObject(pJsonRoot, "type", "CMD_DEVICE_FREEZE");
+		for (i = 0; i < sizeof(FreezeDataSign)/sizeof(FreezeDataSign[10]); i++)
+		{
+			nwy_ext_echo("\r\n CMD_DEVICE_REALTIME_DATA value is [%f]",*dataAddr);
+			cJSON_AddNumberToObject(pJsonRoot, &FreezeDataSign[i][0], *dataAddr);
+			dataAddr++;
+		}	
+	}
+	else if (PubTopicIndex == eGetRealTimeDataAck)
+	{
+		cJSON *ds;
+		ds = cJSON_CreateObject();
+		cJSON_AddStringToObject(pJsonRoot, "type", "CMD_DEVICE_REALTIME_DATA");
+		for (i = 0; i < sizeof(RealTimeDataSign)/sizeof(RealTimeDataSign[10]); i++)
+		{
+			nwy_ext_echo("\r\n CMD_DEVICE_REALTIME_DATA value is [%f]",*dataAddr);
+			cJSON_AddNumberToObject(ds, &RealTimeDataSign[i][0], *dataAddr);
+			dataAddr++;
+		}	
+		//追加 需量和时间标签
+		cJSON_AddItemToObject(pJsonRoot, "DS", ds);
+	}
+	else if (PubTopicIndex == eGetParaAck)
+	{
+		cJSON_AddStringToObject(pJsonRoot, "type", "CMD_DEVICE_GET_PARA");
+
+		if (TimeSegorTimeArea == 1)//时区表
+		{
+			cJSON_AddStringToObject(pJsonRoot, "ParaItem", "TTimeAreaTable");
+			reply = TimeAreaTable_to_json("TimeSegTable",RatioPara.TimeAreaTable,RatioPara.TimeZoneNum);
+			cJSON_AddItemToObject(pJsonRoot, "value", reply);
+		}
+		else //时段表
+		{
+			cJSON_AddStringToObject(pJsonRoot, "ParaItem", "TimeSegTable");
+			cJSON *value = cJSON_CreateArray();
+			for (BYTE i = 0; i < RatioPara.TimeSegTableNum; i++)
+			{
+				cJSON *item = cJSON_CreateObject();
+				cJSON_AddNumberToObject(item, "Date", RatioPara.TimeSegTables[i].Date);
+				reply = TimeAreaTable_to_json("Rate",RatioPara.TimeSegTables[i].Segs,RatioPara.TimeSegNum);
+				cJSON_AddItemToObject(item, "SegTable", reply);
+				cJSON_AddItemToArray(value, item);
+			}
+			cJSON_AddItemToObject(pJsonRoot, "value", value);
+		}
+	}
+
+	c_message = cJSON_PrintUnformatted(pJsonRoot);
+	// 发布部分
+	memset(paho_mqtt_user_param.message, 0, sizeof(paho_mqtt_user_param.message));
+	strncpy(paho_mqtt_user_param.message, c_message, strlen(c_message));
+	nwy_ext_echo("\r\nmqttpub param retained = %d, qos = %d, topic = %s, msg = %s", paho_mqtt_user_param.retained, paho_mqtt_user_param.qos, paho_mqtt_user_param.topic,
+				 paho_mqtt_user_param.message);
+	memset(&pubmsg, 0, sizeof(pubmsg));
+	pubmsg.payload = (void *)paho_mqtt_user_param.message;
+	pubmsg.payloadlen = strlen(paho_mqtt_user_param.message);
+	pubmsg.qos = paho_mqtt_user_param.qos;
+	pubmsg.retained = paho_mqtt_user_param.retained;
+	pubmsg.dup = 0;
+	int rc = nwy_MQTTPublish(UserClient, paho_mqtt_user_param.topic, &pubmsg);
+	if (rc)
+	{
+		cJSON_Delete(pJsonRoot);
+		free(c_message);
+	}
+	cJSON_Delete(pJsonRoot);
+	free(c_message);
+}
+//--------------------------------------------------
 //功能描述:  接受mqtt用户端主站发来的数据
 //         
 //参数:      
@@ -470,39 +667,29 @@ void MqttRecvfromUser(void)
 		else if (strstr(pType->valuestring, "CMD_DEVICE_GET_PARA"))
 		{
 			pParaItem = cJSON_GetObjectItem(pRoot, "ParaItem");
-			if (strcmp(pParaItem->valuestring, "TimeZoneNum") == 0)
+			if (strcmp(pParaItem->valuestring, "TimeZoneNum") == 0	)
 			{
-				ReadMeterInfo.Type = eREAD_METER_STANDARD;
-				ReadMeterInfo.Standard645ID = TIME_ZONE_NUM;
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "d", "ParaItem",(double)RatioPara.TimeZoneNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegTableNum") == 0)
-			{
-				ReadMeterInfo.Type = eREAD_METER_STANDARD;
-				ReadMeterInfo.Standard645ID = TIME_SEG_TABLE_NUM;
+			{	
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "d", "ParaItem",(double)RatioPara.TimeSegTableNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegNum") == 0)
 			{
-				ReadMeterInfo.Type = eREAD_METER_STANDARD;
-				ReadMeterInfo.Standard645ID = TIME_SEG_NUM;
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "d", "ParaItem",(double)RatioPara.TimeSegNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "RatioNum") == 0)
 			{
-				ReadMeterInfo.Type = eREAD_METER_STANDARD;
-				ReadMeterInfo.Standard645ID = RATIO_NUM;
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "d", "ParaItem",(double)RatioPara.RatioNum );	
 			}
 			else if (strcmp(pParaItem->valuestring, "TTimeAreaTable") == 0)
 			{
-				ReadMeterInfo.Type = eREAD_METER_STANDARD;
-				ReadMeterInfo.Standard645ID = TTIME_AREA_TABLE;
+				pub_datatoUser(&paho_user_client,NULL,eGetParaAck,1);		
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegTable") == 0)
 			{
-				ReadMeterInfo.Type = eREAD_METER_STANDARD;
-				for (i = 0; i < MAX_TIME_SEGTABLE_NUM; i++)
-				{
-					ReadMeterInfo.Standard645ID = TIME_SEG_TABLE_DAY1 + i;
-					nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
-				}
+				pub_datatoUser(&paho_user_client,NULL,eGetParaAck,0);		
 			}
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_SET_PARA"))
@@ -521,7 +708,7 @@ void MqttRecvfromUser(void)
 			else if (strcmp(pParaItem->valuestring, "CycleDataFre") == 0)
 			{
 				
-				SafeMem.ReportPara.reportfre = (WORD)pValue->valuedouble;
+				SafeMem.ReportPara.reportfre = (WORD)pValue->valuedouble;//更不更新当前刷新周期
 				addr = GET_SAFE_SPACE_ADDR(ReportPara.reportfre);
 				nwy_ext_echo("\r\nset CycleDataFre:%d", SafeMem.ReportPara.reportfre);
 				api_OperateFileSystem(WRITE, addr, (BYTE *)&SafeMem.ReportPara.reportfre, sizeof(SafeMem.ReportPara.reportfre));
@@ -560,12 +747,16 @@ void MqttRecvfromUser(void)
 				ReadMeterInfo.Standard645ID = TIME_ZONE_NUM;
 				ReadMeterInfo.DataLen = 1;
 				nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+				ReadMeterInfo.Type = eREAD_METER_STANDARD;
+				nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegTableNum") == 0)
 			{
 				ReadMeterInfo.Data.TimeSegTableNum = (BYTE)pValue->valueint;
-				ReadMeterInfo.Standard645ID = TIME_SEG_TABLE_NUM;
+				ReadMeterInfo.Standard645ID = TIME_SEGTABLE_NUM;
 				ReadMeterInfo.DataLen = 1;
+				nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+				ReadMeterInfo.Type = eREAD_METER_STANDARD;
 				nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegNum") == 0)
@@ -574,12 +765,16 @@ void MqttRecvfromUser(void)
 				ReadMeterInfo.Standard645ID = TIME_SEG_NUM;
 				ReadMeterInfo.DataLen = 1;
 				nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+				ReadMeterInfo.Type = eREAD_METER_STANDARD;
+				nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
 			}
 			else if (strcmp(pParaItem->valuestring, "RatioNum") == 0)
 			{
 				ReadMeterInfo.Data.RatioNum = (BYTE)pValue->valueint;
-				ReadMeterInfo.Standard645ID = RATIO_NUM;
+				ReadMeterInfo.Standard645ID = TIME_RATIO;
 				ReadMeterInfo.DataLen = 1;
+				nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+				ReadMeterInfo.Type = eREAD_METER_STANDARD;
 				nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
 			}
 			else if (strcmp(pParaItem->valuestring, "TTimeAreaTable") == 0)
@@ -591,8 +786,10 @@ void MqttRecvfromUser(void)
 				}
 				else
 				{
-					ReadMeterInfo.Standard645ID = TTIME_AREA_TABLE;
+					ReadMeterInfo.Standard645ID = TIME_ZONE_TABLE;
 					ReadMeterInfo.DataLen = cnt * 3;
+					nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+					ReadMeterInfo.Type = eREAD_METER_STANDARD;
 					nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
 				}
 			}
@@ -622,12 +819,14 @@ void MqttRecvfromUser(void)
 						ReadMeterInfo.DataLen = cnt * 3;
 						if(nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff))
 						{
-							nwy_ext_echo("\r\n put msg set TimeSegTable:%d", ReadMeterInfo.Standard645ID);
+							// nwy_ext_echo("\r\n put msg set TimeSegTable:%d", ReadMeterInfo.Standard645ID);
 						}
 						else
 						{
 							nwy_ext_echo("\r\n put msg set TimeSegTable failed:%d", ReadMeterInfo.Standard645ID);
 						}
+						ReadMeterInfo.Type = eREAD_METER_STANDARD;
+						nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
 					}
 				}
 			}
@@ -656,7 +855,7 @@ void MqttRecvfromUser(void)
 			}
 			for (i = 0; i < 7; ++i)
 			{
-				ReadMeterInfo.Data.SetTime[i] = (BYTE)(time[i] & 0xFF);
+				ReadMeterInfo.Data.SetorGetTime[i] = (BYTE)(time[i] & 0xFF);
 			}
 			ReadMeterInfo.Type = eSET_METER_STANDARD;
 			ReadMeterInfo.Standard645ID = DAY_TIME;
@@ -716,170 +915,32 @@ void MqttRecvfromUser(void)
 				}
 			}
 		}
+		else if (strstr(pType->valuestring, "CMD_DEVICE_FREEZE"))
+		{
+			int gtbuf[7] = {0};
+			char test[25] = {0};
+
+			cJSON_GetObjectValue(pRoot, "StartTime", ecJSON_String, test, sizeof(test));
+			sscanf(test, "%d-%d-%d %d:%d:%d", &gtbuf[1],&gtbuf[2], &gtbuf[3], &gtbuf[4], &gtbuf[5],&gtbuf[6]);
+			gtbuf[0] = LHBYTE(gtbuf[1]);
+			gtbuf[1] = LLBYTE(gtbuf[1]);
+
+			// nwy_ext_echo("\r\n [%d][%d][%d][%d]",gtbuf[0], gtbuf[1], gtbuf[2], gtbuf[3]);
+			ReadMeterInfo.Type = eREAD_METER_FREEZE;
+			for (i = 0; i < 7; ++i)
+			{
+				ReadMeterInfo.Data.SetorGetTime[i] = (BYTE)(gtbuf[i] & 0xFF);
+			}
+			nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+		}
+		else if (strstr(pType->valuestring, "CMD_DEVICE_REALTIME_DATA"))
+		{
+			
+		}
 		cJSON_Delete(pRoot);
 		nwy_ext_echo("\r\nfree");
 		free(msg);
 	}
-}
-//--------------------------------------------------
-// 功能描述:
-//
-// 参数:
-//
-// 返回值:
-//
-// 备注:
-//--------------------------------------------------
-char RealTimeDataSign[][10]	=
-{
-	{"HZ" 	  },		//频率
-	{"UA" 	  },		//A相电压
-	{"UB" 	  },		//B相电压
-	{"UC" 	  },		//C相电压
-	{"LUAB"	  },		//AB相电压
-	{"LUBC"	  },		//BC相电压
-	{"LUCA"	  },		//CA相电压
-	{"IA" 	  },		//A相电流
-	{"IB" 	  },		//B相电流
-	{"IC" 	  },		//C相电流
-	{"PT" 	  },		//总有功
-	{"PA" 	  },		//A相有功功率
-	{"PB" 	  },		//B相有功功率
-	{"PC" 	  },		//C相有功功率
-	{"QT" 	  },		//总无功	
-	{"QA" 	  },		//A相无功功率
-	{"QB" 	  },		//B相无功功率
-	{"QC" 	  },		//C相无功功率
-	{"ST" 	  },		//总视在功率	
-	{"SA" 	  },		//A相视在功率
-	{"SB" 	  },		//B相视在功率
-	{"SC" 	  },		//C相视在功率
-	{"PFT"	  },		//总功率因数	
-	{"PFA"	  },		//A相功率因数
-	{"PFB"	  },		//B相功率因数
-	{"PFC"	  },		//C相功率因数
-	{"EPT"	  },		//正向有功电能总	
-	{"EP1"	  },		//正向有功电能费率1
-	{"EP2"	  },		//正向有功电能费率2
-	{"EP3"	  },		//正向有功电能费率3
-	{"EP4"	  },		//正向有功电能费率4
-	{"EP5"	  },		//正向有功电能费率5
-	{"ENT"	  },		//反向有功电能总	
-	{"EN1"	  },		//反向有功电能费率1
-	{"EN2"	  },		//反向有功电能费率2
-	{"EN3"	  },		//反向有功电能费率3
-	{"EN4"	  },		//反向有功电能费率4
-	{"EN5"	  },		//反向有功电能费率5
-	{"ERC1"	  },		//组合无功1总电能	
-	{"ERC2"	  },		//组合无功2总电能	
-	{"QD_TIME"},		//需量时标
-	{"QD_MAX" },		//最大需量
-};
-		
-void  pub_realtimedatatoUser( MQTTClient *UserClient ,double* dataAddr )
-{
-	cJSON *pJsonRoot,*ds;
-	char *c_message;
-	MQTTMessage pubmsg = {0};
-	TRealTimer tTime = {0};
-	BYTE i;
-
-	nwy_ext_echo("\r\n realtime success recved");
-	get_N176_time(&tTime);
-	memset(paho_mqtt_user_param.topic, 0, sizeof(paho_mqtt_user_param.topic));
-	strncpy(paho_mqtt_user_param.topic, &device_user_topics[eGetRealTimeDataAck][0], strlen(device_user_topics[eGetRealTimeDataAck]));
-	paho_mqtt_user_param.qos = 1;
-	paho_mqtt_user_param.retained = 10;
-	pJsonRoot = cJSON_CreateObject();
-	ds = cJSON_CreateObject();
-	if (NULL == pJsonRoot)
-		return;
-
-	cJSON_AddNumberToObject(pJsonRoot, "T", getmktimems(&tTime));
-	cJSON_AddStringToObject(pJsonRoot, "type", "CMD_DEVICE_REALTIME_DATA");
-	for (i = 0; i < sizeof(RealTimeDataSign)/sizeof(RealTimeDataSign[10]); i++)
-	{
-		nwy_ext_echo("\r\n CMD_DEVICE_REALTIME_DATA value is [%f]",*dataAddr);
-		cJSON_AddNumberToObject(ds, &RealTimeDataSign[i][0], *dataAddr);
-		dataAddr++;
-	}	
-	cJSON_AddItemToObject(pJsonRoot, "DS", ds);
-	c_message = cJSON_PrintUnformatted(pJsonRoot);
-	// 发布部分
-	memset(paho_mqtt_user_param.message, 0, sizeof(paho_mqtt_user_param.message));
-	strncpy(paho_mqtt_user_param.message, c_message, strlen(c_message));
-	nwy_ext_echo("\r\nmqttpub param retained = %d, qos = %d, topic = %s, msg = %s", paho_mqtt_user_param.retained, paho_mqtt_user_param.qos, paho_mqtt_user_param.topic,
-				 paho_mqtt_user_param.message);
-	memset(&pubmsg, 0, sizeof(pubmsg));
-	pubmsg.payload = (void *)paho_mqtt_user_param.message;
-	pubmsg.payloadlen = strlen(paho_mqtt_user_param.message);
-	pubmsg.qos = paho_mqtt_user_param.qos;
-	pubmsg.retained = paho_mqtt_user_param.retained;
-	pubmsg.dup = 0;
-	int rc = nwy_MQTTPublish(UserClient, paho_mqtt_user_param.topic, &pubmsg);
-	if (rc)
-	{
-		cJSON_Delete(pJsonRoot);
-		free(c_message);
-	}
-	cJSON_Delete(pJsonRoot);
-	free(c_message);
-}
-//--------------------------------------------------
-//功能描述:  
-//         
-//参数:      
-//         
-//返回值:    
-//         
-//备注:  
-//--------------------------------------------------
-void  pub_freezedatatoUser( MQTTClient *UserClient ,double* dataAddr )
-{
-	cJSON *pJsonRoot;
-	char *c_message;
-	MQTTMessage pubmsg = {0};
-	TRealTimer tTime = {0};
-	BYTE i;
-
-	nwy_ext_echo("\r\n realtime success recved");
-	get_N176_time(&tTime);
-	memset(paho_mqtt_user_param.topic, 0, sizeof(paho_mqtt_user_param.topic));
-	strncpy(paho_mqtt_user_param.topic, &device_user_topics[eGetFreezeAck][0], strlen(device_user_topics[eGetFreezeAck]));
-	paho_mqtt_user_param.qos = 1;
-	paho_mqtt_user_param.retained = 10;
-	pJsonRoot = cJSON_CreateObject();
-	if (NULL == pJsonRoot)
-		return;
-
-	cJSON_AddNumberToObject(pJsonRoot, "T", getmktimems(&tTime));
-	cJSON_AddStringToObject(pJsonRoot, "type", "CMD_DEVICE_FREEZE");
-	for (i = 0; i < sizeof(RealTimeDataSign)/sizeof(RealTimeDataSign[10]); i++)
-	{
-		nwy_ext_echo("\r\n CMD_DEVICE_REALTIME_DATA value is [%f]",*dataAddr);
-		cJSON_AddNumberToObject(pJsonRoot, &RealTimeDataSign[i][0], *dataAddr);
-		dataAddr++;
-	}	
-	c_message = cJSON_PrintUnformatted(pJsonRoot);
-	// 发布部分
-	memset(paho_mqtt_user_param.message, 0, sizeof(paho_mqtt_user_param.message));
-	strncpy(paho_mqtt_user_param.message, c_message, strlen(c_message));
-	nwy_ext_echo("\r\nmqttpub param retained = %d, qos = %d, topic = %s, msg = %s", paho_mqtt_user_param.retained, paho_mqtt_user_param.qos, paho_mqtt_user_param.topic,
-				 paho_mqtt_user_param.message);
-	memset(&pubmsg, 0, sizeof(pubmsg));
-	pubmsg.payload = (void *)paho_mqtt_user_param.message;
-	pubmsg.payloadlen = strlen(paho_mqtt_user_param.message);
-	pubmsg.qos = paho_mqtt_user_param.qos;
-	pubmsg.retained = paho_mqtt_user_param.retained;
-	pubmsg.dup = 0;
-	int rc = nwy_MQTTPublish(UserClient, paho_mqtt_user_param.topic, &pubmsg);
-	if (rc)
-	{
-		cJSON_Delete(pJsonRoot);
-		free(c_message);
-	}
-	cJSON_Delete(pJsonRoot);
-	free(c_message);
 }
 //--------------------------------------------------
 //功能描述:  回复mqtt用户端发来的数据
@@ -900,13 +961,13 @@ void  MqttRepytoUser( MQTTClient *UserClient )
 		switch (UartToMqttData.Type)
 		{
 			case eRealTimeData:
-				pub_realtimedatatoUser(UserClient,UartToMqttData.Data.RealTimeDataAddr);
+				pub_datatoUser(UserClient,UartToMqttData.Data.RealTimeDataAddr,eGetRealTimeDataAck,0);
 				break;
 			case eFreezeData:
-				pub_freezedatatoUser(UserClient,UartToMqttData.Data.FreezeDataAddr);
+				pub_datatoUser(UserClient,UartToMqttData.Data.FreezeDataAddr,eGetFreezeAck,0);
 				break;
 			case eRelayStatusData:
-				UserRemessageF("CMD_DEVICE_SETTIME", &device_user_topics[eSetParaAck][0], "s", "Result", "success");
+				UserRemessageF("CMD_DEVICE_SETTIME", &device_user_topics[eGetParaAck][0], "s", "status", UartToMqttData.Data.RelayStatusData);//临时上传，未改完
 				break;
 			case eReadTimeData:
 				sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d", UartToMqttData.Data.ReadTimeData.wYear, UartToMqttData.Data.ReadTimeData.Mon, UartToMqttData.Data.ReadTimeData.Day, UartToMqttData.Data.ReadTimeData.Hour, UartToMqttData.Data.ReadTimeData.Min, UartToMqttData.Data.ReadTimeData.Sec);

@@ -57,6 +57,9 @@ BYTE bReadMeterRetry = 0;
 TUserIdTable EpTcpUserTable[5] = {0};//目前 最大5个 
 BYTE g_EpTcpUserNum = MAX_SPECIAL_USER_NUM;// 环保协议用户端主站 个数
 BYTE g_EpTcpUserChannel = 0;//环保协议用户端主站通道bit
+
+TRatioPara RatioPara;
+BYTE g_Date = 0;
 //-----------------------------------------------
 //				本文件使用的变量，常量
 //-----------------------------------------------
@@ -278,6 +281,29 @@ DWORD lib_DWBCDToBin(DWORD In)
 {
 	//这个地方不再判断是否为BCD码，BBCDToBina这个函数判了
 	return ((DWORD)lib_WBCDToBin( (In>>16)&0xffff )) * 10000 + (DWORD)lib_WBCDToBin(In&0xffff);
+}
+//-----------------------------------------------
+//函数功能: 多个字节的BCD码数据转换为HEX码数据
+//
+//参数: 
+//          WORD Num                数据个数
+//
+//			pIn[in]					要转换的数据
+//         
+//          BYTE* pOut              输出的数据
+//
+//返回值:  	转换后的HEX码数据
+//
+//备注:   
+//-----------------------------------------------
+void lib_MultipleBBCDToBin( WORD Num, BYTE* pIn, BYTE* pOut )
+{
+    WORD i;
+
+    for( i=0; i<Num; i++ )
+    {
+        pOut[i] = lib_BBCDToBin( pIn[i] );
+    }
 }
 WORD MW(BYTE Hi, BYTE Lo)
 {
@@ -884,7 +910,8 @@ BOOL DealDLT645_2007(DWORD dwID, BYTE *pBuf, BYTE Len) //直接拷贝多字节数据 无需
 	BYTE j;
 	BYTE Sum = 0;
 	BYTE bCorrect = 0;
-	BYTE bReceiveBit = 0;
+	BYTE bReceiveBit = 0,Date;
+	BYTE *buf = NULL;
 	TUartToMqttData UartToMqttData = {0};
 	#if (CYCLE_METER_READING == PROTOCOL_645)
 	WORD i;
@@ -986,6 +1013,49 @@ BOOL DealDLT645_2007(DWORD dwID, BYTE *pBuf, BYTE Len) //直接拷贝多字节数据 无需
 		else
 		{
 			bUsedChannelNum = pBuf[0];
+			bReceiveBit = 1;
+		}
+	}
+	else if( (dwID >= TIME_ZONE_NUM)&&(dwID <= TIME_RATIO))
+	{
+		buf = &(RatioPara.TimeZoneNum);
+		buf[LLBYTE(dwID)-1] = pBuf[0];
+		nwy_ext_echo("\r\n RatioPara [%d[%d]",LLBYTE(dwID)-1,buf[LLBYTE(dwID)-1]);
+		bReceiveBit = 1;
+	}
+	else if (dwID == TIME_ZONE_TABLE)
+	{
+		lib_MultipleBBCDToBin(Len,pBuf,pBuf);
+		for (BYTE i = 0; i < RatioPara.TimeZoneNum; i++)
+		{
+			//数据处理
+			lib_InverseData(&pBuf[0+i*3],3);
+			sprintf((char*)&RatioPara.TimeAreaTable[i].Time[0],"%d:%d", (int)pBuf[0+i*3], (int)pBuf[1+i*3]);
+			nwy_ext_echo("\r\n TimeAreaTable[%s]",RatioPara.TimeAreaTable[i].Time);
+			RatioPara.TimeAreaTable[i].TimeSegTableorRate = pBuf[2+i*3];
+			// sprintf((char*)&RatioPara.TimeAreaTable[i].TimeSegTable,%d,(int)pBuf[2+i*3]);
+			nwy_ext_echo("\r\n TimeAreaTable[%d]",RatioPara.TimeAreaTable[i].TimeSegTableorRate);
+		}
+		bReceiveBit = 1;
+	}
+	else if( (dwID >= 0x04020001)&&(dwID <= 0x04020008))//1-8日 日时段表
+	{
+		Date = LLBYTE(dwID);
+		lib_MultipleBBCDToBin(Len,pBuf,pBuf);
+		for (BYTE i = 0; i < RatioPara.TimeSegNum; i++)
+		{
+			//数据处理
+			lib_InverseData(&pBuf[0+i*3],3);
+			RatioPara.TimeSegTables[Date-1].Date = Date;
+			sprintf((char*)&RatioPara.TimeSegTables[Date-1].Segs[i].Time[0],"%2d:%2d", (int)pBuf[0+i*3], (int)pBuf[1+i*3]);
+			nwy_ext_echo("\r\n [%s]",RatioPara.TimeSegTables[Date-1].Segs[i].Time);
+			RatioPara.TimeSegTables[Date-1].Segs[i].TimeSegTableorRate = pBuf[2+i*3];
+			// sprintf((char*)&RatioPara.TimeSegTables[Date-1].Segs[i].TimeSegTableorRate,"%d",(int)pBuf[2+i*3]);
+			nwy_ext_echo("\r\n [%d]",RatioPara.TimeSegTables[Date-1].Segs[i].TimeSegTableorRate);
+		}
+		g_Date++;//重试四次，不能在这使用
+		if (g_Date == 9)
+		{
 			bReceiveBit = 1;
 		}
 	}

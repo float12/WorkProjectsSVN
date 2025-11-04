@@ -680,7 +680,7 @@ BOOL Rx_GetRequestNormalList(BYTE *pBuf)
 				}
 				else
 				{
-					//Structure_698 类型太麻烦，不考虑,只考虑一个数据项情况
+					//Structure_698 类型太麻烦，不考虑,只考虑一个数据项情况，索引不是0的情况
 					nwy_ext_echo("\r\n Non-array data type: 0x%02X", GetResult.DataType);
 					// 根据DataType跳过相应长度的数据
 					wLen = GetBasicTypeLen(eData,GetResult.DataType);
@@ -787,35 +787,50 @@ BOOL Rx_GetRequestRecord(BYTE *pBuf)
 //         
 //备注:  
 //--------------------------------------------------
+char  buf_test[2][7];
 BOOL  Rx_GetRequestNormal( BYTE *pBuf )
 {
-	DWORD Oad = 0;
-	BYTE *OffsetBuf = pBuf,bIndex,ResultType;
-	// bAttribute
-	// *ReturnOad = NULL
+	DWORD Oad = 0,wLen;
+	BYTE *OffsetBuf = pBuf,bIndex;
+	TArrayLen GetResult;
+
 	lib_ExchangeData((BYTE*)&Oad,OffsetBuf,2);
 	OffsetBuf = OffsetBuf + 2;
 	// bAttribute = *OffsetBuf;
 	OffsetBuf++;
 	bIndex = *OffsetBuf;
 	OffsetBuf++;
-	ResultType = *OffsetBuf;
+	// 解析结果类型描述符 (3字节)
+	memcpy((BYTE*)&GetResult, OffsetBuf, 3);
 
 	switch (Oad)
 	{
 		case 0x1010://正向有功最大需量
-			if(ResultType == 1)
+			if(GetResult.ResultType == 1)
 			{
 				if (bIndex == 00)
 				{
-					// bAttribute = 0;
 				}
-				// else if (/* condition */)
-				// {
-				// 	/* code */
-				// }
-				
-				
+				else if (bIndex == 01)
+				{
+					if (GetResult.DataType == Structure_698)
+					{
+						OffsetBuf = OffsetBuf+3;
+						for (BYTE i = 0; i < GetResult.ArrayNum; i++)
+						{
+							wLen = GetBasicTypeLen(eData,*OffsetBuf);
+							//解析数据
+							OffsetBuf++;
+							memcpy(&buf_test[i][0],OffsetBuf,wLen);
+							nwy_ext_echo("\r\n Rx_GetRequestNormal");
+							for (BYTE j = 0; j < wLen; j++)
+							{
+								nwy_ext_echo("[%02x]",buf_test[i][j]);
+							}
+							OffsetBuf = OffsetBuf + wLen;
+						}
+					}
+				}
 			}
 			else
 			{
@@ -843,11 +858,13 @@ void  RxUartMessage_Dlt698( TSerial *p )
 	BYTE bReceiveBit = 0;
 	BYTE bResponse;
 	double *rtdataAddr = NULL,*fzdataAddr = NULL;
+	TUartToMqttData UartToMqttData = {0};
 
 	bResponse = p->ProBuf[p->Addr_Len+8];
 	buf = &(p->ProBuf[p->Addr_Len+9]);
 	rtdataAddr = &RealTimeData[0];
-	fzdataAddr = &FreezeData[0];
+	fzdataAddr = &FreezeData[0];//目前用的一个一个buf，队列拥堵时会覆盖 待优化！！！
+
 
 	switch (bResponse)
 	{
@@ -858,14 +875,15 @@ void  RxUartMessage_Dlt698( TSerial *p )
 				{
 					bReceiveBit = 1;
 				}
-				
 			}
 			else if (buf[0] == 0x02)//RX_NormalLists
 			{
 				if(Rx_GetRequestNormalList(&buf[2]))
 				{
+					UartToMqttData.Type = eRealTimeData;
+					UartToMqttData.Data.RealTimeDataAddr = rtdataAddr;
 					//上报实时数据
-					if (nwy_put_msg_que(UartReplyToMqttMsgQue, &rtdataAddr, 0xffffffff)) // 组MQTT帧进行发送
+					if (nwy_put_msg_que(UartReplyToMqttMsgQue, &UartToMqttData, 0xffffffff)) // 组MQTT帧进行发送
 					{
 						nwy_ext_echo("\r\n report RealTimeData succcess");
 					}
@@ -876,8 +894,10 @@ void  RxUartMessage_Dlt698( TSerial *p )
 			{
 				if(Rx_GetRequestRecord(&buf[2]))
 				{
+					UartToMqttData.Type = eFreezeData;
+					UartToMqttData.Data.FreezeDataAddr = fzdataAddr;
 					//上报冻结数据
-					if (nwy_put_msg_que(UartReplyToMqttMsgQue, &fzdataAddr, 0xffffffff)) // 组MQTT帧进行发送
+					if (nwy_put_msg_que(UartReplyToMqttMsgQue, &UartToMqttData, 0xffffffff)) // 组MQTT帧进行发送
 					{
 						nwy_ext_echo("\r\n report FreeezeData succcess");
 					}
