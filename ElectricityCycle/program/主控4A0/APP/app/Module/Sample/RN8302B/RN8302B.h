@@ -137,6 +137,7 @@
 #define	EMMIF_EMU			0x0165		//EMU中断标志寄存器
 #define	IRegionS_EMU		0x0168		//电流分区状态寄存器
 #define	PHASES_EMU			0x0169		//相电压电流状态寄存器
+#define EMMIF2_EMU			0x016C		//EMU中断标志寄存器2
 #define ZXOTCFG_EMU			0x0192	 	//过零计算配置及标志寄存器
 #define	AUOTDC_EN_EMU		0x0191		//直流OFFSET自动校正使能寄存器 
 #define ADCCTL_SYS			0x0183		//ADC控制寄存器
