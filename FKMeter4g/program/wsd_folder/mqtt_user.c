@@ -672,19 +672,19 @@ void MqttRecvfromUser(void)
 			pParaItem = cJSON_GetObjectItem(pRoot, "ParaItem");
 			if (strcmp(pParaItem->valuestring, "TimeZoneNum") == 0	)
 			{
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeZoneNum );
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","ParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeZoneNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegTableNum") == 0)
 			{	
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeSegTableNum );
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","ParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeSegTableNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegNum") == 0)
 			{
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeSegNum );
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","ParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeSegNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "RatioNum") == 0)
 			{
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)RatioPara.RatioNum );	
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","ParaItem",pParaItem->valuestring,"value",(double)RatioPara.RatioNum );	
 			}
 			else if (strcmp(pParaItem->valuestring, "TTimeAreaTable") == 0)
 			{
@@ -696,11 +696,11 @@ void MqttRecvfromUser(void)
 			}
 			else if (strcmp(pParaItem->valuestring, "ReportDataMode")== 0)
 			{
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)ReportPara.ReportMode);	
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","ParaItem",pParaItem->valuestring,"value",(double)ReportPara.ReportMode);	
 			}
 			else if (strcmp(pParaItem->valuestring, "CycleDataFre")== 0)
 			{
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)ReportPara.reportfre);	
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","ParaItem",pParaItem->valuestring,"value",(double)ReportPara.reportfre);	
 			}	
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_SET_PARA"))
@@ -969,8 +969,8 @@ void  MqttRepytoUser( MQTTClient *UserClient )
 				pub_datatoUser(UserClient,UartToMqttData.Data.FreezeDataAddr,eGetFreezeAck,0);
 				break;
 			case eRelayStatusData:
-				UserRemessageF("CMD_DEVICE_RELAY_STATUS", &device_user_topics[eGetParaAck][0], "ssssss", "channel", "1","status",UartToMqttData.Data.RelayStatusData[0],
-				"channel", "2","status",UartToMqttData.Data.RelayStatusData[1],"channel", "3","status",UartToMqttData.Data.RelayStatusData[2]);//临时上传，未改完
+				UserRemessageF("CMD_DEVICE_RELAY_STATUS", &device_user_topics[eGetParaAck][0], "ssssss", "channel", "1","status",UartToMqttData.Data.RelayStatusData[2],
+				"channel", "2","status",UartToMqttData.Data.RelayStatusData[1],"channel", "3","status",UartToMqttData.Data.RelayStatusData[0]);//临时上传，未改完
 				break;
 			case eReadTimeData:
 				sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d", UartToMqttData.Data.ReadTimeData.wYear, UartToMqttData.Data.ReadTimeData.Mon, UartToMqttData.Data.ReadTimeData.Day, UartToMqttData.Data.ReadTimeData.Hour, UartToMqttData.Data.ReadTimeData.Min, UartToMqttData.Data.ReadTimeData.Sec);
