@@ -125,15 +125,19 @@ typedef struct
 	BYTE  Dot;
 } Normal_698;
 
-// 
-// typedef DWORD  Normal_698;
+typedef struct 
+{
+	double MaxDemand;
+	char  DemandTime[7];
+} Normal_Demand;
 
-typedef DWORD  Record_698;
 //-----------------------------------------------
 //				全局使用的变量，常量
 //-----------------------------------------------
-double RealTimeData[DATA_MAXITEM];//转double 忘了会不会存在.9999999情况了 待排查！！！
+double RealTimeData[DATA_MAXITEM];
 double FreezeData[DATA_MAXITEM];
+Normal_Demand  Demand[MAX_RATIO_NUM];//最大需量存储,需量+时表
+// char  Demand[2][7];//最大需量存储,需量+时表
 
 //-----------------------------------------------
 //				本文件使用的变量，常量		
@@ -787,7 +791,6 @@ BOOL Rx_GetRequestRecord(BYTE *pBuf)
 //         
 //备注:  
 //--------------------------------------------------
-char  buf_test[2][7];
 BOOL  Rx_GetRequestNormal( BYTE *pBuf )
 {
 	DWORD Oad = 0,wLen;
@@ -810,24 +813,46 @@ BOOL  Rx_GetRequestNormal( BYTE *pBuf )
 			{
 				if (bIndex == 00)
 				{
+					if (GetResult.DataType == Array_698)
+					{
+						for (BYTE i = 0; i < GetResult.ArrayNum; i++)
+						{
+							if (*OffsetBuf == Structure_698)
+							{
+								OffsetBuf += 3;
+								wLen = GetBasicTypeLen(eData,*OffsetBuf);
+								//解析数据
+								OffsetBuf++;
+
+								memcpy((BYTE*)&Demand[0].MaxDemand,OffsetBuf,wLen);
+								OffsetBuf = OffsetBuf + wLen + 1;
+								memcpy(Demand[0].DemandTime,OffsetBuf,7);
+							}
+							// OffsetBuf
+						}
+					}
 				}
 				else if (bIndex == 01)
 				{
 					if (GetResult.DataType == Structure_698)
 					{
+						nwy_ext_echo("\r\n Rx_GetRequestNormal");
 						OffsetBuf = OffsetBuf+3;
-						for (BYTE i = 0; i < GetResult.ArrayNum; i++)
+						// for (BYTE i = 0; i < GetResult.ArrayNum; i++)
 						{
 							wLen = GetBasicTypeLen(eData,*OffsetBuf);
 							//解析数据
 							OffsetBuf++;
-							memcpy(&buf_test[i][0],OffsetBuf,wLen);
-							nwy_ext_echo("\r\n Rx_GetRequestNormal");
-							for (BYTE j = 0; j < wLen; j++)
-							{
-								nwy_ext_echo("[%02x]",buf_test[i][j]);
-							}
-							OffsetBuf = OffsetBuf + wLen;
+							// Demand[i].MaxDemand
+							memcpy((BYTE*)&Demand[0].MaxDemand,OffsetBuf,wLen);
+							// memcpy(&Demand[i][0],OffsetBuf,wLen);
+				
+							// for (BYTE j = 0; j < wLen; j++)
+							// {
+							// 	nwy_ext_echo("[%02x]",Demand[i][j]);
+							// }
+							OffsetBuf = OffsetBuf + wLen + 1;
+							memcpy(Demand[0].DemandTime,OffsetBuf,7);
 						}
 					}
 				}

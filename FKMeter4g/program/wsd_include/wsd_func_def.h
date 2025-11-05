@@ -104,18 +104,19 @@ typedef enum
 {
 	eBIT_ADDR = 0,	
 	eBIT_TIME,
+	eBIT_VERSION,
 	eBIT_GET_TIME_ZONE_NUM,
 	eBIT_GET_TIME_SEG_TABLE_NUM,
 	eBIT_GET_TIME_SEG_NUM,
 	eBIT_GET_RATIO,
+	eBIT_GET_TIME_ZONE_TABLE,
 	eBIT_GET_TIME_SEG_TABLE,
-	eBIT_test,
 	eBIT_USEDCHANNEL,	//基表使用回路数
-	eBIT_RealTime_698,
+	// eBIT_Demand_698,
+	eBIT_RealTime_698,//将周期上报特殊数据放在普通周期抄读之前，保证刷新一轮
 	eBIT_Freeze_698,	
 	eBIT_TCP_USER_PARA,	
 	eBIT_TCPNET,
-	eBIT_VERSION,
 	eBIT_OPEN_FACTORY,
 	eBIT_MQTTNET,
 	eBIT_TCPUSER,

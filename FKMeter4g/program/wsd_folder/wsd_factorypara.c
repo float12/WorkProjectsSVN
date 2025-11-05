@@ -1758,6 +1758,8 @@ void  InitUartWH( void )
 //--------------------------------------------------
 void CalculateFlow(void)
 {
+	char heapinfo[100]={0};
+	int iTmp;
 	static WORD i = 0;
 	i++;
 
@@ -1779,6 +1781,9 @@ void CalculateFlow(void)
 		total_seconds = (tTimer.hour - poweronTimer.hour) * 3600 +
 						(tTimer.min - poweronTimer.min) * 60 +
 						(tTimer.sec - poweronTimer.sec);
+		nwy_dm_get_device_heapinfo(heapinfo);
+		iTmp = nwy_sdk_vfs_ls();
+	
 		if (total_seconds > 0)
 		{
 			// 计算每秒流量(字节/秒)
@@ -1788,6 +1793,7 @@ void CalculateFlow(void)
 			nwy_ext_echo("\r\ntotal_bytes: %llu bytes", total_bytes);
 			nwy_ext_echo("\r\nflow per second: %.2f bytes/s", flow_per_second);
 			nwy_ext_echo("\r\nflow per one days: %.2f MB/day", flow_per_day);
+			nwy_ext_echo("RAM[%s]ROM[%d]",heapinfo,iTmp); 
 		}
 	}
 }

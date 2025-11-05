@@ -363,7 +363,7 @@ static void prvThreadEntry(void *param)
 	// MqttReplyFreezeDataMsgQue = nwy_create_msg_Que(5, sizeof(double*));
 	UartReplyToMqttMsgQue = nwy_create_msg_Que(5, sizeof(TUartToMqttData));
 	MQTTUserToUartMsgQue = nwy_create_msg_Que(20, sizeof(TReadMeterInfo));
-	nwy_sleep(5000);
+	nwy_sleep(10000);
 	// 创建使用的任务  注：使用事件的任务需要完成nwy_timer_init
 	// DataCall_Task
 	int profileID=1;
@@ -389,11 +389,11 @@ static void prvThreadEntry(void *param)
 	//定时器 所有定时器放下一个线程 
 	//Uart_Task
 	uart_thread = nwy_create_thread("UartTask",Uart_Task, NULL,NWY_OSI_PRIORITY_NORMAL, UART_STACK, 8);
-	// nwy_sleep(3000);
+	nwy_sleep(3000);
 	for ( ServerNum = 0; ServerNum < USER_SPECIAL_START; ServerNum++)
 	{
-		// tcp_thread[ServerNum] = nwy_create_thread("TcpToUart", TCP_TranserTask,  (void*)&ServerNum, NWY_OSI_PRIORITY_NORMAL,TCP_PRIVATE_STACK, 8);
-		// nwy_sleep(2000);
+		tcp_thread[ServerNum] = nwy_create_thread("TcpToUart", TCP_TranserTask,  (void*)&ServerNum, NWY_OSI_PRIORITY_NORMAL,TCP_PRIVATE_STACK, 8);
+		nwy_sleep(2000);
 	}
 	#if(TCP_USER == YES)
 	for ( ServerNum = USER_SPECIAL_START; ServerNum < (g_EpTcpUserNum +  USER_SPECIAL_START); ServerNum++)
@@ -404,7 +404,7 @@ static void prvThreadEntry(void *param)
 	#endif
 	Date_call_thread = nwy_create_thread("DateCall", DataCall_Task, (void*)&profileID, NWY_OSI_PRIORITY_NORMAL, 1024 * 4, 8);
 	//MQTT_Task
-	// mqtt_thread = nwy_create_thread("MqttTask", WSD_MQTT_Task, NULL, NWY_OSI_PRIORITY_NORMAL, MQTT_PRIVATE_STACK, 8);
+	mqtt_thread = nwy_create_thread("MqttTask", WSD_MQTT_Task, NULL, NWY_OSI_PRIORITY_NORMAL, MQTT_PRIVATE_STACK, 8);
 	#if(MQTT_USER == YES)
 	userserver_mqtt_thread = nwy_create_thread("MqttTask", USER_MQTT_Task, NULL, NWY_OSI_PRIORITY_NORMAL, MQTT_USER_STACK, 8);
 	#endif
@@ -415,7 +415,7 @@ static void prvThreadEntry(void *param)
 	#if(GPRS_POSITION == YES)
 	location_thread = nwy_create_thread("LocationTask", Location_Task, NULL, NWY_OSI_PRIORITY_NORMAL, 1024 * 5, 8);
 	#endif
-	// Monitor_Thread = nwy_create_thread("MonitorTask", Monitor_task, NULL, NWY_OSI_PRIORITY_NORMAL, 1024 * 10, 8);
+	Monitor_Thread = nwy_create_thread("MonitorTask", Monitor_task, NULL, NWY_OSI_PRIORITY_NORMAL, 1024 * 10, 8);
 	nwy_exit_thread();
 }
 int appimg_enter(void *param)

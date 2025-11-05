@@ -26,7 +26,7 @@ typedef union
 {
     double* FreezeDataAddr;
     double* RealTimeDataAddr;
-    BYTE RelayStatusData[METER_PHASE_NUM];
+    char RelayStatusData[METER_PHASE_NUM][6];
     TRealTimer ReadTimeData; //读取时间数据
 }uUartToMqttData;
 

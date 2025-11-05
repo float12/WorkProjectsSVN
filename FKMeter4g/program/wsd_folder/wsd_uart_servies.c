@@ -234,7 +234,7 @@ void ReadMeterTask(BYTE bStep, BYTE *bAddr)
 	case eBIT_GET_TIME_SEG_TABLE:
 		Dlt645_Tx_Read(TIME_SEG_TABLE_DAY1+g_Date);
 		break;
-	case eBIT_test:
+	case eBIT_GET_TIME_ZONE_TABLE:
 		Dlt645_Tx_Read(TIME_ZONE_TABLE);
 		break;
 	default:
@@ -281,8 +281,15 @@ BOOL TraverseMeterReadingSigns(BYTE bLoop, BYTE *bAddr)
 					{
 						nwy_uart_set_baud(UART_HD,BAUDRATE_9600);
 						nwy_set_rx_frame_timeout(UART_HD, BYTE_DANCE_TIMEOUT1);
-						qwReadMeterFlag[0] |= (1ull << (CycleReadMeterNum + eBIT_ADDR));
+						qwReadMeterFlag[0] |= (1ull<<(CycleReadMeterNum + eBIT_ADDR));
 					}//可能需要防护一下 防止地址始终无法探测出
+					
+					if (i == (CycleReadMeterNum+eBIT_GET_TIME_SEG_TABLE))
+					{
+						{
+							qwReadMeterFlag[0] |= (1ull<<(CycleReadMeterNum + eBIT_GET_TIME_SEG_TABLE));
+						}	
+					}
 					return FALSE;
 				}
 				bReadMeterRetry++;
@@ -363,7 +370,7 @@ void ToMqttByCycle(void)
 				}
 			}
 			#elif(CYCLE_METER_READING == PROTOCOL_698)
-			qwReadMeterFlag[0] |= (1 << eBIT_RealTime_698);
+			qwReadMeterFlag[0] |= (1ull << eBIT_RealTime_698);
 			#endif
 
 			tTimer = TempTimer;
@@ -752,6 +759,8 @@ void  RecvMsgQueFromTcp( void )
 		nwy_ext_echo("\r\n recv from mqtt user:%08x", ReadMeterInfo.Standard645ID);
 		api_SetSysStatus(eSYS_STASUS_START_COLLECT);
 		HandleMsgFromMqttUser(&ReadMeterInfo);
+		nwy_stop_timer(uart_timer);
+		nwy_start_timer(uart_timer, 2000);
 	}
 }
 //--------------------------------------------------
@@ -830,7 +839,7 @@ void Uart_Task(void *parameter)
 
 				if (api_GetTaskFlag(&FlagBytes, eTASK_PARA_ID, eFLAG_HOUR) == TRUE)
 				{
-					// api_UpdateForInte();
+					api_UpdateForInte();
 					api_ClrTaskFlag(&FlagBytes, eTASK_PARA_ID, eFLAG_HOUR);
 				}
 				if (api_GetTaskFlag(&FlagBytes, eTASK_PARA_ID, eFLAG_MINUTE) == TRUE)

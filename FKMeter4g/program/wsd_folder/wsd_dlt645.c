@@ -1038,7 +1038,7 @@ BOOL DealDLT645_2007(DWORD dwID, BYTE *pBuf, BYTE Len) //直接拷贝多字节数据 无需
 		}
 		bReceiveBit = 1;
 	}
-	else if( (dwID >= 0x04020001)&&(dwID <= 0x04020008))//1-8日 日时段表
+	else if( (dwID >= 0x04010001)&&(dwID <= 0x04010008))//1-8日 日时段表
 	{
 		Date = LLBYTE(dwID);
 		lib_MultipleBBCDToBin(Len,pBuf,pBuf);
@@ -1054,7 +1054,7 @@ BOOL DealDLT645_2007(DWORD dwID, BYTE *pBuf, BYTE Len) //直接拷贝多字节数据 无需
 			nwy_ext_echo("\r\n [%d]",RatioPara.TimeSegTables[Date-1].Segs[i].TimeSegTableorRate);
 		}
 		g_Date++;//重试四次，不能在这使用
-		if (g_Date == 9)
+		if (g_Date == 8)
 		{
 			bReceiveBit = 1;
 		}
@@ -1155,8 +1155,21 @@ BOOL DealDLT645_Factory(BYTE *pBuf, BYTE bDataLen)
 			if (pBuf[0] == 0x26)//继电器状态
 			{
 				UartToMqttData.Type = eRelayStatusData;
-				memcpy(UartToMqttData.Data.RelayStatusData, pBuf + 2, METER_PHASE_NUM);
+				for (BYTE i = 0; i < 3; i++)
+				{
+					if (pBuf[2+i] == 0x01)
+					{
+						strcpy(&UartToMqttData.Data.RelayStatusData[i][0],"open");
+					}
+					else if (pBuf[2+i] == 0)
+					{
+						strcpy(&UartToMqttData.Data.RelayStatusData[i][0],"close");
+					}
+					nwy_ext_echo("\r\n [%s]",UartToMqttData.Data.RelayStatusData[i]);
+				}			
+				// memcpy(UartToMqttData.Data.RelayStatusData, pBuf + 2, METER_PHASE_NUM);
 				nwy_put_msg_que(UartReplyToMqttMsgQue, &UartToMqttData, 0xffffffff);
+				bReceiveBit = 1;
 			}
 			#if (PT_CT == YES)
 			if (pBuf[0] == 0x18)

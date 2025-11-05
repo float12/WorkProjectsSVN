@@ -99,23 +99,27 @@ char RealTimeDataSign[][10]	=
 	{"EN5"	  },		//反向有功电能费率5
 	{"ERC1"	  },		//组合无功1总电能	
 	{"ERC2"	  },		//组合无功2总电能	
-	{"QD_TIME"},		//需量时标
-	{"QD_MAX" },		//最大需量
 };
-char FreezeDataSign[][10]	=
+char SpecialDataSign[][10]	=			//周期上报包含特殊数据
+{
+	
+	{"QD_MAX" },		//最大需量
+	{"QD_TIME"},		//需量时标
+};
+char FreezeDataSign[][10]	=//如果改动费率数，对应周期上报和冻结抄读都需要修改上报项！！！待优化
 {
 	{"EPT"	  },		//正向有功电能总	
-	// {"EP1"	  },		//正向有功电能费率1
-	// {"EP2"	  },		//正向有功电能费率2
-	// {"EP3"	  },		//正向有功电能费率3
-	// {"EP4"	  },		//正向有功电能费率4
-	// {"EP5"	  },		//正向有功电能费率5
+	{"EP1"	  },		//正向有功电能费率1
+	{"EP2"	  },		//正向有功电能费率2
+	{"EP3"	  },		//正向有功电能费率3
+	{"EP4"	  },		//正向有功电能费率4
+	{"EP5"	  },		//正向有功电能费率5
 	{"ENT"	  },		//反向有功电能总	
-	// {"EN1"	  },		//反向有功电能费率1
-	// {"EN2"	  },		//反向有功电能费率2
-	// {"EN3"	  },		//反向有功电能费率3
-	// {"EN4"	  },		//反向有功电能费率4
-	// {"EN5"	  },		//反向有功电能费率5
+	{"EN1"	  },		//反向有功电能费率1
+	{"EN2"	  },		//反向有功电能费率2
+	{"EN3"	  },		//反向有功电能费率3
+	{"EN4"	  },		//反向有功电能费率4
+	{"EN5"	  },		//反向有功电能费率5
 	{"ERC1"	  },		//组合无功1总电能	
 	{"ERC2"	  },		//组合无功2总电能	
 };
@@ -533,7 +537,7 @@ void  pub_datatoUser( MQTTClient *UserClient ,double* dataAddr,eUserPubTopicInde
 		cJSON_AddStringToObject(pJsonRoot, "type", "CMD_DEVICE_FREEZE");
 		for (i = 0; i < sizeof(FreezeDataSign)/sizeof(FreezeDataSign[10]); i++)
 		{
-			nwy_ext_echo("\r\n CMD_DEVICE_REALTIME_DATA value is [%f]",*dataAddr);
+			nwy_ext_echo("\r\n CMD_DEVICE_FREEZE value is [%f]",*dataAddr);
 			cJSON_AddNumberToObject(pJsonRoot, &FreezeDataSign[i][0], *dataAddr);
 			dataAddr++;
 		}	
@@ -545,7 +549,7 @@ void  pub_datatoUser( MQTTClient *UserClient ,double* dataAddr,eUserPubTopicInde
 		cJSON_AddStringToObject(pJsonRoot, "type", "CMD_DEVICE_REALTIME_DATA");
 		for (i = 0; i < sizeof(RealTimeDataSign)/sizeof(RealTimeDataSign[10]); i++)
 		{
-			nwy_ext_echo("\r\n CMD_DEVICE_REALTIME_DATA value is [%f]",*dataAddr);
+			nwy_ext_echo("\r\n CMD_DEVICE_REALTIME_DATA value[%s] is [%f]",RealTimeDataSign[i],*dataAddr);
 			cJSON_AddNumberToObject(ds, &RealTimeDataSign[i][0], *dataAddr);
 			dataAddr++;
 		}	
@@ -658,6 +662,7 @@ void MqttRecvfromUser(void)
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_RELAY_STATUS"))
 		{
+			
 			ReadMeterInfo.Type = eREAD_METER_EXTENDED;
 			ReadMeterInfo.Extended645ID = READ_RELAY_STATUS;
 			ReadMeterInfo.Control = READ_METER_CONTROL_BYTE;
@@ -669,19 +674,19 @@ void MqttRecvfromUser(void)
 			pParaItem = cJSON_GetObjectItem(pRoot, "ParaItem");
 			if (strcmp(pParaItem->valuestring, "TimeZoneNum") == 0	)
 			{
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "d", "ParaItem",(double)RatioPara.TimeZoneNum );
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeZoneNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegTableNum") == 0)
 			{	
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "d", "ParaItem",(double)RatioPara.TimeSegTableNum );
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeSegTableNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "TimeSegNum") == 0)
 			{
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "d", "ParaItem",(double)RatioPara.TimeSegNum );
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)RatioPara.TimeSegNum );
 			}
 			else if (strcmp(pParaItem->valuestring, "RatioNum") == 0)
 			{
-				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "d", "ParaItem",(double)RatioPara.RatioNum );	
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)RatioPara.RatioNum );	
 			}
 			else if (strcmp(pParaItem->valuestring, "TTimeAreaTable") == 0)
 			{
@@ -691,6 +696,14 @@ void MqttRecvfromUser(void)
 			{
 				pub_datatoUser(&paho_user_client,NULL,eGetParaAck,0);		
 			}
+			else if (strcmp(pParaItem->valuestring, "ReportDataMode")== 0)
+			{
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)ReportPara.ReportMode);	
+			}
+			else if (strcmp(pParaItem->valuestring, "CycleDataFre")== 0)
+			{
+				UserRemessageF("CMD_DEVICE_GET_PARA", &device_user_topics[eGetParaAck][0], "sd","pParaItem",pParaItem->valuestring,"value",(double)ReportPara.reportfre);	
+			}	
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_SET_PARA"))
 		{
@@ -700,6 +713,7 @@ void MqttRecvfromUser(void)
 			pValue = cJSON_GetObjectItem(pRoot, "value");
 			if (strcmp(pParaItem->valuestring, "ReportDataMode") == 0)
 			{
+				ReportPara.ReportMode = (BYTE)pValue->valuedouble;
 				SafeMem.ReportPara.ReportMode = (BYTE)pValue->valuedouble;
 				addr = GET_SAFE_SPACE_ADDR(ReportPara.ReportMode);
 				nwy_ext_echo("\r\nset ReportMode:%d", SafeMem.ReportPara.ReportMode);
@@ -707,7 +721,8 @@ void MqttRecvfromUser(void)
 			}
 			else if (strcmp(pParaItem->valuestring, "CycleDataFre") == 0)
 			{
-				
+				ReportPara.reportfre = (WORD)pValue->valuedouble;
+				IntervalTime =  (WORD)pValue->valuedouble;//同步刷新下吧在这
 				SafeMem.ReportPara.reportfre = (WORD)pValue->valuedouble;//更不更新当前刷新周期
 				addr = GET_SAFE_SPACE_ADDR(ReportPara.reportfre);
 				nwy_ext_echo("\r\nset CycleDataFre:%d", SafeMem.ReportPara.reportfre);
@@ -830,7 +845,7 @@ void MqttRecvfromUser(void)
 					}
 				}
 			}
-			UserRemessageF("CMD_DEVICE_RESET", &device_user_topics[eSetParaAck][0], "s", "Result", "success");
+			UserRemessageF("CMD_DEVICE_SET_PARA", &device_user_topics[eSetParaAck][0], "s", "Result", "success");
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_RESET"))
 		{
@@ -935,7 +950,10 @@ void MqttRecvfromUser(void)
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_REALTIME_DATA"))
 		{
-			
+			if(ReportPara.ReportMode == 0)
+			{
+				qwReadMeterFlag[0] |= (1ull << eBIT_RealTime_698);
+			}
 		}
 		cJSON_Delete(pRoot);
 		nwy_ext_echo("\r\nfree");
@@ -967,7 +985,8 @@ void  MqttRepytoUser( MQTTClient *UserClient )
 				pub_datatoUser(UserClient,UartToMqttData.Data.FreezeDataAddr,eGetFreezeAck,0);
 				break;
 			case eRelayStatusData:
-				UserRemessageF("CMD_DEVICE_SETTIME", &device_user_topics[eGetParaAck][0], "s", "status", UartToMqttData.Data.RelayStatusData);//临时上传，未改完
+				UserRemessageF("CMD_DEVICE_RELAY_STATUS", &device_user_topics[eGetParaAck][0], "ssssss", "channel", "1","status",UartToMqttData.Data.RelayStatusData[0],
+				"channel", "2","status",UartToMqttData.Data.RelayStatusData[1],"channel", "3","status",UartToMqttData.Data.RelayStatusData[2]);//临时上传，未改完
 				break;
 			case eReadTimeData:
 				sprintf(timeStr, "%04d-%02d-%02d %02d:%02d:%02d", UartToMqttData.Data.ReadTimeData.wYear, UartToMqttData.Data.ReadTimeData.Mon, UartToMqttData.Data.ReadTimeData.Day, UartToMqttData.Data.ReadTimeData.Hour, UartToMqttData.Data.ReadTimeData.Min, UartToMqttData.Data.ReadTimeData.Sec);

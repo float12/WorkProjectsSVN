@@ -11,24 +11,24 @@
 //-----------------------------------------------
 //				宏定义
 //-----------------------------------------------
-#define TCP_REQ_NET 		0x040013D1		//TCP IP地址和端口号
-#define TCP_REQ_USER_PD 	0x040013D6  	//TCP 用户名和密码
-#define MQTT_REQ_NET 		0x040013E1		//MQTT IP地址和端口号
-#define MQTT_REQ_USER_PD 	0x040013E6 		//MQTT 用户名和密码
-#define DAY_TIME 			0x0400010C		//日期和时间
-#define USED_CHANNEL_NUM 	0x04A00100 		//测量点使用回路数
-#define READ_RELAY_STATUS 			0x1126		    //检查继电器状态
-#define TIME_ZONE_NUM		0x04000201		//年时区数
-#define TIME_SEGTABLE_NUM	0X04000202		//日时段表数
-#define TIME_SEG_NUM		0X04000203		//日时段数
-#define TIME_RATIO			0X04000204		//费率数据
-#define TIME_SEG_TABLE_DAY1		0x04020001		//1-日时段表叔
-#define TIME_ZONE_TABLE		0x04020000		//时区表数据
-#define TIME_ZONE_TABLE_CHANGE_TIME 0x04000106		//时区表切换时间
-#define TIME_SEG_TABLE_CHANGE_TIME  0x04000107		//时段表切换时间
-#define SET_METER_CONTROL_BYTE 		0x14			//设置表控制字
-#define READ_METER_CONTROL_BYTE 	0x11			//读表控制字
-#define CONTROL_RELAY_CONTROL_BYTE 	0x1C			//继电器控制字
+#define TCP_REQ_NET 				0x040013D1				//TCP IP地址和端口号
+#define TCP_REQ_USER_PD 			0x040013D6  			//TCP 用户名和密码
+#define MQTT_REQ_NET 				0x040013E1				//MQTT IP地址和端口号
+#define MQTT_REQ_USER_PD 			0x040013E6 				//MQTT 用户名和密码
+#define DAY_TIME 					0x0400010C				//日期和时间
+#define USED_CHANNEL_NUM 			0x04A00100 				//测量点使用回路数
+#define READ_RELAY_STATUS 			0x1126					//检查继电器状态
+#define TIME_ZONE_NUM				0x04000201				//年时区数
+#define TIME_SEGTABLE_NUM			0X04000202				//日时段表数
+#define TIME_SEG_NUM				0X04000203				//日时段数
+#define TIME_RATIO					0X04000204				//费率数据
+#define TIME_SEG_TABLE_DAY1			0x04010001				//1-日时段表叔
+#define TIME_ZONE_TABLE				0x04010000				//时区表数据
+#define TIME_ZONE_TABLE_CHANGE_TIME 0x04000106				//时区表切换时间
+#define TIME_SEG_TABLE_CHANGE_TIME  0x04000107				//时段表切换时间
+#define SET_METER_CONTROL_BYTE 		0x14					//设置表控制字
+#define READ_METER_CONTROL_BYTE 	0x11					//读表控制字
+#define CONTROL_RELAY_CONTROL_BYTE 	0x1C					//继电器控制字
 
 #if( EVENT_REPORT ==  YES)
 #define WARNING_REPORT		0x04A10001		//消防告警状态字
