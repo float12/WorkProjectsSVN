@@ -625,11 +625,9 @@ void MqttRecvfromUser(void)
 	FtpUpdatePara ftpupdatepara = {0};
 	TSafeMem SafeMem = {0};
 	char reqbuf[512] = {0};
-	BYTE TimeStr[50] = {0};
 	BYTE cnt = 0;
 	cJSON *tbl = NULL;
 	int date = 0;
-	unsigned int time[7] = {0};//消除警告定义为int
 	int i = 0;
 	// 接收用户主站的MQTT帧
 	if (nwy_get_msg_que(MqttResUserMessageQueue, &msg, 0xffffffff)) // 等待一秒
@@ -797,7 +795,7 @@ void MqttRecvfromUser(void)
 				cnt = ParseTableItem("TimeSegTable", pValue, ReadMeterInfo.Data.TTimeAreaTable);
 				if(cnt > MAX_TIME_ZONE_NUM)
 				{
-					nwy_ext_echo("\r\n TTimeAreaTable count error:%d", cnt);
+					// nwy_ext_echo("\r\n TTimeAreaTable count error:%d", cnt);
 				}
 				else
 				{
@@ -855,27 +853,13 @@ void MqttRecvfromUser(void)
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_GETTIME"))
 		{
-			ReadMeterInfo.Standard645ID = DAY_TIME;
-			ReadMeterInfo.Type = eREAD_METER_STANDARD;
-			nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+			UserRemessageF("CMD_DEVICE_GETTIME", &device_user_topics[eGetParaAck][0], "s", "DateTime", get_N176_time_stringp());
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_SETTIME"))
 		{
-			tmp = cJSON_GetObjectItem(pRoot, "DateTime");
-			memcpy(TimeStr, cJSON_GetStringValue(tmp), sizeof(TimeStr));
-			nwy_ext_echo("\r\n rec set time:%s", TimeStr);
-			if (sscanf((char *)TimeStr, "%02x%02x-%02x-%02x-%02x %02x:%02x:%02x", &time[0],&time[6], &time[5], &time[4], &time[3],&time[2], &time[1], &time[0]) == 8)
-			{
-				ReadMeterInfo.DataLen = 7;
-			}
-			for (i = 0; i < 7; ++i)
-			{
-				ReadMeterInfo.Data.SetorGetTime[i] = (BYTE)(time[i] & 0xFF);
-			}
-			ReadMeterInfo.Type = eSET_METER_STANDARD;
-			ReadMeterInfo.Standard645ID = DAY_TIME;
-			ReadMeterInfo.Control = SET_METER_CONTROL_BYTE;
-			nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+			// 设置时间
+			cJSON_GetObjectValue(pRoot, "DateTime", ecJSON_String, reqbuf, sizeof(reqbuf));
+			set_N176_time_stringp(reqbuf);
 			UserRemessageF("CMD_DEVICE_SETTIME", &device_user_topics[eSetParaAck][0], "s", "Result", "success");
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_APPVERSION"))
