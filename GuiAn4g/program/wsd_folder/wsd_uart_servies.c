@@ -22,13 +22,12 @@
 //-----------------------------------------------
 //				全局使用的变量，常量
 //-----------------------------------------------
+BYTE IsMqttComMeterFlag = 0;//mqtt和表通信标志，用于接收处理
 int UART_HD = 0;
 int IntervalTime = 60; //采集间隔时间
-BYTE IsCycleReadRelayFlag = 0; //周期检查继电器状态标志，区分mqtt下发跳合闸命令后上报继电器状态
 //-----------------------------------------------
 //				本文件使用的变量，常量
 //-----------------------------------------------
-TRelayControlInfo RelayControlInfo = {0};
 BYTE UartRecTimeout = 0; //接收超时标志
 static WORD SysTickCounter;
 BYTE gTranType = 0;
@@ -72,11 +71,6 @@ void InitPoint(TSerial *p)
 void nwy_meter_upgrade_timer_cb(void *type)
 {
 	MeterUpgradeTimeUpFlag = 1;
-}
-void Read_Relay_timer_cb(void *type)
-{
-	qwReadMeterFlag[0] |= (1ull << (CycleReadMeterNum + eBIT_CHECK_RELAY));
-	nwy_ext_echo("\r\n read relay status time up");
 }
 void nwy_general_timer_cb(void *type)
 {
@@ -217,13 +211,6 @@ void ReadMeterTask(BYTE bStep, BYTE *bAddr)
 	case eBIT_TCP_USER_PARA:
 		CommWithMeter_DBDF(0x11, 0, (BYTE *)&Ep212Tcp[0], 0);
 		break;
-	case eBIT_CONTROL_RELAY:
-		nwy_ext_echo("\r\n control relay");
-		ControlRelay();
-		break;
-	case eBIT_CHECK_RELAY:
-		CheckRelay();
-		break;
 	default:
 		break;
 	}
@@ -321,9 +308,11 @@ void CollectMeterTask(void)
 //--------------------------------------------------
 void ToMqttByCycle(void)
 {
-	BYTE bTime, i, j;
+	BYTE bTime;
+	#if (CYCLE_METER_READING == PROTOCOL_645)
+	BYTE i, j;
+	#endif
 	TRealTimer TempTimer = {0};
-	static BYTE CycleTimeUpFlag = 0;//读继电器状态等待过程占用串口可能错误，所以增加时间到标志判断
 
 	get_N176_time(&TempTimer);
 	if (IntervalTime <= 1)
@@ -338,36 +327,31 @@ void ToMqttByCycle(void)
 	{
 		if (api_GetSysStatus(eSYS_STASUS_SAMPLE_UPLOAD) == TRUE)
 		{
-			CycleTimeUpFlag = 1;
-			api_ClrSysStatus(eSYS_STASUS_SAMPLE_UPLOAD);
-		}
+			#if (CYCLE_METER_READING == PROTOCOL_645)
 		// nwy_ext_echo("\r\nTimeUpFlag:%d,api_GetSysStatus(eSYS_STASUS_START_COLLECT):%d", TimeUpFlag,api_GetSysStatus(eSYS_STASUS_START_COLLECT));
-	}
-	else
-	{
-		api_SetSysStatus(eSYS_STASUS_SAMPLE_UPLOAD);
-	}
-	if((CycleTimeUpFlag == 1)  && (api_GetSysStatus(eSYS_STASUS_UART_AVAILABLE) == TRUE))
-	{
-		CycleTimeUpFlag = 0;
 		for (i = 0; i < bUsedChannelNum; i++)
 		{
 			for (j = 0; j < CycleReadMeterNum; j++)
 			{
 				qwReadMeterFlag[i] |= (1ull << j);
 			}
-			api_ClrSysStatus(eSYS_STASUS_UART_AVAILABLE);
-			IsCycleReadRelayFlag = 1;
 		}
+			#elif(CYCLE_METER_READING == PROTOCOL_698)
+			qwReadMeterFlag[0] |= (1ull << eBIT_RealTime_698);
+			#endif
 		tTimer = TempTimer;
 		if (IntervalTime >= 1) // 保证上报整分数据时，秒是0
 		{
 			tTimer.Sec = 0;
 		}
-		
-		nwy_ext_echo("\r\ntime up");
+			api_ClrSysStatus(eSYS_STASUS_SAMPLE_UPLOAD);
+			nwy_ext_echo("\r\ntime up");
+		}
 	}
-
+	else
+	{
+		api_SetSysStatus(eSYS_STASUS_SAMPLE_UPLOAD);
+	}
 }
 #endif
 //--------------------------------------------------
@@ -382,16 +366,15 @@ void ToMqttByCycle(void)
 static void nwy_uart_recv_handle(const char *str, uint32_t length)
 {
 	WORD wLen, wLen1;
-	// WORD i;
+	WORD i;
 	nwy_ext_echo("\r\nenter uart");
 	nwy_ext_echo("\r\nlen:%d", length);
-	// for (i = 0; i < length; i++)
-	// {
-	// 	nwy_ext_echo("%02x ", str[i]);
-	// }
+	for (i = 0; i < length; i++)
+	{
+		nwy_ext_echo("%02x ", str[i]);
+	}
 	if (api_GetSysStatus(eSYS_STASUS_START_TRAN))
 	{
-		api_SetSysStatus(eSYS_STASUS_UART_AVAILABLE);
 		memset(&Transdata.buf, 0, sizeof(Transdata.buf));
 		if (length > sizeof(Transdata.buf))
 		{
@@ -407,7 +390,7 @@ static void nwy_uart_recv_handle(const char *str, uint32_t length)
 		{
 			if (nwy_put_msg_que(TranDataToFactoryMessageQueue, &Transdata, 0xffffffff) == TRUE)
 			{
-				nwy_ext_echo("\r\nuart to factory ok");
+				nwy_ext_echo("\r\nuart to factory ok,length");
 			}
 			else
 			{
@@ -598,7 +581,10 @@ void api_ReceData_UartTask(void)
 		Result = DoReceProc_Modbus_UART(Serial.ProBuf[Serial.RXRPoint], &Serial);
 		#endif
 		#if (CYCLE_REPORT_PROTOCAL == PROTOCOL_212)
+		if (Result == FALSE)
+		{
 		Result = DoReceProc_EP212_UART(Serial.ProBuf[Serial.RXRPoint], &Serial);
+		}
 		#endif
 		if (Result == FALSE)
 		{
@@ -657,6 +643,34 @@ void DetectReadMeterStasus(void)
 	PowerOnReadMeter = 1;
 }
 //--------------------------------------------------
+// 功能描述:  接收来自 mqtt user线程的数据
+//
+// 参数: ReadMeterInfo 读表信息
+//
+// 返回值:
+//
+// 备注:
+//--------------------------------------------------
+void HandleMsgFromMqttUser(TReadMeterInfo *ReadMeterInfo)
+{
+	if (ReadMeterInfo->Type == eREAD_METER_EXTENDED)
+	{
+		CommWithMeter_DBDF(READ_METER_CONTROL_BYTE, 0, (BYTE *)&ReadMeterInfo->Extended645ID, NULL);
+	}
+	else if (ReadMeterInfo->Type == eSET_METER_EXTENDED)
+	{
+		CommWithMeter_DBDF(SET_METER_CONTROL_BYTE, ReadMeterInfo->DataLen, (BYTE *)&ReadMeterInfo->Extended645ID, (BYTE *)&ReadMeterInfo->Data);
+	}
+	else if (ReadMeterInfo->Type == eREAD_METER_STANDARD)
+	{
+		Dlt645_Tx_Read(ReadMeterInfo->Standard645ID);
+	}
+	else if (ReadMeterInfo->Type == eSET_METER_STANDARD)
+	{
+		Dlt645_Tx_Write(ReadMeterInfo->Standard645ID, ReadMeterInfo->DataLen, (BYTE *)&ReadMeterInfo->Data, ReadMeterInfo->Control);
+	}
+	IsMqttComMeterFlag = 1;
+}
 //功能描述:  接收来自 tcp线程的下行数据 
 //         
 //参数:      
@@ -667,6 +681,7 @@ void DetectReadMeterStasus(void)
 //--------------------------------------------------
 void  RecvMsgQueFromTcp( void )
 {	
+	TReadMeterInfo ReadMeterInfo = {0};
 	BYTE temp = 0;
 	WORD ID = 0x2001;
 
@@ -688,7 +703,6 @@ void  RecvMsgQueFromTcp( void )
 	else if (nwy_get_msg_que(TranDataToUartMessageQueue, &Transdata, 0xffffffff))
 	{
 		api_SetSysStatus(eSYS_STASUS_START_TRAN);
-		api_ClrSysStatus(eSYS_STASUS_UART_AVAILABLE);
 		gTranType = Transdata.TranType;
 		SendTranData(Transdata.buf, Transdata.len);
 		nwy_ext_echo("\r\ntran data send ok");
@@ -696,8 +710,16 @@ void  RecvMsgQueFromTcp( void )
 	else if (nwy_get_msg_que(UserTcpStatusChangeMsgQue, &temp, 0xffffffff))
 	{
 		//组包直接发送
-		CommWithMeter_DBDF(0x14,1,(BYTE*)&ID,&temp);
+		CommWithMeter_DBDF(SET_METER_CONTROL_BYTE,1,(BYTE*)&ID,&temp);
 		api_SetSysStatus(eSYS_STASUS_START_COLLECT);//如果不判断回复帧的话 就不用锁uart！！！
+		nwy_stop_timer(uart_timer);
+		nwy_start_timer(uart_timer, 2000); //10s定时
+	}
+	else if (nwy_get_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff))
+	{
+		nwy_ext_echo("\r\n recv from mqtt user:%08x", ReadMeterInfo.Standard645ID);
+		api_SetSysStatus(eSYS_STASUS_START_COLLECT);
+		HandleMsgFromMqttUser(&ReadMeterInfo);
 		nwy_stop_timer(uart_timer);
 		nwy_start_timer(uart_timer, 2000); //10s定时
 	}
@@ -748,25 +770,6 @@ void Uart_Task(void *parameter)
 #if (CYCLE_METER_READING == YES)
 			ToMqttByCycle();
 			//没置周期采集数据的标志，则从mqtt用户端获取继电器命令
-			if(api_GetSysStatus(eSYS_STASUS_UART_AVAILABLE) == TRUE)
-			{
-				if (nwy_get_msg_que(MQTTUserToUartMsgQue, &RelayControlInfo, 0xffffffff))
-				{
-					nwy_ext_echo("\r\n recv from mqtt user msg que, cmd:%d, collcetBit:%d", 
-					RelayControlInfo.RelayCmd,RelayControlInfo.CollcetBit);
-					if(RelayControlInfo.CollcetBit == eBIT_CHECK_RELAY)
-					{
-						nwy_ext_echo("\r\n set timer to read relay status");
-						nwy_start_timer(Read_Relay_timer, 5000);//等待一会后读继电器状态
-					}
-					else
-					{
-						qwReadMeterFlag[0] |= (1ull << (CycleReadMeterNum + RelayControlInfo.CollcetBit));
-					}
-					api_ClrSysStatus(eSYS_STASUS_UART_AVAILABLE);
-					IsCycleReadRelayFlag = 0;
-				}
-			}
 #endif
 		}
 		api_ReceData_UartTask();
@@ -785,7 +788,7 @@ void Uart_Task(void *parameter)
 			if (api_GetSysStatus(eSYS_STASUS_START_COLLECT) != TRUE) //判断当前处于上传模式则不会进行透传
 			{
 				//消息队列可能同时攒了多条，所以加上判断接收后发下一帧透传数据，判断顺序不能变
-				if ((api_GetSysStatus(eSYS_STASUS_START_TRAN) != TRUE) && (api_GetSysStatus(eSYS_STASUS_UART_AVAILABLE) == TRUE))
+				if (api_GetSysStatus(eSYS_STASUS_START_TRAN) != TRUE)
 				{
 					RecvMsgQueFromTcp();
 				}
@@ -811,6 +814,7 @@ void Uart_Task(void *parameter)
 						qwReadMeterFlag[0] |= (1ull << (CycleReadMeterNum + eBIT_POSITION));
 					}
 					#endif
+					qwReadMeterFlag[0] |= (1ull << (CycleReadMeterNum + eBIT_VERSION));
 					api_ClrTaskFlag(&FlagBytes, eTASK_PARA_ID, eFLAG_MINUTE);
 				}
 				if (api_GetTaskFlag(&FlagBytes, eTASK_SAMPLE_ID, eFLAG_SECOND) == TRUE)

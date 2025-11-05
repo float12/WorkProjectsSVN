@@ -184,6 +184,5 @@ void SampleDatatoReport(TRealTimer *pTime)
 	{
 		nwy_put_msg_que(CollectMessageQueue, &CollectValue, 0xffffffff);
 	}
-	api_SetSysStatus(eSYS_STASUS_UART_AVAILABLE);
 }
 #endif

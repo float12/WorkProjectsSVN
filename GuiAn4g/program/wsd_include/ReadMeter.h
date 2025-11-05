@@ -20,12 +20,29 @@
 //-----------------------------------------------
 //				结构体，共用体，枚举
 //-----------------------------------------------
+typedef enum
+{
+	eREAD_METER_STANDARD = 0,
+	eREAD_METER_EXTENDED = 1,
+	eSET_METER_STANDARD = 2,
+	eSET_METER_EXTENDED = 3,
+	eREAD_METER_FREEZE,
+} eReadType;
+typedef union
+{
+	BYTE RelayCmdData[8];//继电器命令
+	BYTE SetorGetTime[7];//设置时间或读取冻结时间
+} uSetMeterData;//设置表的数据
+
 typedef struct
 {
-	BYTE RelayCmd;//继电器命令
-	BYTE CollcetBit;//采集标志位
-} TRelayControlInfo;
-//对齐方便从报文中拷贝
+	eReadType Type;//645读取/设置或698抄读
+	WORD Extended645ID;//645扩展采集标识  低两字节
+	DWORD Standard645ID;//645标准采集标识
+	uSetMeterData Data;//
+	BYTE Control;//控制字
+	BYTE DataLen;//数据长度，不包括数据标识、密码和操作者代码
+} TReadMeterInfo;
 #pragma pack(1)
 typedef struct
 {
@@ -33,7 +50,6 @@ typedef struct
 	BYTE Energe[6][4];//电能
 	DWORD Reason;//继电器变化原因
 } TRelayChangeReason;
-#pragma pack()
 
 typedef struct tMeterRead_t
 {
@@ -50,14 +66,14 @@ typedef struct tMeterRead_t
 
 typedef enum
 {
-	eOPEN_RELAY_LOOP1 = 0x4D,
-	eCLOSE_RELAY_LOOP1 = 0x4F,
-	eOPEN_RELAY_LOOP2 = 0x8D,
-	eCLOSE_RELAY_LOOP2 = 0x8F,
-	eOPEN_RELAY_LOOP3 = 0xCD,
-	eCLOSE_RELAY_LOOP3 = 0xCF,
-	eOPEN_RELAY_ALL_LOOP = 0x0D,
-	eCLOSE_RELAY_ALL_LOOP = 0x0F,
+	eOPEN_RELAY_LOOP1 = 0x1A,
+	eCLOSE_RELAY_LOOP1 = 0x1C,
+	eOPEN_RELAY_LOOP2 = 0x5A,
+	eCLOSE_RELAY_LOOP2 = 0x5C,
+	eOPEN_RELAY_LOOP3 = 0x9A,
+	eCLOSE_RELAY_LOOP3 = 0x9C,
+	eOPEN_RELAY_ALL_LOOP = 0x0D-0x33,
+	eCLOSE_RELAY_ALL_LOOP = 0x0F-0x33,
 }eRELAY_CMD;
 
 typedef enum

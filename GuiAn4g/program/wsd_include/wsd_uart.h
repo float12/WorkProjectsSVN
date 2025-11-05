@@ -31,10 +31,29 @@ typedef enum
 	e645FrameNormal,			//645组帧发送正常
 } eUpgradeResult;
 
+typedef enum
+{
+	eRelayStatusData,
+}eUartToMqttType;
+
+typedef union 
+{
+    double* FreezeDataAddr;
+    double* RealTimeDataAddr;
+    char RelayStatusData[METER_PHASE_NUM][6];
+    TRealTimer ReadTimeData; //读取时间数据
+}uUartToMqttData;
+
+typedef struct
+{
+    eUartToMqttType Type;
+    uUartToMqttData Data;
+}TUartToMqttData;
 //-----------------------------------------------
 //				变量声明
 //-----------------------------------------------
 extern int UART_HD;
+extern BYTE IsMqttComMeterFlag; //mqtt和表通信标志，用于接收处理
 extern int IntervalTime;			//采集间隔时间
 extern TRealTimer tTimer;
 extern BYTE IsCycleReadRelayFlag; //检查继电器状态标志

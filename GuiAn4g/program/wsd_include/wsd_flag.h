@@ -53,8 +53,6 @@ typedef enum
 	eSYS_STASUS_SAMPLE_UPLOAD,
 	//每个报文占用串口标志
 	eSYS_STASUS_START_COLLECT,
-	//不同采集任务串口是否可用标志,占用后需要重新设置标志位，1表示可用,每个任务串口上锁后需要解锁
-	eSYS_STASUS_UART_AVAILABLE, 
 	//电表升级成功回复一帧
 	eSYS_STASUS_UPGRADE_REPLY_FRAME,
 	//单次定时器时间到标志

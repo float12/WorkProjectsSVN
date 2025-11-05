@@ -17,12 +17,16 @@
 #define MQTT_REQ_USER_PD 		0x040013E6 		//MQTT 用户名和密码
 #define DAY_TIME 				0x0400010C		//日期和时间
 #define USED_CHANNEL_NUM 		0x04A00100 		//测量点使用回路数
+#define READ_RELAY_STATUS 			0x1126					//检查继电器状态
 #define LOOP1_RELAY_OPEN_INFO 	0x1D00FF01		//回路1上一次继电器打开原因
 #define LOOP2_RELAY_OPEN_INFO 	0x1D01FF01		//回路2上一次继电器打开原因
 #define LOOP3_RELAY_OPEN_INFO 	0x1D02FF01		//回路3上一次继电器打开原因
 #define LOOP1_RELAY_CLOSE_INFO 	0x1E00FF01		//回路1上一次继电器关闭原因
 #define LOOP2_RELAY_CLOSE_INFO 	0x1E01FF01		//回路2上一次继电器关闭原因
 #define LOOP3_RELAY_CLOSE_INFO 	0x1E02FF01		//回路3上一次继电器关闭原因
+#define SET_METER_CONTROL_BYTE 		0x14					//设置表控制字
+#define READ_METER_CONTROL_BYTE 	0x11					//读表控制字
+#define CONTROL_RELAY_CONTROL_BYTE 	0x1C					//继电器控制字
 #if( EVENT_REPORT ==  YES)
 #define WARNING_REPORT		0x04A10001		//消防告警状态字
 #endif
@@ -145,7 +149,6 @@ extern char LtuAddr[30];
 extern char MeterVersion[35];
 extern TSerial Serial;
 extern BYTE bHisReadMeter[MAX_SAMPLE_CHIP]; //上电初始化成FF
-extern TRelayControlInfo RelayControlInfo;
 extern QWORD qwReadMeterFlag[MAX_SAMPLE_CHIP];
 extern BYTE bReadMeterRetry;
 extern BYTE bUsedChannelNum; //被使用通道个数 上电需探测
@@ -184,7 +187,7 @@ void Dlt645_Tx_ReadMultiLoop(DWORD dwID, BYTE *bAddress);
 //
 // 备注:
 //--------------------------------------------------
-void Dlt645_Tx_Write(DWORD dwID, BYTE bDataLen, BYTE *pBuf);
+void Dlt645_Tx_Write(DWORD dwID, BYTE bDataLen, BYTE *pBuf,BYTE Control);
 //--------------------------------------------------
 //功能描述: 其他参数抄读任务
 //
@@ -265,8 +268,7 @@ void Adrr_Txd(void);
 void Dlt645_Tx_Read_Version(void);
 BOOL CommWithMeter_DBDF(BYTE Type, BYTE bDataLen, BYTE *ID, BYTE *pBuf);
 void  OpenSystemProgram(void);
-void  ControlRelay(void);
-void  CheckRelay(void);
+void ReceiveClearBitFlag(void);
 //功能描述:  多主站查询查表 查找对应关系
 //         
 //参数:      

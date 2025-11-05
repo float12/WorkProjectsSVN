@@ -1056,11 +1056,11 @@ cJSON *DataToCJson(TDataTable *DataTable, char *name, int ValueType, BYTE bLoop,
 				{
 					nwy_ext_echo("\r\n enter arry");
 				}
-				else if (DataTable->MqttData.DataValue.MqttDataArray->TMqttData[i]->DataType == eCollectionToData) //嵌套同类型结构
-				{
-					cJsonTemp = DataToCJson(&CollectionToData, DataTable->MqttData.DataValue.MqttDataArray->TMqttData[i]->DataName, DataTable->MqttData.DataValue.MqttDataArray->TMqttData[i]->ValueType, bLoop, cJsonTemp, qwTms, addr);
-					cJSON_AddItemToArray(cJsonOut, cJsonTemp);
-				}
+				// else if (DataTable->MqttData.DataValue.MqttDataArray->TMqttData[i]->DataType == eCollectionToData) //嵌套同类型结构
+				// {
+				// 	cJsonTemp = DataToCJson(&CollectionToData, DataTable->MqttData.DataValue.MqttDataArray->TMqttData[i]->DataName, DataTable->MqttData.DataValue.MqttDataArray->TMqttData[i]->ValueType, bLoop, cJsonTemp, qwTms, addr);
+				// 	cJSON_AddItemToArray(cJsonOut, cJsonTemp);
+				// }
 			}
 		}
 	}
@@ -2183,8 +2183,8 @@ static void HandleRelayCommand(const char* cmdStr, cJSON *pRoot, BYTE isOpenCmd)
 {
     BYTE channel = 0;
 	BYTE channelStr[1] = {0};
-	TRelayControlInfo RelayControlInfo = {0};
-	
+	TReadMeterInfo ReadMeterInfo = {0};
+	BYTE buf[7] = {0x00,0x18,0x54,0x15,0x09,0x10,0x50};//控制继电器时间 需要大于当前时间，目前为2050年
     // 获取 channel 字段
 	cJSON_GetObjectValue(pRoot, "channel", ecJSON_String, channelStr, sizeof(channelStr));
 	channel = atoi((char *)channelStr);
@@ -2194,46 +2194,90 @@ static void HandleRelayCommand(const char* cmdStr, cJSON *pRoot, BYTE isOpenCmd)
 	{
 		if (channel == 1)
 		{
-			RelayControlInfo.RelayCmd = eOPEN_RELAY_LOOP1;
+			ReadMeterInfo.Data.RelayCmdData[0] = eOPEN_RELAY_LOOP1;
 		}
 		else if (channel == 2)
 		{
-			RelayControlInfo.RelayCmd = eOPEN_RELAY_LOOP2;
+			ReadMeterInfo.Data.RelayCmdData[0] = eOPEN_RELAY_LOOP2;
 		}
 		else if (channel == 3)
 		{
-			RelayControlInfo.RelayCmd = eOPEN_RELAY_LOOP3;
+			ReadMeterInfo.Data.RelayCmdData[0] = eOPEN_RELAY_LOOP3;
 		}
 	}
 	else
 	{
 		if (channel == 1)
 		{
-			RelayControlInfo.RelayCmd = eCLOSE_RELAY_LOOP1;
+			ReadMeterInfo.Data.RelayCmdData[0] = eCLOSE_RELAY_LOOP1;
 		}
 		else if (channel == 2)
 		{
-			RelayControlInfo.RelayCmd = eCLOSE_RELAY_LOOP2;
+			ReadMeterInfo.Data.RelayCmdData[0] = eCLOSE_RELAY_LOOP2;
 		}
 		else if (channel == 3)
 		{
-			RelayControlInfo.RelayCmd = eCLOSE_RELAY_LOOP3;
+			ReadMeterInfo.Data.RelayCmdData[0] = eCLOSE_RELAY_LOOP3;
 		}
 	}
+	memcpy(&ReadMeterInfo.Data.RelayCmdData[1], buf, sizeof(buf));
 	// 状态设置写队列
-	RelayControlInfo.CollcetBit = eBIT_CONTROL_RELAY;
-    if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &RelayControlInfo, 0xffffffff))
+	ReadMeterInfo.Type = eSET_METER_STANDARD;
+	ReadMeterInfo.DataLen = sizeof(ReadMeterInfo.Data.RelayCmdData);
+	ReadMeterInfo.Control = CONTROL_RELAY_CONTROL_BYTE;
+    if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff))
     {
         nwy_ext_echo("\r\n put mqtt msg que failed");
+		return;
     }
-    RelayControlInfo.CollcetBit = eBIT_CHECK_RELAY;
-    if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &RelayControlInfo, 0xffffffff))
-    {
-        nwy_ext_echo("\r\n put mqtt msg que failed");
-    }
-    RemessageF(&paho_user_client, cmdStr, (char *)&RecRelayCmdTopic_Pub[0], "s", "RelayCmd", "receive relay cmd");
+	nwy_start_timer(Check_Relay_Status_Timer, 4000);
+	RemessageF(&paho_user_client, cmdStr, (char *)&RecRelayCmdTopic_Pub[0], "s", "RelayCmd", "receive relay cmd");
 }
 
+//--------------------------------------------------
+// 功能描述:检查继电器状态定时器回调
+//
+// 参数:
+//
+// 返回值:
+//
+// 备注:
+//--------------------------------------------------
+void Check_Relay_Status_Timer_cb(void *type)
+{
+	TReadMeterInfo ReadMeterInfo = {0};
+
+	ReadMeterInfo.Type = eREAD_METER_EXTENDED;
+	ReadMeterInfo.Extended645ID = READ_RELAY_STATUS;
+	ReadMeterInfo.Control = READ_METER_CONTROL_BYTE;
+	ReadMeterInfo.DataLen = 0;
+	nwy_put_msg_que(MQTTUserToUartMsgQue, &ReadMeterInfo, 0xffffffff);
+}
+//--------------------------------------------------
+//功能描述:  回复mqtt用户端发来的数据
+//         
+//参数:      
+//         
+//返回值:    
+//         
+//备注:  
+//--------------------------------------------------
+void  MqttRepytoUser(void)
+{
+	TUartToMqttData UartToMqttData = {0};
+
+	if (nwy_get_msg_que(UartReplyToMqttMsgQue, &UartToMqttData, 0xffffffff)) // 组MQTT帧进行发送
+	{
+		switch (UartToMqttData.Type)
+		{
+			case eRelayStatusData:
+				RemessageF(&paho_user_client,"CMD_DEVICE_RELAY_STATUS", (char *)&RelayStatusTopic_Pub[0], "ssssss", "channel", "1","status",UartToMqttData.Data.RelayStatusData[2],
+				"channel", "2","status",UartToMqttData.Data.RelayStatusData[1],"channel", "3","status",UartToMqttData.Data.RelayStatusData[0]);//临时上传，未改完
+				break;
+		}
+	}
+
+}
 //--------------------------------------------------
 // 功能描述:	mqtt用户端业务处理
 //
@@ -2249,10 +2293,7 @@ void MQTT_UserServices(void)
 	CollectionDatas CollectData;
 	#endif
 	cJSON *pRoot, *pType;
-	BYTE i = 0;
 	char *msg = NULL;
-	BYTE RelayStatusStr[METER_PHASE_NUM][10] = {0};
-	BYTE RelayStatus[METER_PHASE_NUM] = {0};
 	static DWORD MqttCount = 0;
 	TRealTimer tTime = {0};
 	BYTE RecID[13] = {0};
@@ -2321,16 +2362,7 @@ void MQTT_UserServices(void)
 		nwy_ext_echo("free");
 		free(msg);
 	}
-	if(nwy_get_msg_que(RelayStatusMessageQueue, &RelayStatus, 0xffffffff))
-	{
-		nwy_ext_echo("\r\n Relay status is %02X %02X %02X ", RelayStatus[0],RelayStatus[1],RelayStatus[2]);
-		for(i = 0; i < METER_PHASE_NUM; i++)
-		{
-			CheckRelayStatus(RelayStatus[i], RelayStatusStr[i]);
-		}
-		RemessageF(&paho_user_client,"CMD_DEVICE_RELAY_STATUS", (char *)&RelayStatusTopic_Pub[0], "sss", 
-		"Relay1Status", RelayStatusStr[2],"Relay2Status", RelayStatusStr[1], "Relay3Status", RelayStatusStr[0]);
-	}
+	
 	//心跳上报
 	MqttCount++;
 	if(MqttCount >= HEART_SECOND_COUNT)
@@ -2339,6 +2371,7 @@ void MQTT_UserServices(void)
 		get_N176_time(&tTime);
 		RemessageF(&paho_user_client,"CMD_DEVICE_HEART", (char *)&HeartTopic_Pub[0],NULL);
 	}
+	//周期上报
 	#if(CYCLE_REPORT_PROTOCAL == PROTOCOL_MQTT)
 	if (nwy_get_msg_que(CollectMessageQueue, &CollectData, 0xffffffff)) // 组MQTT帧进行发送
 	{
@@ -2353,7 +2386,9 @@ void MQTT_UserServices(void)
 	{
 		pub_reportEventdata(EventData);
 	}
-#endif
+	#endif
+	//回复
+	MqttRepytoUser();
 }
 #endif
 #if(MQTT_USER == YES)
@@ -2587,7 +2622,16 @@ void USER_MQTT_Task(void *param)
 {
 	nwy_sleep(10000);
 	DWORD Connectfre = 0;
-	TRelayControlInfo RelayControlInfo = {0};
+
+	TReadMeterInfo CloseRelayInfo = {0};
+	BYTE buf[7] = {0x00,0x18,0x54,0x15,0x09,0x10,0x50};//控制继电器时间 需要大于当前时间，目前为2050年
+	memcpy(&CloseRelayInfo.Data.RelayCmdData[1], buf, sizeof(buf));
+	// 状态设置写队列
+	CloseRelayInfo.Data.RelayCmdData[0] = eCLOSE_RELAY_ALL_LOOP;
+	CloseRelayInfo.Type = eSET_METER_STANDARD;
+	CloseRelayInfo.DataLen = sizeof(CloseRelayInfo.Data.RelayCmdData);
+	CloseRelayInfo.Control = CONTROL_RELAY_CONTROL_BYTE;
+
 	while (1)
 	{
 		if (UserMqttReconnectTimerFlag == 1)
@@ -2609,16 +2653,18 @@ void USER_MQTT_Task(void *param)
 							if(((Connectfre - 1) * MQTT_USER_RECON_INTERVAL) >= ReportPara.OfflineOpenRelayMin)
 							{
 								nwy_ext_echo("\r\nopen relay,Connectfre %d", Connectfre);
-								RelayControlInfo.RelayCmd = eOPEN_RELAY_ALL_LOOP;
-								RelayControlInfo.CollcetBit = eBIT_CONTROL_RELAY;
-								nwy_put_msg_que(MQTTUserToUartMsgQue, &RelayControlInfo, 0xffffffff);
+								if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &CloseRelayInfo, 0xffffffff))
+								{
+									nwy_ext_echo("\r\n put mqtt msg que failed");
+								}
 							}
 						}
 						else
 						{
-							RelayControlInfo.RelayCmd = eOPEN_RELAY_ALL_LOOP;
-							RelayControlInfo.CollcetBit = eBIT_CONTROL_RELAY;
-							nwy_put_msg_que(MQTTUserToUartMsgQue, &RelayControlInfo, 0xffffffff);
+							if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &CloseRelayInfo, 0xffffffff))
+							{
+								nwy_ext_echo("\r\n put mqtt msg que failed");
+							}
 							UserMqttReconnectTimerFlag = 0;
 							nwy_start_timer(User_MQTT_Reconnect_timer, 3600000 * 4); // 4小时重试一次连接 每次连接消耗560字节
 						}

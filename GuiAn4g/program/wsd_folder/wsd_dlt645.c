@@ -523,102 +523,6 @@ BYTE lib_CheckSum(BYTE *ptr, WORD Length)
 	return Sum;
 }
 //--------------------------------------------------
-//¹¦ÄÜÃèÊö:  ¼ì²é¼ÌµçÆ÷×´Ì¬
-//         
-//²ÎÊý:      
-//         
-//·µ»ØÖµ:    
-//         
-//±¸×¢:  
-//--------------------------------------------------
-void CheckRelay(void)
-{
-	BYTE bLen,Buf[60],i;
-	BYTE bBuf[] = {0x0E,0x12,0x12,0x37,0x59,0x44,0x12,0x0E};
-	bLen = 12;
-	// memset(Buf,0,sizeof(Buf));
-	//×éÇ°µ¼Ö¡
-	memset( (BYTE *)&Buf[0], 0xFE, 4 );
-	Buf[4] = 0x68;
-	memcpy(&Buf[5],reverAddr,6);
-
-	Buf[5+6] = 0x68;
-	Buf[bLen++] = 0x11;
-	Buf[bLen++] = 0x08;//¹Ì¶¨³¤¶È16¸ö×Ö½Ú
-	memcpy((BYTE*)&Buf[bLen],(BYTE*)&bBuf[0],sizeof(bBuf));
-	bLen = bLen + sizeof(bBuf);
-	// for (i = 14; i <(14+16); i++)
-	// {
-	// 	Buf[i] += 0x33;
-	// }
-	Buf[bLen] = lib_CheckSum(&Buf[4],bLen-4);
-	bLen++;
-	Buf[bLen++] = 0x16;
-
-	nwy_ext_echo("\r\n");
-	for (i = 0; i < bLen; i++)
-    {
-        nwy_ext_echo("%02X ",Buf[i]);
-    }
-	nwy_uart_send_data(UART_HD,Buf,bLen);
-}
-//--------------------------------------------------
-//¹¦ÄÜÃèÊö:  ¿ØÖÆ·Ñ¿Øµ¼¹ì±íÌøÕ¢ ºÏÕ¢
-//         
-//²ÎÊý:      
-//         
-//·µ»ØÖµ:    
-//         
-//±¸×¢:  
-//--------------------------------------------------
-void  ControlRelay(void)
-{
-	BYTE bLen,Buf[60],i;
-	BYTE bBuf[] = {0x02,0,0,0,0,0,0,0};
-	BYTE bTime[6] = {0};
-	bLen = 12;
-	nwy_ext_echo("\r\n ControlRelay cmd is %02X", RelayControlInfo.RelayCmd);
-	memset(Buf,0,sizeof(Buf));
-	//×éÇ°µ¼Ö¡
-	memset( (BYTE *)&Buf[0], 0xFE, 4 );
-
-	Buf[4] = 0x68;
-	memset(&Buf[5],0x88,6);
-
-	Buf[5+6] = 0x68;
-	Buf[bLen++] = 0x1C;
-	Buf[bLen++] = 0x10;//¹Ì¶¨³¤¶È16¸ö×Ö½Ú
-	memcpy((BYTE*)&Buf[bLen],(BYTE*)&bBuf[0],sizeof(bBuf));
-	bLen = bLen + sizeof(bBuf);
-	Buf[bLen++] = RelayControlInfo.RelayCmd -0x33;
-	Buf[bLen++] = 0;
-	//ssmmhhDDMMYY
-	api_GetRtcDateTime(DATETIME_YYMMDDhhmmss|DATETIME_BCD,bTime);
-	bTime[0] = 0x30 + bTime[0];
-	// INSERT_YOUR_CODE
-	// nwy_ext_echo("\r\nbTime: ");
-	// for(i = 0; i < sizeof(bTime); i++) {
-	// 	nwy_ext_echo("%02x ", bTime[i]);
-	// }
-	nwy_ext_echo("\r\n");
-	lib_ExchangeData(&Buf[bLen],bTime,sizeof(bTime));
-	for (i = 14; i <(14+16); i++)
-	{
-		Buf[i] += 0x33;
-	}
-	bLen += sizeof(bTime);
-	Buf[bLen] = lib_CheckSum(&Buf[4],bLen-4);
-	bLen++;
-	Buf[bLen++] = 0x16;
-	RelayControlInfo.RelayCmd = 0;
-	nwy_ext_echo("\r\ncontrol relay");
-	// for (i = 0; i < bLen; i++)
-    // {
-    //     nwy_ext_echo("%02X ",Buf[i]);
-    // }
-	nwy_uart_send_data(UART_HD,Buf,bLen);
-}  //¿ØÖÆ»ù±íÌøÕ¢ºÏÕ¢ api
-//--------------------------------------------------
 //¹¦ÄÜÃèÊö:   645¿ª±à³Ì  ÉèÖÃ»ù±íÊ±¼ä
 //         
 //²ÎÊý:      
@@ -766,7 +670,7 @@ void  Dlt645_Tx_ContinueRead( BYTE bStep, BYTE *bBuf)
 //
 //±¸×¢:
 //--------------------------------------------------
-void Dlt645_Tx_Write(DWORD dwID, BYTE bDataLen, BYTE *pBuf) //È«8 µØÖ·ÓÐÎÊÌâ   Ð´bufÊý¾ÝÊ±²»ÖªµÀ Òª²»Òª×ª¸ñÊ½
+void Dlt645_Tx_Write(DWORD dwID, BYTE bDataLen, BYTE *pBuf,BYTE Control) //È«8 µØÖ·ÓÐÎÊÌâ   Ð´bufÊý¾ÝÊ±²»ÖªµÀ Òª²»Òª×ª¸ñÊ½
 {
 	BYTE i, bLen, Buf[128];
 
@@ -775,15 +679,22 @@ void Dlt645_Tx_Write(DWORD dwID, BYTE bDataLen, BYTE *pBuf) //È«8 µØÖ·ÓÐÎÊÌâ   Ð
 	//×éÇ°µ¼Ö¡
 	memset((BYTE *)&Buf[0], 0xFE, 4);
 	Buf[4] = 0x68;
-	memset(&Buf[5], 0x88, 6);
+	memcpy(&Buf[5], reverAddr, 6);
 	Buf[5 + 6] = 0x68;
-	Buf[bLen++] = 0x14;
+	Buf[bLen++] = Control;
+	if(Control == SET_METER_CONTROL_BYTE)
+	{
 	Buf[bLen++] = 12 + bDataLen;
 
 	Buf[bLen++] = (BYTE)(LLBYTE(dwID) + 0x33);
 	Buf[bLen++] = (BYTE)(LHBYTE(dwID) + 0x33);
 	Buf[bLen++] = (BYTE)(HLBYTE(dwID) + 0x33);
 	Buf[bLen++] = (BYTE)(HHBYTE(dwID) + 0x33);
+	}
+	else if(Control == CONTROL_RELAY_CONTROL_BYTE)
+	{
+		Buf[bLen++] = 8 + bDataLen;
+	}
 	//ÃÜÂë ²Ù×÷Õß´úÂë
 	Buf[bLen++] = 0x35;
 	memset((BYTE *)&Buf[bLen], 0x33, 7);
@@ -799,10 +710,11 @@ void Dlt645_Tx_Write(DWORD dwID, BYTE bDataLen, BYTE *pBuf) //È«8 µØÖ·ÓÐÎÊÌâ   Ð
 	Buf[bLen] = lib_CheckSum(&Buf[4], bLen - 4);
 	bLen++;
 	Buf[bLen++] = 0x16;
-	// for (i = 0; i < bLen; i++)
-	// {
-	//     nwy_ext_echo("%c",Buf[i]);
-	// }
+	nwy_ext_echo("\r\n645 write send data datalen %d",bDataLen);
+	for (i = 0; i < bLen; i++)
+	{
+	    nwy_ext_echo("%02X ",Buf[i]);
+	}
 	nwy_uart_send_data(UART_HD, Buf, bLen);
 }
 //--------------------------------------------------
@@ -938,7 +850,7 @@ BOOL api_CheckorSetPosition(BYTE bMode)
 	{
 		if (bMode == 1)
 		{
-			Dlt645_Tx_Write(0x0400041F, sizeof(TLocation), (BYTE *)&TLocation);
+			Dlt645_Tx_Write(0x0400041F, sizeof(TLocation), (BYTE *)&TLocation,SET_METER_CONTROL_BYTE);
 		}
 		return TRUE;
 	}
@@ -1220,7 +1132,8 @@ BOOL DealDLT645_Factory(BYTE *pBuf, BYTE bDataLen)
 	BYTE bReceiveBit = 0,t_EpTcpUserNum = 0,j = 0;
 	DWORD temp;
 	BYTE dwID[4] = {0x00, 0x00, 0xDF, 0xDB};
-
+	TUartToMqttData UartToMqttData = {0};
+	
 	memcpy((BYTE *)&dwID[0], (BYTE *)&pBuf[0], 2);
 	switch (pBuf[1])
 	{
@@ -1230,10 +1143,24 @@ BOOL DealDLT645_Factory(BYTE *pBuf, BYTE bDataLen)
 		case 0x11: //±ä±È
 			if (pBuf[0] == 0x26)//¼ÌµçÆ÷×´Ì¬
 			{
-				if(IsCycleReadRelayFlag == 0)
+				if(IsMqttComMeterFlag)
 				{
-					nwy_put_msg_que(RelayStatusMessageQueue, &pBuf[2], 0xffffffff);
-					api_SetSysStatus(eSYS_STASUS_UART_AVAILABLE);
+					IsMqttComMeterFlag = 0;
+					UartToMqttData.Type = eRelayStatusData;
+					for (BYTE i = 0; i < 3; i++)
+					{
+						if (pBuf[2+i] == 0x01)
+						{
+							strcpy(&UartToMqttData.Data.RelayStatusData[i][0],"open");
+						}
+						else if (pBuf[2+i] == 0)
+						{
+							strcpy(&UartToMqttData.Data.RelayStatusData[i][0],"close");
+						}
+						nwy_ext_echo("\r\n [%s]",UartToMqttData.Data.RelayStatusData[i]);
+					}			
+					// memcpy(UartToMqttData.Data.RelayStatusData, pBuf + 2, METER_PHASE_NUM);
+					nwy_put_msg_que(UartReplyToMqttMsgQue, &UartToMqttData, 0xffffffff);
 				}
 				else
 				{
@@ -1393,10 +1320,6 @@ BOOL RxUartMessage_Dlt645(TSerial *p)
 	}
 	else if ((pRxFm->byCtrl == 0x9C) || (pRxFm->byCtrl == 0xDC))//ÌøºÏÕ¢¿ØÖÆ
 	{
-		if(IsCycleReadRelayFlag == 0)
-		{
-			api_SetSysStatus(eSYS_STASUS_UART_AVAILABLE);
-		}
 		return TRUE;
 	}
 	else

@@ -33,12 +33,11 @@ nwy_osiTimer_t *ftp_timer = NULL;
 nwy_osiTimer_t *meter_upgrade_timer = NULL;//表升级全过程最大时间定时器
 nwy_osiTimer_t * User_MQTT_Reconnect_timer = NULL;
 nwy_osiTimer_t *general_timer = NULL;
-nwy_osiTimer_t *Read_Relay_timer = NULL;
 nwy_osiTimer_t *g_timer = NULL;
 nwy_osiTimer_t *uart_timer = NULL;
 nwy_osiTimer_t *Ble_Recv_ByteTimeout_timer = NULL;//蓝牙帧间超时定时器
 nwy_osiTimer_t *Uart_Recv_timer = NULL;//uart帧间超时定时器
-
+nwy_osiTimer_t *Check_Relay_Status_Timer = NULL;//继电器状态检查定时器
 #if (TCP_COMM_MODULE == YES)
 nwy_osiTimer_t *Tcp_ComModule_timer = NULL;
 #endif
@@ -66,7 +65,6 @@ nwy_osiMessageQueue_t *TranDataToMqttServerMsgQue = NULL;
 nwy_osiMessageQueue_t *TranDataToUartMessageQueue = NULL;
 nwy_osiMessageQueue_t *TranDataToFactoryMessageQueue = NULL;
 nwy_osiMessageQueue_t *UpgradeResultMessageQueue = NULL;
-nwy_osiMessageQueue_t *RelayStatusMessageQueue = NULL;
 #if (TCP_COMM_MODULE == YES)
 nwy_osiMessageQueue_t *TcpDataToModuleMsgQue = NULL;
 nwy_osiMessageQueue_t *ModuleDataToTcpMsgQue = NULL;
@@ -80,6 +78,7 @@ nwy_osiMessageQueue_t *UartToEp212MsgQue = NULL;
 #endif
 nwy_osiMessageQueue_t *UserTcpStatusChangeMsgQue;//tcp 用户端状态改变通知
 nwy_osiMessageQueue_t *MQTTUserToUartMsgQue;//mqtt使用uart读表的队列
+nwy_osiMessageQueue_t *UartReplyToMqttMsgQue;
 //-----------------------------------------------
 //				本文件使用的变量，常量
 //-----------------------------------------------
@@ -342,7 +341,6 @@ void nwy_uart_timer_cb(void *type)
 	if (api_GetSysStatus(eSYS_STASUS_START_TRAN))
 	{
 		api_ClrSysStatus(eSYS_STASUS_START_TRAN);
-		api_SetSysStatus(eSYS_STASUS_UART_AVAILABLE);
 	}
 	if (api_GetSysStatus(eSYS_STASUS_START_COLLECT))
 	{
@@ -372,7 +370,6 @@ void  InitExternalPinsandFlags( void )
 	api_ClrSysStatus(eSYS_STASUS_TIMER_UP);//目前先放着吧
 	api_ClrSysStatus(eSYS_STASUS_START_TRAN);
 	api_ClrSysStatus(eSYS_STASUS_START_COLLECT);
-	api_SetSysStatus(eSYS_STASUS_UART_AVAILABLE);
 	api_SetSysStatus(eSYS_STASUS_UPGRADE_REPLY_FRAME);
 	api_PowerOnCreatSyseventTable();
 }
@@ -390,7 +387,6 @@ static void prvThreadEntry(void *param)
 	TranDataToUartMessageQueue = nwy_create_msg_Que(5,sizeof(tTranData));
 	TranDataToFactoryMessageQueue = nwy_create_msg_Que(5, sizeof(tTranData));
 	UpgradeResultMessageQueue = nwy_create_msg_Que(10, sizeof(BYTE));
-	RelayStatusMessageQueue = nwy_create_msg_Que(5, sizeof(BYTE) * METER_PHASE_NUM);
 	#if (TCP_COMM_MODULE == YES)
 	TcpDataToModuleMsgQue = nwy_create_msg_Que(5, sizeof(tTranData));
 	ModuleDataToTcpMsgQue = nwy_create_msg_Que(5, sizeof(tTranData));
@@ -403,7 +399,8 @@ static void prvThreadEntry(void *param)
 	EventReportMessageQueue = nwy_create_msg_Que(4, sizeof(Eventmessage));
 	#endif
 	UserTcpStatusChangeMsgQue= nwy_create_msg_Que(20, sizeof(BYTE));
-	MQTTUserToUartMsgQue = nwy_create_msg_Que(5, sizeof(TRelayControlInfo));
+	UartReplyToMqttMsgQue = nwy_create_msg_Que(5, sizeof(TUartToMqttData));
+	MQTTUserToUartMsgQue = nwy_create_msg_Que(10, sizeof(TReadMeterInfo));
 	nwy_sleep(5000);
 	// 创建使用的任务  注：使用事件的任务需要完成nwy_timer_init
 	// DataCall_Task
@@ -412,8 +409,8 @@ static void prvThreadEntry(void *param)
 	//定时器 线程 
 	Timer_thread = nwy_create_thread("Timer", Timer_Task, NULL, NWY_OSI_PRIORITY_NORMAL, 1024 * 5, 16);
 	general_timer = nwy_timer_init(Timer_thread, nwy_general_timer_cb, NULL);
-	Read_Relay_timer = nwy_timer_init(Timer_thread, Read_Relay_timer_cb, NULL);
 	Uart_Recv_timer = nwy_timer_init(Timer_thread, Uart_Recv_timer_cb, NULL);
+	Check_Relay_Status_Timer = nwy_timer_init(Timer_thread, Check_Relay_Status_Timer_cb, NULL);
 	uart_timer = nwy_timer_init(Timer_thread, nwy_uart_timer_cb, NULL);
 	ftp_timer = nwy_timer_init(Timer_thread, nwy_ftp_timer_cb, NULL);
 	meter_upgrade_timer = nwy_timer_init(Timer_thread, nwy_meter_upgrade_timer_cb,NULL);

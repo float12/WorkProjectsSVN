@@ -112,14 +112,6 @@ typedef enum
 	eBIT_MQTTNET,
 	eBIT_TCPUSER,
 	eBIT_MQTTUSER,
-	eBIT_CONTROL_RELAY,
-	eBIT_CHECK_RELAY,//11
-	eBIT_LOOP1_RELAY_OPEN_INFO,//上一次继电器打开原因
-	eBIT_LOOP2_RELAY_OPEN_INFO,
-	eBIT_LOOP3_RELAY_OPEN_INFO,
-	eBIT_LOOP1_RELAY_CLOSE_INFO,
-	eBIT_LOOP2_RELAY_CLOSE_INFO,
-	eBIT_LOOP3_RELAY_CLOSE_INFO,
 	#if(PT_CT == YES)
 	eBIT_CT1,
 	eBIT_CT2,
@@ -171,7 +163,6 @@ extern nwy_osiMessageQueue_t *TranDataToMqttServerMsgQue;
 extern nwy_osiMessageQueue_t *TranDataToUartMessageQueue;
 extern nwy_osiMessageQueue_t *TranDataToFactoryMessageQueue;
 extern nwy_osiMessageQueue_t *UpgradeResultMessageQueue;
-extern nwy_osiMessageQueue_t *RelayStatusMessageQueue;
 #if (TCP_COMM_MODULE == YES)
 extern nwy_osiMessageQueue_t *TcpDataToModuleMsgQue;
 extern nwy_osiMessageQueue_t *ModuleDataToTcpMsgQue;
@@ -185,6 +176,7 @@ extern nwy_osiMessageQueue_t *UartToEp212MsgQue;
 #endif
 extern nwy_osiMessageQueue_t *UserTcpStatusChangeMsgQue;//tcp 用户端状态改变通知
 extern nwy_osiMessageQueue_t *MQTTUserToUartMsgQue;//继电器状态改变原因通知
+extern nwy_osiMessageQueue_t *UartReplyToMqttMsgQue;
 //线程
 extern nwy_osiThread_t *FtpFotaUpdate_thread;
 extern nwy_osiThread_t *location_thread;
@@ -196,13 +188,13 @@ extern nwy_osiThread_t *factorypara_thread;
 //定时器 
 extern nwy_osiTimer_t *g_timer;
 extern nwy_osiTimer_t *general_timer;
-extern nwy_osiTimer_t *Read_Relay_timer;
 extern nwy_osiTimer_t *User_MQTT_Reconnect_timer;
 extern nwy_osiTimer_t *meter_upgrade_timer;
 extern nwy_osiTimer_t *ftp_timer;
 extern nwy_osiTimer_t *uart_timer;
 extern nwy_osiTimer_t *Ble_Recv_ByteTimeout_timer;
 extern nwy_osiTimer_t * Uart_Recv_timer;
+extern nwy_osiTimer_t *Check_Relay_Status_Timer;
 #if (TCP_COMM_MODULE == YES)
 extern nwy_osiTimer_t *Tcp_ComModule_timer;
 #endif
@@ -232,8 +224,8 @@ void nwy_Ble_Recv_timer_cb(void *type);
 void Tcp_Commodule_timer_cb(void *type);
 #endif
 void nwy_general_timer_cb(void *type);
-void Read_Relay_timer_cb(void *type);
 void Uart_Recv_timer_cb(void *type);
+void Check_Relay_Status_Timer_cb(void *type);
 void nwy_ftp_timer_cb(void *type);
 void nwy_meter_upgrade_timer_cb(void *type);
 void  api_ReadSystemFiletoRam( eREAD_METER_BIT eBit );
