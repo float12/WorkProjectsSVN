@@ -197,8 +197,8 @@ Normal_698  OadNormalLists[] =
 
 Normal_698  OadRecordLists[] = 
 {
-	{0x00100201,2},//正向有功电能
-	{0x00200201,2},//反向有功电能
+	{0x00100200,2},//正向有功电能
+	{0x00200200,2},//反向有功电能
 	{0x00300201,2},//组合无功1电能
 	{0x00400201,2},//组合无功2电能
 };
@@ -624,7 +624,7 @@ BOOL Rx_GetRequestNormalList(BYTE *pBuf)
 	WORD wLen;
 	TArrayLen GetResult;
 	BYTE *OffsetBuf = pBuf;
-	DWORD dataIndex = 0,tempData = 0;  // Energy_test数组索引
+	SDWORD dataIndex = 0,tempData = 0;  // Energy_test数组索引
 
 	NormalNum = *OffsetBuf;
 	OffsetBuf++;  // 指向第一个OAD开始位置
@@ -729,8 +729,8 @@ BOOL Rx_GetRequestRecord(BYTE *pBuf)
 
 	WORD wLen;
 	BYTE *ReturnOad = NULL,*OffsetBuf = pBuf;
-	DWORD dataIndex = 0;  // Energy_test数组索引
-	DWORD FreezeOad = 0,tempData = 0;
+	DWORD FreezeOad = 0;
+	SDWORD dataIndex = 0,tempData = 0;  // Energy_test数组索引
 
 	lib_ExchangeData((BYTE*)&FreezeOad,OffsetBuf,4);
 	nwy_ext_echo("\r\n FreezeOad = 0x%04lx", FreezeOad);
@@ -758,23 +758,37 @@ BOOL Rx_GetRequestRecord(BYTE *pBuf)
 			{
 				lib_ExchangeData((BYTE*)&FreezeOad,ReturnOad,4);
 				nwy_ext_echo("\r\n FreezeOad[%d] = 0x%4lx",dataIndex ,FreezeOad);
-				BYTE elementDataType = *OffsetBuf;
+				
+				BYTE elementDataType = *OffsetBuf;//若是结构体类型或者数据类型则是struct+len/array+len，若是数据类型+数据本身
 				OffsetBuf++;
-				wLen = GetBasicTypeLen(eData,elementDataType);
-				// if (OadNormalLists[i] == )//特殊处理
+				BYTE DataLen = *OffsetBuf;
+
+				if(elementDataType == Array_698)
 				{
-					// memcpy(buf,OffsetBuf,wLen);
-					// nwy_ext_echo("\r\n [%x][%x][%x][%x][%x][%x][%x]", buf[0],buf[1],buf[2],buf[3],buf[4],buf[5],buf[6]);
+					OffsetBuf +=2;//获取成员变量
+
+					for (BYTE j = 0; j < DataLen; j++)
+					{
+						lib_ExchangeData((BYTE*)&tempData, OffsetBuf, 4);//数组内成员变量，目前只使用冻结，长度先按固定四字节处理
+						nwy_ext_echo("\r\n tempData[%d] = 0x%04X", dataIndex, tempData);
+						FreezeData[dataIndex] = tempData/(1.0 * pow(10, OadNormalLists[i].Dot));
+						nwy_ext_echo("\r\n FreezeData[%d] = %f", dataIndex, FreezeData[dataIndex]);
+
+						OffsetBuf += (4+1);
+						dataIndex++;
+					}
+					OffsetBuf -= 1;
 				}
-				// else
+				else 
 				{
+					wLen = GetBasicTypeLen(eData,elementDataType);
 					lib_ExchangeData((BYTE*)&tempData, OffsetBuf, wLen);
 					nwy_ext_echo("\r\n tempData[%d] = 0x%04X", dataIndex, tempData);
 					FreezeData[dataIndex] = tempData/(1.0 * pow(10, OadNormalLists[i].Dot));
 					nwy_ext_echo("\r\n FreezeData[%d] = %f", dataIndex, FreezeData[dataIndex]);
+					OffsetBuf += wLen;
+					dataIndex++;
 				}
-				OffsetBuf += wLen;
-				dataIndex++;
 				ReturnOad += 5;
 			}
 		}
