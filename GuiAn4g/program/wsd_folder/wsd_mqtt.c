@@ -2297,7 +2297,7 @@ void MQTT_UserServices(void)
 	static DWORD MqttCount = 0;
 	TRealTimer tTime = {0};
 	BYTE RecID[13] = {0};
-	WORD OffLineOpenRelayMin = 0;
+	int OffLineOpenRelayMin = 0;
 	DWORD addr = 0;
 	#if (EVENT_REPORT == YES)
 	Eventmessage EventData;
@@ -2310,12 +2310,14 @@ void MQTT_UserServices(void)
 		pRoot = cJSON_Parse(msg);
 		if (NULL == pRoot)
 		{
+			free(msg);
 			nwy_ext_echo("pRootNULL");
 			return;
 		}
 		pType = cJSON_GetObjectItem(pRoot, "type");
 		if (NULL == pType)
 		{
+			free(msg);
 			nwy_ext_echo("pTypeNULL");
 			cJSON_Delete(pRoot);
 			return;
@@ -2623,14 +2625,14 @@ void USER_MQTT_Task(void *param)
 	nwy_sleep(10000);
 	DWORD Connectfre = 0;
 
-	TReadMeterInfo CloseRelayInfo = {0};
+	TReadMeterInfo OpenRelayInfo = {0};
 	BYTE buf[7] = {0x00,0x18,0x54,0x15,0x09,0x10,0x50};//控制继电器时间 需要大于当前时间，目前为2050年
-	memcpy(&CloseRelayInfo.Data.RelayCmdData[1], buf, sizeof(buf));
+	memcpy(&OpenRelayInfo.Data.RelayCmdData[1], buf, sizeof(buf));
 	// 状态设置写队列
-	CloseRelayInfo.Data.RelayCmdData[0] = eCLOSE_RELAY_ALL_LOOP;
-	CloseRelayInfo.Type = eSET_METER_STANDARD;
-	CloseRelayInfo.DataLen = sizeof(CloseRelayInfo.Data.RelayCmdData);
-	CloseRelayInfo.Control = CONTROL_RELAY_CONTROL_BYTE;
+	OpenRelayInfo.Data.RelayCmdData[0] = eOPEN_RELAY_ALL_LOOP;
+	OpenRelayInfo.Type = eSET_METER_STANDARD;
+	OpenRelayInfo.DataLen = sizeof(OpenRelayInfo.Data.RelayCmdData);
+	OpenRelayInfo.Control = CONTROL_RELAY_CONTROL_BYTE;
 
 	while (1)
 	{
@@ -2653,7 +2655,7 @@ void USER_MQTT_Task(void *param)
 							if(((Connectfre - 1) * MQTT_USER_RECON_INTERVAL) >= ReportPara.OfflineOpenRelayMin)
 							{
 								nwy_ext_echo("\r\nopen relay,Connectfre %d", Connectfre);
-								if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &CloseRelayInfo, 0xffffffff))
+								if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &OpenRelayInfo, 0xffffffff))
 								{
 									nwy_ext_echo("\r\n put mqtt msg que failed");
 								}
@@ -2661,7 +2663,7 @@ void USER_MQTT_Task(void *param)
 						}
 						else
 						{
-							if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &CloseRelayInfo, 0xffffffff))
+							if(!nwy_put_msg_que(MQTTUserToUartMsgQue, &OpenRelayInfo, 0xffffffff))
 							{
 								nwy_ext_echo("\r\n put mqtt msg que failed");
 							}
@@ -2683,7 +2685,7 @@ void USER_MQTT_Task(void *param)
 			}
 		}
 
-		nwy_sleep(500);
+		nwy_sleep(400);
 	}
 }
 #endif

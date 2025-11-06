@@ -12,11 +12,13 @@
 //-----------------------------------------------
 //			本文件使用的宏定义
 //-----------------------------------------------
-#define MAX_FILE_NAME_LEN 12//99999-1p.bin 
-#define SAMPLE_DOTS_PER_CYCLE 128
-#define MAX_WAVE_FILE_NUM 99999 // 文件名不能超过8字符
-#define FILE_SUFFIX ".bin"
-#define SYNC_FILE_CNT 64
+#define PREALLOC_CHUNK   		(8*1024*1024) // 8MB
+#define SAFE_MARGIN      		(1*1024*1024) // 1MB
+#define MAX_FILE_NAME_LEN 		12//99999-1p.bin 
+#define SAMPLE_DOTS_PER_CYCLE 	128
+#define MAX_WAVE_FILE_NUM 		99999 // 文件名不能超过8字符
+#define FILE_SUFFIX 			".bin"
+#define SYNC_FILE_CNT 			64
 
 
 
@@ -661,6 +663,54 @@ FRESULT CreateNextWaveFile(void)
 }
 
 //-----------------------------------------------
+// 函数功能:检查并预分配文件空间
+//
+// 参数: 
+//
+// 返回值: 
+//
+// 备注:
+//-----------------------------------------------
+void CheckAndPreAlloc(FIL *fp)
+{
+    QWORD pos = f_tell(fp);
+    QWORD size = f_size(fp);
+	QWORD new_size = 0;
+	FRESULT res = FR_INT_ERR;
+	BYTE b = 0;
+    UINT bw = 0;
+    // 如果剩余空间不够 SAFE_MARGIN，就扩一段
+    if (size - pos < SAFE_MARGIN)
+    {
+        new_size = size + PREALLOC_CHUNK;
+        res = f_lseek(fp, new_size);
+        if (res == FAT32_FR_OK)
+        {
+            // 写一个字节确保真正分配，不留洞
+            f_write(fp, &b, 1, &bw);
+            f_lseek(fp, pos);
+        }
+    }
+}
+//-----------------------------------------------
+// 函数功能:关闭波形文件，截去预分配未使用的空间
+//
+// 参数:
+//
+// 返回值:
+//
+// 备注:
+//-----------------------------------------------
+void CloseWaveFile(FIL *file)
+{
+	QWORD actual_size = f_tell(file);
+	// 回到实际长度位置
+	f_lseek(file, actual_size);
+	// 截断文件释放后面预分配的簇
+	f_truncate(file);
+	f_close(file);
+}
+//-----------------------------------------------
 // 函数功能:写数据到文件
 //
 // 参数: file 文件指针 buf 数据 Size 数据大小
@@ -681,7 +731,7 @@ BYTE WriteDataToFile(FIL *file, const BYTE *buf, DWORD Size)
 	if ((freeSpace < WAVE_FRAME_SIZE * WAVE_RECORD_PHASE_NUM * SAVE_TO_SD_CYCLE_NUM) || (freeSpace == 0))
 	{
 		// 关闭当前文件
-		f_close(file);
+		CloseWaveFile(file);
 		// toggleTestPin();
 		fr_result = CreateNextWaveFile();
 		// toggleTestPin();
@@ -701,6 +751,7 @@ BYTE WriteDataToFile(FIL *file, const BYTE *buf, DWORD Size)
 			return FALSE;
 		}
 	}
+	CheckAndPreAlloc(file);
 	fr_result = f_write(file, buf, Size, (UINT *)&writtenBytes);
 	if ((fr_result != FAT32_FR_OK) || (writtenBytes != Size))
 	{
@@ -842,7 +893,7 @@ void api_PowerDownWaveRecord(void)
 {
 	if ((keyStatus == PRESSED_STATUS) && (isPressed == 1))
 	{
-		f_close(&DataFile);
+		CloseWaveFile(&DataFile);
 		memset(&DataFile, 0, sizeof(DataFile));
 		SaveMonitorData(ePOWER_DOWN);
 	}
@@ -894,7 +945,7 @@ void KeyProcess(void)
 	else if ((keyStatus == UNPRESSED_STATUS) && (isPressed == 1))
 	{
 		// 每次按键弹起保存监视数据
-		f_close(&DataFile);
+		CloseWaveFile(&DataFile);
 		memset(&DataFile, 0, sizeof(DataFile));
 		isPressed = 0;
 		SaveMonitorData(eKEY_RELEASED);

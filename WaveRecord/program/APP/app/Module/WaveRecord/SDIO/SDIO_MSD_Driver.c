@@ -92,13 +92,8 @@ int MSD_Init(void)
     stc_sdcard_init_t stcCardInitCfg =
     {
         SdiocBusWidth4Bit,
-        #if (HARDWARE_TYPE == THREE_PHASE_BOARD)
         SdiocClk50M,
         SdiocHighSpeedMode,
-        #elif (HARDWARE_TYPE == SINGLE_PHASE_BOARD)
-        SdiocClk25M,
-        SdiocNormalSpeedMode,
-        #endif
         NULL,
     };
     SdiocInitPins();

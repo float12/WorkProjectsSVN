@@ -684,12 +684,11 @@ void Dlt645_Tx_Write(DWORD dwID, BYTE bDataLen, BYTE *pBuf,BYTE Control) //È«8 µ
 	Buf[bLen++] = Control;
 	if(Control == SET_METER_CONTROL_BYTE)
 	{
-	Buf[bLen++] = 12 + bDataLen;
-
-	Buf[bLen++] = (BYTE)(LLBYTE(dwID) + 0x33);
-	Buf[bLen++] = (BYTE)(LHBYTE(dwID) + 0x33);
-	Buf[bLen++] = (BYTE)(HLBYTE(dwID) + 0x33);
-	Buf[bLen++] = (BYTE)(HHBYTE(dwID) + 0x33);
+		Buf[bLen++] = 12 + bDataLen;
+		Buf[bLen++] = (BYTE)(LLBYTE(dwID) + 0x33);
+		Buf[bLen++] = (BYTE)(LHBYTE(dwID) + 0x33);
+		Buf[bLen++] = (BYTE)(HLBYTE(dwID) + 0x33);
+		Buf[bLen++] = (BYTE)(HHBYTE(dwID) + 0x33);
 	}
 	else if(Control == CONTROL_RELAY_CONTROL_BYTE)
 	{
