@@ -33,6 +33,7 @@ typedef  enum
 extern volatile DWORD gsysTick;
 DWORD SendFrameCnt = 0;		//发送帧计数，用来判超时
 BYTE SendDataLostFlag = 0;//发送数据丢失标志
+BYTE DmaErrFlag = 0;//dma错误标志
 DWORD DeviceStatus = 0;//各器件状态,最低位开始依次是eep，flash，rtc，计量芯片，spi接收数据，复位引脚
 WORD IsChargingFlag;//低十二位用来表示是否正在充电
 BYTE IsRecWaveData;//低四位表示是否在接收数据

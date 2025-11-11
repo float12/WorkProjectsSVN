@@ -186,7 +186,7 @@ void  Send_Heartbeatframe_698( tTranData *transdata,BYTE bLink)
 	nwy_ext_echo("\r\n 698 heart is\r\n");
 	for (BYTE i = 0; i < 40; i++)
 	{
-		nwy_ext_echo("%02x",MessageBuf[i]);
+		nwy_ext_echo("%02x ",MessageBuf[i]);
 	}
 	memcpy(transdata->buf,MessageBuf,32);
 	transdata->len = 32;

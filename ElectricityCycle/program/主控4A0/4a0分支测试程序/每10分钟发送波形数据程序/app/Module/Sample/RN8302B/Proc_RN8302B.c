@@ -1518,6 +1518,12 @@ static void Task_Sec_Sample(void)
 			WaveDataDeal[i].WriteCrcEventCnt++;
 		}
 	}
+
+	if(DmaErrFlag == 1)
+	{
+		DmaErrFlag = 0;
+		api_WriteSysUNMsg(SYSUN_SEND_WAVE_DATA_DMA_ERR);
+	}
 	if(SendDataLostFlag == 1)
 	{
 		SendDataLostFlag = 0;

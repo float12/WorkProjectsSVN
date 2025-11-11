@@ -289,6 +289,8 @@
 #define EMMIF3_ERR							0x803E
 #define EMMIF4_ERR							0x803F
 #define SEND_WAVE_UART_ERR				0x8040
+//波形数据通过dma发送错误
+#define SYSUN_SEND_WAVE_DATA_DMA_ERR	0x8041
 
 //写采样芯片寄存器8100+寄存器地址(一个字节)1
 #define MANUAL_MODIFIED_PARA			0x8100

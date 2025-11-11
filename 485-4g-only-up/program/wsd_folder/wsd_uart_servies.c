@@ -356,8 +356,8 @@ static void nwy_uart_recv_handle(const char *str, uint32_t length)
 	{
 		nwy_ext_echo("%02x ", str[i]);
 	}
-	if (api_GetSysStatus(eSYS_STASUS_START_TRAN))
-	{
+	// if (api_GetSysStatus(eSYS_STASUS_START_TRAN))
+	// {
 		memset(&Transdata.buf, 0, sizeof(Transdata.buf));
 		if (length > sizeof(Transdata.buf))
 		{
@@ -369,19 +369,19 @@ static void nwy_uart_recv_handle(const char *str, uint32_t length)
 			memcpy(Transdata.buf, str, length);
 			Transdata.len = length;
 		}
-		if (gTranType == eTRAN_BLETOOTH)
-		{
-			if (nwy_put_msg_que(TranDataToFactoryMessageQueue, &Transdata, 0xffffffff) == TRUE)
-			{
-				nwy_ext_echo("\r\nuart to factory ok,length");
-			}
-			else
-			{
-				nwy_ext_echo("\r\nuart to factory err");
-			}
-		}
-		else if (gTranType == eTRAN_TCP)
-		{
+	// 	if (gTranType == eTRAN_BLETOOTH)
+	// 	{
+	// 		if (nwy_put_msg_que(TranDataToFactoryMessageQueue, &Transdata, 0xffffffff) == TRUE)
+	// 		{
+	// 			nwy_ext_echo("\r\nuart to factory ok,length");
+	// 		}
+	// 		else
+	// 		{
+	// 			nwy_ext_echo("\r\nuart to factory err");
+	// 		}
+	// 	}
+	// 	else if (gTranType == eTRAN_TCP)
+	// 	{
 			if (nwy_put_msg_que(UartDataToTcpMsgQue, &Transdata, 0xffffffff))
 			{
 				nwy_ext_echo("\r\nuart to mqtt/tcp queue ok,length:%d", length);
@@ -390,42 +390,42 @@ static void nwy_uart_recv_handle(const char *str, uint32_t length)
 			{
 				nwy_ext_echo("\r\nto mqtt queue err");
 			}
-		}
-		else if (gTranType == eTRAN_MQTT)
-		{
-			if (nwy_put_msg_que(TranDataToMqttServerMsgQue, &Transdata, 0xffffffff))
-			{
-				nwy_ext_echo("\r\nuart to mqtt/tcp queue ok,length:%d", length);
-			}
-			else
-			{
-				nwy_ext_echo("\r\nto mqtt queue err");
-			}
-		}
-		gTranType = 0;
-		nwy_stop_timer(uart_timer);
-		api_ClrSysStatus(eSYS_STASUS_START_TRAN); //亮灯 远程
-	}
-	else
-	{
-		wLen = Serial.RXWPoint + length;
-		if (length >= UART_BUFF_MAX_LEN)
-		{
-			length = UART_BUFF_MAX_LEN;
-		}
-		if (wLen < UART_BUFF_MAX_LEN)
-		{
-			memcpy((char *)&Serial.ProBuf[Serial.RXWPoint], str, length);
-			Serial.RXWPoint += length;
-		}
-		else
-		{
-			wLen1 = UART_BUFF_MAX_LEN - Serial.RXWPoint;
-			memcpy((char *)&Serial.ProBuf[Serial.RXWPoint], str, wLen1);
-			memcpy((char *)&Serial.ProBuf[0], str + wLen1, length - wLen1);
-			Serial.RXWPoint = length - wLen1;
-		}
-	}
+		// }
+		// else if (gTranType == eTRAN_MQTT)
+		// {
+		// 	if (nwy_put_msg_que(TranDataToMqttServerMsgQue, &Transdata, 0xffffffff))
+		// 	{
+		// 		nwy_ext_echo("\r\nuart to mqtt/tcp queue ok,length:%d", length);
+		// 	}
+		// 	else
+		// 	{
+		// 		nwy_ext_echo("\r\nto mqtt queue err");
+		// 	}
+		// }
+		// gTranType = 0;
+		// nwy_stop_timer(uart_timer);
+		// api_ClrSysStatus(eSYS_STASUS_START_TRAN); //亮灯 远程
+	// }
+	// else
+	// {
+	// 	wLen = Serial.RXWPoint + length;
+	// 	if (length >= UART_BUFF_MAX_LEN)
+	// 	{
+	// 		length = UART_BUFF_MAX_LEN;
+	// 	}
+	// 	if (wLen < UART_BUFF_MAX_LEN)
+	// 	{
+	// 		memcpy((char *)&Serial.ProBuf[Serial.RXWPoint], str, length);
+	// 		Serial.RXWPoint += length;
+	// 	}
+	// 	else
+	// 	{
+	// 		wLen1 = UART_BUFF_MAX_LEN - Serial.RXWPoint;
+	// 		memcpy((char *)&Serial.ProBuf[Serial.RXWPoint], str, wLen1);
+	// 		memcpy((char *)&Serial.ProBuf[0], str + wLen1, length - wLen1);
+	// 		Serial.RXWPoint = length - wLen1;
+	// 	}
+	// }
 	// nwy_gpio_set_value(RX_LIGHT, 1);
 	// nwy_ext_echo("\r\n %s",Serial.ProBuf[0]);
 }
@@ -717,13 +717,13 @@ void Uart_Task(void *parameter)
 				//消息队列可能同时攒了多条，所以加上判断接收后发下一帧透传数据，判断顺序不能变
 				if (api_GetSysStatus(eSYS_STASUS_START_TRAN) != TRUE)
 				{
-					if (nwy_get_msg_que(TranDataToUartMessageQueue, &Transdata, 0xffffffff))
-					{
-						api_SetSysStatus(eSYS_STASUS_START_TRAN);
-						gTranType = Transdata.TranType;
-						SendTranData(Transdata.buf, Transdata.len);
-						nwy_ext_echo("\r\ntran data send ok");
-					}
+					// if (nwy_get_msg_que(TranDataToUartMessageQueue, &Transdata, 0xffffffff))
+					// {
+					// 	api_SetSysStatus(eSYS_STASUS_START_TRAN);
+					// 	gTranType = Transdata.TranType;
+					// 	SendTranData(Transdata.buf, Transdata.len);
+					// 	nwy_ext_echo("\r\ntran data send ok");
+					// }
 				}
 			}
 			if (api_GetSysStatus(eSYS_STASUS_START_TRAN) != TRUE) //透传结束,才允许进行抄表

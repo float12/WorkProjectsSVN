@@ -98,6 +98,7 @@ extern TWaveDataDeal WaveDataDeal[4];
 extern BYTE OpeSampleRegChipNo;
 extern DWORD SendFrameCnt;
 extern BYTE SendDataLostFlag;
+extern BYTE DmaErrFlag;
 extern WORD IsChargingFlag;
 extern BYTE BeginSendData;//开始发送数据标志
 extern BYTE SendLoop;//发送回路号，1-12

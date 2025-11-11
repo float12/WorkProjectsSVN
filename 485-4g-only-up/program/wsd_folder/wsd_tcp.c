@@ -13,7 +13,7 @@
 #define PRIVATE_HEART_INTERVAL 				(60*2)					//维护端 心跳间隔
 #define USER_HEART_INTERVAL 				(30)					//用户端 心跳间隔
 #define USER_RESET_INTERVAL					(60*3)					//用户端 长时间无法连接 复位间隔// 约两小时
-#define PORT     							 7194					//维护端  端口
+#define PORT     							 7196					//维护端  端口
 #define PRIVATE_TCP_THREAD					0						//默认维护端tcp 线程号
 #define TRANSPARENT_FLAG					0xAA					//透传基表标志 AA 标志代表与模块自身通信
 #define CHECK_CONNECTED_NUM					10						//检测已连接次数
@@ -53,7 +53,7 @@ void Tcp_send(int Isocket, char *sendbuff, int sendlen, BYTE i)
 {
 	int s = Isocket;
 	int send_len = 0;
-
+	// nwy_ext_echo("\r\nsend socket is %d，len is %d", s, sendlen);
 	send_len = nwy_socket_send(s, sendbuff, sendlen, 0);
 	if(send_len != sendlen)
 	{
@@ -403,7 +403,7 @@ void Tcp_connet(tTranData *transdata,BYTE *bNum)
 				bConnected++;
 				if (bConnected == CHECK_CONNECTED_NUM)
 				{
-					nwy_ext_echo("\r\nnwy_net_connect_tcp connect ok..");
+					nwy_ext_echo("\r\nnwy_net_connect_tcp connect ok..，socket %d",bSocket);
 					transdata->socketid = bSocket;
 					transdata->threadid = bChannel;
 					socket[bChannel] = bSocket;
@@ -497,6 +497,7 @@ void TCP_PrivateTask(void *param)
 					//test
 					nwy_ext_echo("\r\n socket is [%d],thread is [%d]",socket[UploadTranData.threadid],UploadTranData.threadid);
 					HeartSeconds[UploadTranData.threadid] = 0;
+					UploadTranData.threadid = 0;
 					Tcp_send(socket[UploadTranData.threadid], (char *)&UploadTranData.buf[0], UploadTranData.len,UploadTranData.threadid);//！！！ 要测试
 				}
 				#if (TCP_COMM_MODULE == YES)
