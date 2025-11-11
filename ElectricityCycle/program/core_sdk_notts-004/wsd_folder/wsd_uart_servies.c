@@ -405,26 +405,26 @@ void nwy_uart_recvwave_handle(const char *str, uint32_t length)
 	if (length != WAVE_DATA_FRAME_SIZE)
 	{
 		nwy_ext_echo("\r\nrec len  not 815, %d", length);
-		nwy_time_t julian_time = {0};
-		char timezone = 0;
-		nwy_get_time(&julian_time, &timezone);
-		nwy_ext_echo("\r\n%d-%d %d:%d:%d", julian_time.mon, julian_time.day, 
-			julian_time.hour, julian_time.min, julian_time.sec);
-		int64_t ms = nwy_get_ms();
-		nwy_ext_echo("\r\nms: %lld", ms);
-		if (length > WAVE_DATA_FRAME_SIZE && length <= 2 * WAVE_DATA_FRAME_SIZE)
-		{
-			nwy_ext_echo("\r\n10 bytes after 815:");
-			for (i = WAVE_DATA_FRAME_SIZE; i < WAVE_DATA_FRAME_SIZE + 10 && i < length; i++)
-			{
-				nwy_ext_echo("%02x ", (unsigned char)str[i]);
-			}
-			nwy_ext_echo("\r\n last 10 bytes:");
-			for (i = (length >= 10 ? length - 10 : 0); i < length; i++)
-			{
-				nwy_ext_echo("%02x ", (unsigned char)str[i]);
-			}
-		}
+		// nwy_time_t julian_time = {0};
+		// char timezone = 0;
+		// nwy_get_time(&julian_time, &timezone);
+		// nwy_ext_echo("\r\n%d-%d %d:%d:%d", julian_time.mon, julian_time.day, 
+		// 	julian_time.hour, julian_time.min, julian_time.sec);
+		// int64_t ms = nwy_get_ms();
+		// nwy_ext_echo("\r\nms: %lld", ms);
+		// if (length > WAVE_DATA_FRAME_SIZE && length <= 2 * WAVE_DATA_FRAME_SIZE)
+		// {
+		// 	nwy_ext_echo("\r\n10 bytes after 815:");
+		// 	for (i = WAVE_DATA_FRAME_SIZE; i < WAVE_DATA_FRAME_SIZE + 10 && i < length; i++)
+		// 	{
+		// 		nwy_ext_echo("%02x ", (unsigned char)str[i]);
+		// 	}
+		// 	nwy_ext_echo("\r\n last 10 bytes:");
+		// 	for (i = (length >= 10 ? length - 10 : 0); i < length; i++)
+		// 	{
+		// 		nwy_ext_echo("%02x ", (unsigned char)str[i]);
+		// 	}
+		// }
 	}
 	for (i = 0; i < num; i++)
 	{
