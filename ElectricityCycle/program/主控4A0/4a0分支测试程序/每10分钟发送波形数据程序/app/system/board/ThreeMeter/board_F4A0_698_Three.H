@@ -132,7 +132,8 @@
 #define UART_DMA_TC_INT_SRC                 (INT_SRC_DMA1_TC7) 
 #define TX_DMA_TC_FLAG                  	(DMA_FLAG_TC_CH7)
 #define UART_DMA_TC_INT_IRQn                (Uart1Dma_TC_IrqNo)   //(UART2_DMA2_IrqNo)
-
+#define UART_DMA_ERR_INT_SRC                 (INT_SRC_DMA1_ERR) 
+#define UART_DMA_ERR_INT_IRQn                (Uart1Dma_ERR_IrqNo)   //(UART2_DMA2_IrqNo)
 
 //-----------------------------------------------------------
 //¹ØÁªÅÐ¶Ï

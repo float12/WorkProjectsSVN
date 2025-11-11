@@ -169,6 +169,10 @@ class FormatConverter:
         with open(input_path, 'rb') as f_in, open(output_path, 'wb') as f_out:
             frame_index = 0
             buffer = f_in.read(53)  # ÏûºÄµôÏµÊýÖ¡
+            if buffer[0] == 0x68 and buffer[52] == 0x16 and buffer[25] == 0 : 
+                pass
+            else:
+                f_in.seek(0)
             while True:
                 buffer = f_in.read(input_frame_size)
                 if len(buffer) < input_frame_size:

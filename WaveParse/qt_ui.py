@@ -108,11 +108,7 @@ class WaveDataProcessUI(QWidget):
         self.phase_select.setCurrentIndex(0)  # 默认选择一相（1）
         self.left_layout.addWidget(QLabel("选择相数:"))
         self.left_layout.addWidget(self.phase_select)
-        # 增加文本输入框
-        self.text_input_label = QLabel("输入格式转换文件目录或文件：")
-        self.text_input = QLineEdit()
-        self.left_layout.addWidget(self.text_input_label)
-        self.left_layout.addWidget(self.text_input)
+       
         # 格式选择
         self.format_select = QComboBox()
         self.format_select.addItems(["", str("wlb_waveRecord_with_NO"), str("698"),str("wlb_waveRecord")])
@@ -122,7 +118,7 @@ class WaveDataProcessUI(QWidget):
         # 文件选择
         file_layout = QHBoxLayout()
         self.file_edit = QLineEdit()
-        self.file_button = QPushButton("选择bin文件")
+        self.file_button = QPushButton("选择波形解析bin文件")
         file_layout.addWidget(self.file_edit)
         file_layout.addWidget(self.file_button)
         self.left_layout.addLayout(file_layout)
@@ -132,6 +128,11 @@ class WaveDataProcessUI(QWidget):
         self.endian_select.setCurrentIndex(0)  # 默认选择大端
         self.left_layout.addWidget(QLabel("波形数据大小端:"))
         self.left_layout.addWidget(self.endian_select)
+        # 增加文本输入框
+        self.text_input_label = QLabel("输入格式转换文件目录或文件：")
+        self.text_input = QLineEdit()
+        self.left_layout.addWidget(self.text_input_label)
+        self.left_layout.addWidget(self.text_input)
         # 系数输入区
         self.coeff_container = QWidget()
         self.coeff_layout = QGridLayout()
@@ -145,12 +146,21 @@ class WaveDataProcessUI(QWidget):
         btn_layout = QHBoxLayout()
         self.save_btn = QPushButton("保存数据")
         self.plot_btn = QPushButton("绘制图形")
-        self.ConvertTo1P = QPushButton("转成单相")
-        self.ConvertToDataTransmit = QPushButton("带序号录波格式->数据传输格式")
+        self.ConvertTo1P = QPushButton("三相转成单相")
+        self.convert_action_select = QComboBox()
+        self.convert_action_select.addItems([
+            "带序号录波格式->数据传输格式",
+            "698->数据传输格式"
+        ])
+        self.convert_action_select.setCurrentIndex(0)  # 默认选择大端
+        self.left_layout.addWidget(QLabel("转换格式选择:"))
+        self.left_layout.addWidget(self.convert_action_select)
+        self.ConvertToDataTransmit = QPushButton("格式转换")
+        btn_layout.addWidget(self.ConvertToDataTransmit)
         btn_layout.addWidget(self.save_btn)
         btn_layout.addWidget(self.plot_btn)
         btn_layout.addWidget(self.ConvertTo1P)
-        btn_layout.addWidget(self.ConvertToDataTransmit)
+        
         self.left_layout.addLayout(btn_layout)
 
         # 最大值显示
@@ -222,7 +232,13 @@ class WaveDataProcessUI(QWidget):
                 input_file = pathlib.Path(input_file)  # 转成 Path 对象
                 output_dir = pathlib.Path("wlb_WaveRecord_output")
                 output_file = FormatConverter.ensure_output_folder_and_unique_file(output_dir,input_file.name.replace(".bin", "_wlb_waveRecord.bin"))
-                converter.delete_wlbWaveRecord_NO(input_file, output_file, 782, 778)
+                if self.convert_action_select.currentIndex() == 0:
+                    converter.delete_wlbWaveRecord_NO(input_file, output_file, 782, 778)
+                elif self.convert_action_select.currentIndex() == 1:
+                    converter.convert_698_to_wlb_waveRecord(input_file, output_file, 815, 778)
+                else:
+                    print("请选择正确的转换动作")
+                    return
                 # 提取 output_file 的文件名（去掉上级目录），再去掉 "_wlb_waveRecord"
                 clean_stem = pathlib.Path(output_file).name.replace("_wlb_waveRecord", "").replace(".bin", "")
                 output_dir = pathlib.Path("wlb_Transmit_output")
@@ -235,6 +251,7 @@ class WaveDataProcessUI(QWidget):
             print("转换结束")
         else:
             print("请选择文件")
+
     #保存数据按钮回调函数
     def save_to_csv(self):
         if self.data_file_path != None:

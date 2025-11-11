@@ -85,7 +85,7 @@ typedef enum
 	Edge12_Test_IrqNo = INT030_IRQn,//外部中断只能选择0-37和128-143
 
 	Uart1Dma_TC_IrqNo = INT040_IRQn,
-
+	Uart1Dma_ERR_IrqNo = INT041_IRQn,
 } IRQNUM;
 
 typedef struct
@@ -672,7 +672,20 @@ void UartSendDmaConfig(BYTE *Buf, WORD len)
 	/* Enable DMA channel */
 	DMA_ChCmd(UART_DMA_UNIT, UART_DMA_CH, ENABLE);
 }
-
+//-----------------------------------------------
+//函数功能:uart通过dma发送波形数据dma错误回调函数
+//
+//参数:
+//
+//返回值:
+//
+//备注:
+//-----------------------------------------------
+static void DmaErrIrqCallback(void)
+{
+	DmaErrFlag = 1;
+	DMA_ClearErrStatus(UART_DMA_UNIT, DMA_FLAG_TRANS_ERR_CH7);
+}
 //-----------------------------------------------
 //函数功能:uart通过dma发送波形数据完成回调函数
 //
@@ -703,7 +716,7 @@ static void DmaTcIrqCallback(void)
 }
 
 //-----------------------------------------------
-//函数功能: 串口 dma发送完成中断初始化
+//函数功能: 串口 dma发送完成中断、错误中断初始化
 //
 //参数:
 //
@@ -724,6 +737,15 @@ void DmaIrqInit(void)
 	NVIC_EnableIRQ(stcIrqSignConfig.enIRQn);
 	AOS_SetTriggerEventSrc(TX_DMA_TRIG_SEL, UART_DMA_TRG_SEL);
 	DMA_TransCompleteIntCmd(UART_DMA_UNIT, TX_DMA_TC_INT, ENABLE);
+
+	stcIrqSignConfig.enIntSrc = UART_DMA_ERR_INT_SRC;
+	stcIrqSignConfig.enIRQn = (IRQn_Type)UART_DMA_ERR_INT_IRQn;
+	stcIrqSignConfig.pfnCallback = &DmaErrIrqCallback;
+	(void)INTC_IrqSignIn(&stcIrqSignConfig);
+	NVIC_ClearPendingIRQ(stcIrqSignConfig.enIRQn);
+	NVIC_SetPriority(stcIrqSignConfig.enIRQn, DDL_IRQ_PRIO_00);
+	NVIC_EnableIRQ(stcIrqSignConfig.enIRQn);
+	DMA_ErrIntCmd(UART_DMA_UNIT, DMA_INT_REQ_ERR_CH7, ENABLE);
 }
 //-----------------------------------------------
 //函数功能:发送波形数据串口dma初始化

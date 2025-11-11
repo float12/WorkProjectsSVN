@@ -721,7 +721,7 @@ void CloseWaveFile(FIL *file)
 //-----------------------------------------------
 BYTE WriteDataToFile(FIL *file, const BYTE *buf, DWORD Size)
 {
-	DWORD freeSpace = MAX_FILE_SIZE - (file->fsize);
+	DWORD freeSpace = MAX_FILE_SIZE - (file->fptr);
 	DWORD lastNumber = 0;
 	BYTE BoolResult = FALSE;
 	DWORD writtenBytes = 0, readBytes = 0;
@@ -765,8 +765,8 @@ BYTE WriteDataToFile(FIL *file, const BYTE *buf, DWORD Size)
 		if (WriteCnt >= SYNC_FILE_CNT)
 		{
 			f_sync(file);//同步文件，防止数据丢失或者耗时过大
+            WriteCnt = 0;
 		}
-		WriteCnt = 0;
 	}
 	return TRUE;
 }

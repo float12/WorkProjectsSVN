@@ -24,7 +24,7 @@
 #define CYCLE_REPORT_PROTOCAL					PROTOCOL_MQTT	//周期上报协议（mqt/ep212/104）
 #define PT_CT									NO				//周期上报带变比
 #define UART_BUFF_MAX_LEN 						(512+30)
-#define POWERON_READRPARA_NUM					eBIT_VERSION	//上电抄表 截止参数
+#define POWERON_READRPARA_NUM					eBIT_ADDR	//上电抄表 截止参数
 
 // 网络层相关/***********************************************************************/
 #define TCP_TOTAL_NUM							(MAX_PRIVATE_SERVER_NUM+MAX_USER_SERVER_NUM)//总的tcp的连接个数 维护端+用户端
