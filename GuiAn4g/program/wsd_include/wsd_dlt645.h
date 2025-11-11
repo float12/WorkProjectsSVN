@@ -11,19 +11,19 @@
 //-----------------------------------------------
 //				宏定义
 //-----------------------------------------------
-#define TCP_REQ_NET 			0x040013D1		//TCP IP地址和端口号
-#define TCP_REQ_USER_PD 		0x040013D6  	//TCP 用户名和密码
-#define MQTT_REQ_NET 			0x040013E1		//MQTT IP地址和端口号
-#define MQTT_REQ_USER_PD 		0x040013E6 		//MQTT 用户名和密码
-#define DAY_TIME 				0x0400010C		//日期和时间
-#define USED_CHANNEL_NUM 		0x04A00100 		//测量点使用回路数
+#define TCP_REQ_NET 				0x040013D1		//TCP IP地址和端口号
+#define TCP_REQ_USER_PD 			0x040013D6  	//TCP 用户名和密码
+#define MQTT_REQ_NET 				0x040013E1		//MQTT IP地址和端口号
+#define MQTT_REQ_USER_PD 			0x040013E6 		//MQTT 用户名和密码
+#define DAY_TIME 					0x0400010C		//日期和时间
+#define USED_CHANNEL_NUM 			0x04A00100 		//测量点使用回路数
 #define READ_RELAY_STATUS 			0x1126					//检查继电器状态
-#define LOOP1_RELAY_OPEN_INFO 	0x1D00FF01		//回路1上一次继电器打开原因
-#define LOOP2_RELAY_OPEN_INFO 	0x1D01FF01		//回路2上一次继电器打开原因
-#define LOOP3_RELAY_OPEN_INFO 	0x1D02FF01		//回路3上一次继电器打开原因
-#define LOOP1_RELAY_CLOSE_INFO 	0x1E00FF01		//回路1上一次继电器关闭原因
-#define LOOP2_RELAY_CLOSE_INFO 	0x1E01FF01		//回路2上一次继电器关闭原因
-#define LOOP3_RELAY_CLOSE_INFO 	0x1E02FF01		//回路3上一次继电器关闭原因
+#define LOOP1_RELAY_OPEN_INFO 		0x1D00FF01		//回路1上一次继电器打开原因
+#define LOOP2_RELAY_OPEN_INFO 		0x1D01FF01		//回路2上一次继电器打开原因
+#define LOOP3_RELAY_OPEN_INFO 		0x1D02FF01		//回路3上一次继电器打开原因
+#define LOOP1_RELAY_CLOSE_INFO 		0x1E00FF01		//回路1上一次继电器关闭原因
+#define LOOP2_RELAY_CLOSE_INFO 		0x1E01FF01		//回路2上一次继电器关闭原因
+#define LOOP3_RELAY_CLOSE_INFO 		0x1E02FF01		//回路3上一次继电器关闭原因
 #define SET_METER_CONTROL_BYTE 		0x14					//设置表控制字
 #define READ_METER_CONTROL_BYTE 	0x11					//读表控制字
 #define CONTROL_RELAY_CONTROL_BYTE 	0x1C					//继电器控制字

@@ -56,7 +56,7 @@
 #define MQTT_NOFREE_SOCKET		0x8A2B
 //发送请求帧失败
 #define SEND_REQUEST_FRAME_ERR	0x8A2C
-//请求帧循环错误
+//请求帧回路错误
 #define REQUEST_FRAME_LOOP_ERR	0x8A2D
 //模块掉电
 #define POWER_DOWN				0x8AFF
