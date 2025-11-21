@@ -39,7 +39,7 @@ BYTE IsRecWaveData;//低四位表示是否在接收数据
 BYTE gAllowSendWaveData = 1;//是否允许发送波形数据
 TSampleUIK UIFactorArr[SAMPLE_CHIP_NUM];
 TChargePara gChargePara;
-BYTE OpeSampleRegChipNo = 0;//读写计量芯片寄存器的采样芯片号，0-3
+BYTE OpeSampleRegChipNo = 0;//读写计量芯片寄存器的采样芯片号，0-3,包括校表芯片号
 TWaveDataDeal WaveDataDeal[SAMPLE_CHIP_NUM] = {
 	[0] = {
 		.SampleChipNo = 0,

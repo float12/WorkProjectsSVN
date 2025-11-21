@@ -763,8 +763,7 @@ WORD WriteFactoryExtPro(BYTE *pBuf)
 	BYTE i,j;
     BOOL Result; 
 	TFourByteUnion tOpens;
-    static BYTE chipNo = 0;
-	static BYTE cnt = 0;
+	
 	if( (pBuf[2]!=0xdf) || (pBuf[3]!=0xdb) )
 	{
 		return 0;
@@ -986,15 +985,9 @@ WORD WriteFactoryExtPro(BYTE *pBuf)
 				// for (i = 0; i < SAMPLE_CHIP_NUM; i++)
 				// {
 					// AA  HF常数  AA  A相瞬时量  AA  B相瞬时量  AA  C相瞬时量  AA
-					if (api_ProcSampleAdjust(pBuf[9], pBuf + 10, chipNo) != TRUE)
+					if (api_ProcSampleAdjust(pBuf[9], pBuf + 10, OpeSampleRegChipNo) != TRUE)
 					{
 						break;
-					}
-					cnt++;
-					if (cnt >= 3)
-					{
-						cnt = 0;
-						chipNo++;
 					}
 				// }
 				wReturnLen = 1;

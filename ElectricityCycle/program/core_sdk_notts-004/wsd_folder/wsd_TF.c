@@ -66,6 +66,8 @@ BYTE RecLenNot815Flag = 0; // 接收波形数据长度不是815字节标志
 //-----------------------------------------------
 // 文件使用的变量、常量
 //-----------------------------------------------
+static TReadAndUploadFile ReadAndUploadFile = {0};
+static int WriteFileFd = -1;
 static BYTE RequestTimeUpFlag = 1;		//请求主站失败重发标志
 static WaveDatatoTcp DataToTcp;			//TF卡 上传数据到tcp的缓存
 static BYTE WriteBuf[WAVE_DATA_FRAME_SIZE * WAVE_UART_QUEUE_SPACE];
@@ -372,7 +374,6 @@ void ReadFileTask(void)
 	int fd = -1;
 	DWORD lastReadNumber = 0,RecordOffset = 0;
 	BYTE AllZero[sizeof(FileInfoOfOneCharge)] = {0};
-	static TReadAndUploadFile ReadAndUploadFile = {0};
 	FileInfoOfOneCharge TmpInfo;
 
 	memset(&TmpInfo,0,sizeof(TmpInfo));
@@ -675,7 +676,6 @@ void WriteFileTask(void)
 {	
 	int addr;
 	long WriteBytes = 0;
-	static int WriteFileFd = -1;
 	DWORD dwTimeStart,dwTimeEnd;
 	static WORD FileCntOfOneCharge = 0;
 	static DWORD PrintCnt = 0,Hisnumber = 1,Newnumber = 0;
@@ -711,6 +711,11 @@ void WriteFileTask(void)
 			}
 			else if (result == eFirstFrame) //写入该帧数据后创建新文件
 			{
+				if(WriteFileFd != -1)//如果上一个异常没收到结束帧先关闭文件
+				{
+					nwy_sdk_fclose(WriteFileFd);
+					WriteFileFd = -1;
+				}
 				nwy_ext_echo("\r\n get first frame");
 				PrintCnt = 0;
 				if (IsCardFull() == TRUE)
@@ -884,7 +889,28 @@ void CheckInfoFile(void)
 		}
 	}
 }
-
+//-----------------------------------------------
+// 功能描述: 掉电关闭文件
+//
+// 参数: 无
+//
+// 返回值: 无
+//
+// 备注内容: 无
+//-----------------------------------------------
+void CloseReadWriteFile(void)
+{
+	if(ReadAndUploadFile.ReadFileFd != -1)
+	{
+		nwy_sdk_fclose(ReadAndUploadFile.ReadFileFd);
+		ReadAndUploadFile.ReadFileFd = -1;
+	}
+	if(WriteFileFd != -1)
+	{
+		nwy_sdk_fclose(WriteFileFd);
+		WriteFileFd = -1;
+	}
+}
 //-----------------------------------------------
 // 功能描述: TF卡任??
 //
@@ -924,7 +950,8 @@ void TF_Task(void *param)
 		}
 		else
 		{
-			if (nwy_adc_get(NWY_ADC_CHANNEL3, NWY_ADC_SCALE_5V000) > 1200)
+			//掉电再上电不进入文件读写，等待硬复位
+			if ((nwy_adc_get(NWY_ADC_CHANNEL3, NWY_ADC_SCALE_5V000) > 1200) && (PowerDownFlag == 0))
 			{
 				CheckInfoFile();
 				WriteFileTask();
@@ -934,6 +961,7 @@ void TF_Task(void *param)
 			{
 				if (PowerDownFlag == 0)
 				{
+					CloseReadWriteFile();
 					nwy_ext_echo("\r\n power down");
 					api_WriteSysUNMsg(POWER_DOWN);
 					PowerDownFlag = 0xAA;
