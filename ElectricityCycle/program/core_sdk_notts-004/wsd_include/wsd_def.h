@@ -108,7 +108,11 @@ typedef enum
 	NWY_CUSTOM_IP_TYPE_OR_DNS_IPV6 = 1,
 	NWY_CUSTOM_IP_TYPE_OR_DNS_DNS = 2
 } nwy_ip_type_or_dns_enum;
-
+typedef enum
+{
+	NWY_082AS1 = 0,//模组串口用基表维护485
+	NWY_092AS1 = 1,//模组串口用4g的485
+} nwy_chip_type_enum;
 /*Begin by zhaoyating to control tripple sim 20220615*/
 #define MAX_INPUT_OPTION 4 /* contain '\r' '\n' */
 #define STD_SUCCESS      1

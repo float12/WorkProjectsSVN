@@ -67,5 +67,6 @@ extern TSerial Serial[MAX_COM_CHANNEL_NUM];
 void Uart_Task(void *parameter);
 void InitPoint(TSerial *p);
 BYTE api_CalRXD_CheckSum(WORD ProtocolType, TSerial *p);
+DWORD SendDataToModule(BYTE *buf, DWORD len);
 void api_DoReceMoveData(TSerial *p, BYTE ProtocolType);
 #endif // #ifndef __UART_H

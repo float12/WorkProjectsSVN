@@ -20,7 +20,7 @@
 //-----------------------------------------------
 DWORD ThreadRunCnt[eMaxThreadNum] = {0};
 DWORD LastThreadRunCnt[eMaxThreadNum] = {0};
-
+BYTE chipType = 0;
 nwy_osiTimer_t *ftp_timer = NULL;
 nwy_osiTimer_t *meter_upgrade_timer = NULL;//表升级全过程最大时间定时器
 nwy_osiTimer_t *general_timer = NULL;

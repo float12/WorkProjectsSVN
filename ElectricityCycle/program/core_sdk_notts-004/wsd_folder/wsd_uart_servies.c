@@ -127,7 +127,34 @@ BYTE api_CalRXD_CheckSum(WORD ProtocolType, TSerial *p)
 	}
 	return bySum;
 }
-
+//--------------------------------------------------
+//功能描述:  发送数据给辨识模组
+//		 
+//参数:	  buf: 发送数据
+//		  len: 发送数据长度
+//		 
+//返回值:	发送数据长度
+//		 
+//备注:  
+//--------------------------------------------------
+DWORD SendDataToModule(BYTE *buf, DWORD len)
+{
+	if (chipType == NWY_082AS1)
+	{
+		nwy_ext_echo("\r\n send data to base meter,chip type is %d", chipType);
+		return nwy_uart_send_data(UART_HD_BASEMETER, buf, len);
+	}
+	else if (chipType == NWY_092AS1)
+	{
+		nwy_ext_echo("\r\n send data to lto,chip type is %d", chipType);
+		return nwy_uart_send_data(UART_HD_LTO, buf, len);
+	}
+	else
+	{
+		nwy_ext_echo("\r\nchip type is not supported");
+		return 0;
+	}
+}
 //--------------------------------------------------
 //功能描述:  抄表任务
 //		 
@@ -605,7 +632,7 @@ void SendTranData(BYTE *buf, int len, BYTE UartNum)
 	else
 	{
 		ENABLE_HARD_SCI_SEND;
-		RetLen = nwy_uart_send_data(UART_HD_LTO, buf, len);
+		RetLen = SendDataToModule(buf, len);
 	}
 	nwy_ext_echo("uart send len is \r\n %d", RetLen);
 	nwy_stop_timer(uart_timer);
@@ -905,7 +932,7 @@ void Uart_Task(void *parameter)
 	dwCurTicksHis = dwCurTicks;
 	nwy_start_timer_periodic(general_timer, 1000); //周期性定时 一秒一次
 	nwy_stop_timer(uart_timer);
-
+	api_Get4gChipType();
 	while (1)
 	{
 		ThreadRunCnt[eUartThread]++;

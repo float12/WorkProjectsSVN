@@ -223,7 +223,7 @@ void  SetLtoTime( void )
 		nwy_ext_echo("%02x ",buf[j]);
 	}	
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_BASEMETER,buf,i);
+	SendDataToModule(buf,i);
 }
 //--------------------------------------------------
 //功能描述:  物联表开厂内模式
@@ -268,7 +268,7 @@ void  open_ltofactory( void )
 		nwy_ext_echo("%02x ",buf[j]);
 	}	
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_BASEMETER,buf,i);
+	SendDataToModule(buf,i);
 }
 //--------------------------------------------------
 //功能描述:  套壳698
@@ -642,7 +642,7 @@ void  Compose_SecurityRequsetRecordFreezeMin_698( void )
 		nwy_ext_echo("%02x ", MessageBuf[i]);
 	}
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_BASEMETER,MessageBuf,sizeof(MessageBuf));
+	SendDataToModule(MessageBuf,sizeof(MessageBuf));
 }
 //--------------------------------------------------
 //功能描述:  探测基表地址698
@@ -657,7 +657,7 @@ void  Adrr_Txd_698(void)
 {
 	BYTE reqAddr[]={0x68,0x17,0x00,0x43,0x45,0xAA,0xAA,0xAA,0xAA,0xAA,0xAA,0xA0,0x51,0xEA,0x05,0x01,0x00,0x40,0x01,0x02,0x00,0x00,0xED,0x03,0x16};
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_BASEMETER,reqAddr,sizeof(reqAddr));
+	SendDataToModule(reqAddr,sizeof(reqAddr));
 }
 
 //--------------------------------------------------
@@ -704,7 +704,7 @@ void ComposeReadModuleVersion(void)
 		nwy_ext_echo("%02x ", Buf[i]);
 	}
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_BASEMETER, Buf, Len);
+	SendDataToModule(Buf, Len);
 }
 //--------------------------------------------------
 //功能描述:  读取辨识模组的版本 安全传输？
@@ -744,7 +744,7 @@ void  ComposeReadModuleVersion_security( void )
 		nwy_ext_echo("%02x ", MessageBuf[i]);
 	}
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_BASEMETER,MessageBuf,sizeof(MessageBuf));
+	SendDataToModule(MessageBuf,sizeof(MessageBuf));
 }
 //--------------------------------------------------
 //功能描述:  进行698报文帧起始符68搜索

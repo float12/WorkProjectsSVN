@@ -525,7 +525,7 @@ void  Dlt645_Tx_Read( DWORD dwID ) //抄读OK
 	bLen++;
 	Buf[bLen++] = 0x16;
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_BASEMETER,Buf,bLen);
+	SendDataToModule(Buf,bLen);
 }
 //--------------------------------------------------
 //功能描述:  645 通用规约读取 0x11	四回路使用
@@ -559,7 +559,7 @@ void  Dlt645_Tx_ReadMultiLoop( DWORD dwID, BYTE *bAddress )
 	bLen++;
 	Buf[bLen++] = 0x16;
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_BASEMETER,Buf,bLen);
+	SendDataToModule(Buf,bLen);
 }
 #if (CYCLE_REPORT == YES)
 //--------------------------------------------------

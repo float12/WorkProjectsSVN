@@ -192,6 +192,7 @@ extern char PrintLogSign;
 extern int tcp_connect_flag[2];
 extern int BleLogSwitch; //蓝牙打印log开关
 extern DWORD ThreadRunCnt[eMaxThreadNum];
+extern BYTE chipType;
 //-----------------------------------------------
 // 				函数声明
 //-----------------------------------------------
@@ -217,6 +218,7 @@ void nwy_general_timer_cb(void *type);
 void Uart_Recv_timer_cb(void *type);
 void TF_Request_timer_cb(void *type);
 void api_ReadSystemFiletoRam(eREAD_METER_BIT eBit);
+void api_Get4gChipType(void);
 void Location_Task(void *param);
 BOOL get_gps_position_info(char *c_data, DWORD *addr);
 void TCP_User_Task(void *param);

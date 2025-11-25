@@ -1487,6 +1487,31 @@ BOOL  api_PowerOnCreatParaTable( void )
 	}
 }
 //--------------------------------------------------
+// 功能描述:根据底层版本设置芯片类型
+//
+// 参数:
+//
+// 返回值:
+//
+// 备注:
+//--------------------------------------------------
+void api_Get4gChipType(void)
+{
+	char buf2[100] = {0};
+
+	nwy_dm_get_inner_version(buf2, 100);
+	if (strstr(buf2, "BLE") != NULL)
+	{
+		chipType = NWY_082AS1;
+		nwy_ext_echo("\r\nchip type is NWY_082AS1");
+	}
+	else 
+	{
+		chipType = NWY_092AS1;
+		nwy_ext_echo("\r\nchip type is NWY_092AS1");
+	}
+}
+//--------------------------------------------------
 // 功能描述:
 //
 // 参数:
