@@ -58,6 +58,7 @@ typedef struct
 //-----------------------------------------------
 // 全局使用的变量、常量
 //-----------------------------------------------
+BYTE ResetFlag = 0;//模块复位标志，由tf卡关闭文件后再复位
 BYTE RequestLoop = 0;
 TInfoFile infoFile;
 BYTE WaveQueueFullFlag = 0;	// 波形数据队列是否满,满置1，用于长期监视
@@ -942,6 +943,13 @@ void TF_Task(void *param)
 	while (1)
 	{
 		ThreadRunCnt[eTfThread]++;
+		if (ResetFlag == 1)
+		{
+			ResetFlag = 0;
+			CloseReadWriteFile();
+			nwy_ext_echo("\r\n reset");
+			nwy_power_off(2);
+		}
 		if (api_CheckaAndMountSDCard() == FALSE)
 		{
 			nwy_ext_echo("\r\n check or Mount TF Card fail");

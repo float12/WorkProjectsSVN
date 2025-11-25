@@ -1381,7 +1381,7 @@ void SendOpenFactoryFrame(void)
 		nwy_ext_echo("%02x ", Buf[i]);
 	}
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_LTO, Buf, wLen);
+	nwy_uart_send_data(UART_HD_BASEMETER, Buf, wLen);
 	nwy_stop_timer(uart_timer);
 	nwy_start_timer(uart_timer, 5000); //10s¶¨Ê±
 }
@@ -1452,7 +1452,7 @@ void SendIapData698(void)
 	if (tIap_698.IsModuleUpgrade == 1)
 	{
 		ENABLE_HARD_SCI_SEND;
-		nwy_uart_send_data(UART_HD_LTO, Buf, wLen);
+		nwy_uart_send_data(UART_HD_BASEMETER, Buf, wLen);
 	}
 	else
 	{

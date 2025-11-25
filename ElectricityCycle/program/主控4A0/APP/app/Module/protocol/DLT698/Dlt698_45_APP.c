@@ -450,6 +450,28 @@ BOOL Pre_Dlt698(TSerial *p, BYTE *pAck)
 	BOOL bRc = FALSE;
 	BYTE IsMyMeteraddr;
 
+    if( (p == &Serial[eCR]) || (p == &Serial[eRS485_I]))
+    {
+        if((p->ProBuf[(p->BeginPosDlt698_45+4)%MAX_PRO_BUF_REAL] & 0x30) != 0)//读物联表模组
+        {
+            if((p->ProBuf[(p->BeginPosDlt698_45+3)%MAX_PRO_BUF_REAL] & 0x80) == 0)//客户机下发报文
+            {
+                //透传给物联表模组
+                SerialMap[eRS485_I].SCIEnableSend(SerialMap[eRS485_I].SCI_Ph_Num);
+                memcpy(Serial[eRS485_I].ProBuf, p->ProBuf + p->BeginPosDlt698_45, p->ProStepDlt698_45);
+                Serial[eRS485_I].SendLength = p->ProStepDlt698_45;
+                return TRUE;
+            }
+            else//回复报文
+            {
+                //返回给4g
+                memcpy(Serial[eCR].ProBuf, p->ProBuf + p->BeginPosDlt698_45, p->ProStepDlt698_45);
+                Serial[eCR].SendLength = p->ProStepDlt698_45;
+                return TRUE;
+            }
+            
+        }
+    }
 	if( JudgeRecMeterNo_Dlt698_45(p) == FALSE )
 	{
 		IsMyMeteraddr = FALSE;

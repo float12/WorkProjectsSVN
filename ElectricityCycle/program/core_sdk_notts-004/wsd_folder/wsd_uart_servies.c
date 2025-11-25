@@ -196,9 +196,9 @@ void  api_ReadMeterTask( BYTE bStep,BYTE* bWaveAddr )
 			Dlt645_Tx_ContinueRead(bStep,bWaveAddr);
 			break;
 		#endif
-		case eBIT_LTO_ADDR:
-			Adrr_Txd_698();
-			break;
+		// case eBIT_LTO_ADDR:
+		// 	Adrr_Txd_698();
+		// 	break;
 		case eBIT_LTO_SAFE_FREEZE:
 			Compose_SecurityRequsetRecordFreezeMin_698();
 			break;

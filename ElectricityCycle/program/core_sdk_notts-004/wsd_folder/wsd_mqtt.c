@@ -1168,7 +1168,7 @@ void MQTT_Services(void)
 		{
 			RemessageF("CMD_DEVICE_RESET", &topic_pub[0][0], "s", "Status", "StartReset");
 			RemessageF("CMD_DEVICE_RESET", &topic_pub[2][0], "s", "Status", "StartReset");
-			nwy_power_off(2);
+			ResetFlag = 1;
 		}
 		else if (strstr(pType->valuestring, "CMD_DEVICE_MODULEVERSION"))
 		{
@@ -1509,7 +1509,7 @@ void WSD_MQTT_Task(void *param)
 					{
 						if (ReconnectTime >= MQTT_RECONN_RESET_TIMES)
 						{
-							nwy_power_off(2);
+							ResetFlag = 1;
 						}
 						nwy_sleep(60000); // 60秒重试一次连接 每次连接消耗560字节
 						ReconnectTime++;

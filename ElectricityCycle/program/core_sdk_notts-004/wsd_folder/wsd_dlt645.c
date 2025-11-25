@@ -525,7 +525,7 @@ void  Dlt645_Tx_Read( DWORD dwID ) //抄读OK
 	bLen++;
 	Buf[bLen++] = 0x16;
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_LTO,Buf,bLen);
+	nwy_uart_send_data(UART_HD_BASEMETER,Buf,bLen);
 }
 //--------------------------------------------------
 //功能描述:  645 通用规约读取 0x11	四回路使用
@@ -559,7 +559,7 @@ void  Dlt645_Tx_ReadMultiLoop( DWORD dwID, BYTE *bAddress )
 	bLen++;
 	Buf[bLen++] = 0x16;
 	ENABLE_HARD_SCI_SEND;
-	nwy_uart_send_data(UART_HD_LTO,Buf,bLen);
+	nwy_uart_send_data(UART_HD_BASEMETER,Buf,bLen);
 }
 #if (CYCLE_REPORT == YES)
 //--------------------------------------------------
@@ -1394,6 +1394,8 @@ BOOL  RxUartMessage_Dlt645( TSerial *p )
 		}
 		lib_ExchangeData((BYTE*)&MeterWaveAddr[0],(BYTE*)&pBuf[1],bLen);
 		memcpy((BYTE*)&MeterReverAddr[0],(BYTE*)&pBuf[1],bLen);
+		memcpy((BYTE*)&ModuleReverAddr[0],(BYTE*)&MeterReverAddr[0],sizeof(MeterReverAddr));
+		memcpy((BYTE*)&bLtoAddr[0],(BYTE*)&MeterWaveAddr[0],6);
 		nwy_hex_to_string(6,MeterWaveAddr,LtuAddr);
 		nwy_hex_to_string(6,MeterReverAddr,(char*)tmpReverAddr);
 		nwy_ext_echo("\r\n meter addr:%s", LtuAddr);

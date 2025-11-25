@@ -257,10 +257,10 @@ WORD JudgeRecMeterNo_Dlt698_45(TSerial *p)
 	ucData = p->ProBuf[(p->BeginPosDlt698_45+4)%MAX_PRO_BUF_REAL];//通信缓冲大小最后用  MAX_PRO_BUF 
 	//暂不严格判断逻辑地址是管理芯，还是计量芯的
 	//双芯电能表管理芯逻辑地址为0，计量芯逻辑地址为1，除此之外的逻辑地址为非法
-	if( ((ucData>>4)&0x3) > 1 )
-	{
-		return FALSE;
-	}	
+	// if( ((ucData>>4)&0x3) > 1 )
+	// {
+	// 	return FALSE;
+	// }	
 	
 	ucData = (ucData/0x40);//得到地址类型
 
@@ -293,6 +293,10 @@ WORD JudgeRecMeterNo_Dlt698_45(TSerial *p)
 				return TRUE;
 			}	
 		}
+        else if( p->Addr_Len == 7 )//读模组
+		{
+          return TRUE;
+        }
 	}
 	else if( ucData == 3 )//广播地址
 	{
@@ -506,7 +510,7 @@ WORD DoReceProc_DLT698(BYTE ReceByte, TSerial * p)
 			p->Addr_Len = (ReceByte&0xf)+1;
 			if( (ReceByte/0x40) <= 1 )//如果是单地址、通配地址
 			{
-				if( p->Addr_Len != 6 )//电表地址是6字节BCD，即12位BCD码
+				if( (p->Addr_Len != 6) && (p->Addr_Len != 7))//电表地址是6字节BCD，即12位BCD码,模组7字节
 				{
 					DoSearch_68_DLT698(p);
 					return FALSE;
@@ -515,7 +519,7 @@ WORD DoReceProc_DLT698(BYTE ReceByte, TSerial * p)
 		}
 		else if( p->ProStepDlt698_45 == (8+p->Addr_Len) )//地址收完了，HCS收完了，判断HCS是否正确
 		{
-			if( p->Addr_Len > 6 )
+			if( p->Addr_Len > 7 )
 			{
 				DoSearch_68_DLT698(p);
 				return FALSE;
@@ -555,11 +559,11 @@ WORD DoReceProc_DLT698(BYTE ReceByte, TSerial * p)
 			{
 				BYTE control_byte = p->ProBuf[(p->BeginPosDlt698_45+3)%MAX_PRO_BUF_REAL];
                 //如果是电表发出的，控制域 bit7:传输方向位：DIR=0表示此帧是由客户机发出的；DIR=1表示此帧是由服务器发出的。
-				if( control_byte & 0x80 )
-				{
-					DoSearch_68_DLT698(p);
-					return FALSE;
-				}
+//				if( control_byte & 0x80 )//模组回复是服务器
+//				{
+//					DoSearch_68_DLT698(p);
+//					return FALSE;
+//				}
 			}
 		}
 		else if( p->ProStepDlt698_45 == (1+p->wLen) )//收到帧结束符 16H了，判断FCS是否正确

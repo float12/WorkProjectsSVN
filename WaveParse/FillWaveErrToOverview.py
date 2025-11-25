@@ -1,7 +1,54 @@
 # -*- coding: gbk -*-
 import openpyxl
 from openpyxl.utils.cell import coordinate_from_string, column_index_from_string
+import os
+import pandas as pd
+import re
+def extract_number(filename):
+    nums = re.findall(r'\((\d+)\)', filename)
+    return int(nums[-1]) if nums else 0
 
+
+def merge_sheets_by_name(input_dir, output_file="merged.xlsx"):
+    # 获取目录下所有 Excel
+    files = [
+        f for f in os.listdir(input_dir)
+        if f.lower().endswith((".xlsx", ".xls"))
+    ]
+    files.sort(key=extract_number)
+
+    # 读取第一个文件用于获取 sheet 名列表
+    first_file = os.path.join(input_dir, files[0])
+    sheet_names = pd.ExcelFile(first_file).sheet_names
+
+    # 一个 dict：每个 sheet 一个列表，用于存放不同文件的 df
+    merged = {sheet: [] for sheet in sheet_names}
+
+    for file in files:
+        file_path = os.path.join(input_dir, file)
+        print(f"Processing: {file}")
+
+        xls = pd.ExcelFile(file_path)
+
+        for sheet in sheet_names:
+            df = xls.parse(sheet)
+
+            # 在开头插入文件名 + 空行
+            head = pd.DataFrame([[file]])
+            empty = pd.DataFrame([[""]])
+
+            merged[sheet].append(head)
+            merged[sheet].append(empty)
+            merged[sheet].append(df)
+            merged[sheet].append(empty)  # 文件区块结束再加空行
+
+    # 写入输出文件
+    with pd.ExcelWriter(output_file, engine="openpyxl") as writer:
+        for sheet in sheet_names:
+            result = pd.concat(merged[sheet], ignore_index=True)
+            result.to_excel(writer, sheet_name=sheet, index=False)
+
+    print(f"合并完成！输出文件：{output_file}")
 def fill_wave_err_to_overview(excel_path):
     # 打开excel文件
     wb = openpyxl.load_workbook(excel_path, data_only=True)  # data_only=True 只读取值，不读取公式
@@ -54,4 +101,6 @@ def fill_wave_err_to_overview(excel_path):
     print("数据已成功填入'录波精度总览'子表。")
 
 if __name__ == "__main__":
-    fill_wave_err_to_overview("C:\\Users\\nh\\Desktop\\三相录波工装点检表250816 .xlsx")
+    # fill_wave_err_to_overview("C:\\Users\\nh\\Desktop\\三相录波工装点检表250816 .xlsx")
+    directory = r"D:\work\project\ElectricityCycle\电动车精度数据\tmp"
+    merge_sheets_by_name(directory)

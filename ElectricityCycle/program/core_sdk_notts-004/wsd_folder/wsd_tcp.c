@@ -11,8 +11,9 @@
 //-----------------------------------------------
 //			本文件使用的宏定义
 //-----------------------------------------------
-#define USER_HEART_INTERVAL	12000				// 用户端 心跳四分钟间隔 延时5ms 延时不准确   每次20ms 触发		Sleep只能粗略延时
-#define PRIVATE_HEART_INTERVAL (60*5)			//私有端 心跳间隔
+#define USER_HEART_INTERVAL			12000// 用户端 心跳四分钟间隔 延时5ms 延时不准确   每次20ms 触发		Sleep只能粗略延时
+#define PRIVATE_HEART_INTERVAL 		(60*5)//私有端 心跳间隔
+#define RESEND_CNT_MAX 				10	// 重发次数最大值
 //-----------------------------------------------
 //		本文件使用的结构体，共用体，枚举
 //-----------------------------------------------
@@ -495,6 +496,7 @@ void TCP_User_Task(void *param)
 	BYTE Result = 0;
 	static BYTE bLoop = 0;
 	static DWORD SendCnt = 0;
+	static BYTE ResendCnt = 0;
 	BYTE LogInBuf[60] = {0};
 	DWORD Connect = 0;
 	BYTE tmp_buf[SEND_WAVE_DATA_LEN],bchannel = 0;
@@ -540,7 +542,7 @@ void TCP_User_Task(void *param)
 					nwy_ext_echo("\r\nconnect is %d",Connect);
 					if (Connect > 480)//约两小时连接不上 模块复位一次
 					{
-						nwy_power_off(2);
+						ResetFlag = 1;
 					}
 					nwy_sleep(5000);
 				}
@@ -747,12 +749,18 @@ void TCP_User_Task(void *param)
 						nwy_sleep(20000);
 						if(tcp_connect_flag[0] == 0)
 						{
+							ResendCnt++;
+							if(ResendCnt > RESEND_CNT_MAX)
+							{
+								ResetFlag = 1;
+							}
 							nwy_ext_echo("\r\n tcp connect flag is 0,resend  data again");
 							tcpState = eTCP_DISCONNECTED;
 							break;
 						}
 						else
 						{
+							ResendCnt = 0;
 							nwy_ext_echo("\r\n resend all data success");
 							memset(&WaveDataTmpBuf, 0, sizeof(WaveDataTmpBuf));
 							ReconAndReSendFlag = 0;

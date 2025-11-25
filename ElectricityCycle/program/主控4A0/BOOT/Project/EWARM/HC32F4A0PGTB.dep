@@ -1,0 +1,2690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <fileVersion>4</fileVersion>
+    <fileChecksum>312589605</fileChecksum>
+    <configuration>
+        <name>Debug</name>
+        <outputs>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_rtc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_timera.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_trng.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_hash.pbi</file>
+            <file>$TOOLKIT_DIR$\lib\m7M_tl.a</file>
+            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\cmsis_compiler.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\board.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_timera.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpuHC32F460.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr4.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dma.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\bsp_cpu_flash.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr0.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_utility.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_crc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_mau.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_efm.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\exteeprom.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_smc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_rmu.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_rtc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_nfc.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Product_stdlib.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_pwc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_pwc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_icg.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_ots.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdbool.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dbgc.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\system_hc32f460.c</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_sdioc.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_pwc.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_efm.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dmc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f4a0_ll_interrupts_share.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr2.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_pwc.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_usb.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_eth.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_crc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_qspi.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\main.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\inc\c\iccarm_builtin.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_spi.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpuHC32F4A0.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpuHC32F460.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_sram.o</file>
+            <file>$PROJ_DIR$\output\debug\Exe\hc32f4a0pitb.out</file>
+            <file>$PROJ_DIR$\output\debug\Obj\exteeprom.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_rmu.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fcm.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_i2c.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_gpio.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_swdt.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Product_string.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dvp.pbi</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_trng.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\board\SeparateType\board_SeparateType.H</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpu.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_swdt.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_mpu.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_usart.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\SimulateSci.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_sram.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_spi.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\bsp_cpu_flash.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_wdt.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\ddl_config.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\cpuHC32F460.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_interrupts.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_icg.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\config\ConstConfig.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_icg.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dvp.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_mpu.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_spi.pbi</file>
+            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\cmsis_iccarm.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_event_port.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_clk.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_wdt.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_wdt.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\CommFunc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_i2s.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_pwc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_interrupts.pbi</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Full.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\ctype.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_emb.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_clk.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\main.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_mpu.o</file>
+            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\cmsis_version.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dac.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\main.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\config\Specialuser.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fcg.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\Module\SaveMem\at45db161.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\CommFunc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_pwc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_efm.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\system_hc32f460.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\SimulateSci.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Exe\hc32f460petb.out</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpu.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_event_port.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\HC32F4A0xI.icf</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_interrupts.pbi</file>
+            <file>$TOOLKIT_DIR$\lib\dl7M_tlf.a</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\startup_hc32f460keta.s</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_wdt.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_i2c.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr6.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpuHC32F460.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_utility.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmra.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32_common.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_mpu.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_ctc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_sram.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_usart.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_ots.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_hash.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dcu.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f4a0_ll_interrupts_share.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_utility.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Exe\hc32f4a0PITB.bin</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_hrpwm.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_mpu.pbi</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_float_setup.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_mau.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_keyscan.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_clk.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr4.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_sram.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_icg.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dma.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_qspi.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_efm.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_aes.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_ctc.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\bsp_cpu_flash.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_emb.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_event_port.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_nfc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_utility.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_interrupts.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_spi.c</file>
+            <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_icg.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\startup_hc32f460keta.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_mau.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_eth.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_interrupts.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f4A0PGTB.pbd</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_aes.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_cmp.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_smc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\system_hc32f4a0.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_adc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\SimulateSci.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_keyscan.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_mpu.h</file>
+            <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\bsp_cpu_flash.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_smc.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_spi.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_gpio.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dmc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fmac.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_adc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_gpio.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_adc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_sram.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_event_port.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_clk.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dvp.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_adc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\system_hc32f460.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_adc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_timera.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpuHC32F4A0.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\gd25q64c.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_clk.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_pwc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_interrupts.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\system_hc32f4a0.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32_ddl.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_event_port.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_efm.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\cpuHC32F460.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_wdt.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_clk.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_aos.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_gpio.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_adc.o</file>
+            <file>$TOOLKIT_DIR$\lib\shb_l.a</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_ctc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dma.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_clk.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_adc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\system_hc32f460.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\exteeprom.__cstat.et</file>
+            <file>$TOOLKIT_DIR$\CMSIS\Core\Include\mpu_armv7.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dcu.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_aos.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_cmp.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_clk.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\system_hc32f460.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\gd25q64c.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_utility.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_rmu.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_event_port.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_adc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\bsp_cpu_flash.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\board\SeparateType\board_SeparateType.c</file>
+            <file>$PROJ_DIR$\output\debug\Exe\hc32f4a0pgtb.out</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr6.o</file>
+            <file>$PROJ_DIR$\output\debug\Exe\hc32f4a0PGTB.bin</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dac.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_event_port.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_hrpwm.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\memory\memory_API.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpuHC32F4A0.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\system_hc32f4a0.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmra.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_spi.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_sram.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_gpio.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_mpu.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr4.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\HC32F46x.icf</file>
+            <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\cpuHC32F4A0.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fcm.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_interrupts.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_mpu.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_event_port.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fcm.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_can.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_spi.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_qspi.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_wdt.pbi</file>
+            <file>$TOOLKIT_DIR$\lib\rt7M_tl.a</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_utility.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_icg.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fcg.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_gpio.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_can.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_swdt.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\cpu.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr6.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_sram.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_nfc.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\core_cm4.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_aes.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr0.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_aos.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_keyscan.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dcu.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_can.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_efm.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\math.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_usart.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_usb.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr2.pbi</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_timera.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_efm.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_trng.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_wdt.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fmac.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_crc.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_hrpwm.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_i2c.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_event_port.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fcm.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_hash.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_hrpwm.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_i2c.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_i2s.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_icg.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_icg.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_interrupts.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_interrupts.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_keyscan.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fmac.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fcg.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_keyscan.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_i2s.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_mau.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_gpio.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_mau.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_mpu.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_mpu.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_eth.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fcm.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fmac.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fcg.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_gpio.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_emb.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_eth.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_event_port.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_hash.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_rtc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_rmu.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_smc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_ots.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_swdt.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr0.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_sram.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_sdioc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_pwc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_rmu.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_spi.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_swdt.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr0.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr2.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr4.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_nfc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_sdioc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr6.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr2.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_sram.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_spi.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_qspi.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_ots.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_smc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_rtc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_nfc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_qspi.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr4.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr6.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmra.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_pwc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_trng.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32f4a0.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\system_hc32f4a0.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\cpu.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_sram.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\AllHead.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_usart.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32f4a0_ll_interrupts_share.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_wdt.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmra.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\SimulateSci.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_wdt.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_usb.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\cpuHC32F4A0.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_usb.o</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_usart.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\main.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_utility.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32f4a0_ll_interrupts_share.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_utility.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_trng.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\system_hc32f4a0.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_usb.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\startup_hc32f4a0.s</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\cpu_API.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\__def.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_utility.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_ots.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\board.o</file>
+            <file>$PROJ_DIR$\..\..\app\Module\SaveMem\gd25q64c.h</file>
+            <file>$PROJ_DIR$\..\..\app\Module\SaveMem\savemem_API.h</file>
+            <file>$PROJ_DIR$\..\..\app\CommAPI\CommFunc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\bsp_cpu_flash.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\core_cm4.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\bsp_cpu_flash.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_adc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\board\board.c</file>
+            <file>$PROJ_DIR$\..\..\app\Module\SaveMem\gd25q64c.c</file>
+            <file>$PROJ_DIR$\..\..\app\config\relation.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\board\board_API.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ddl.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll.c</file>
+            <file>$PROJ_DIR$\..\..\app\config\sys.h</file>
+            <file>$PROJ_DIR$\..\..\app\config\DefaultConstPara_Sperate.h</file>
+            <file>$PROJ_DIR$\..\..\app\Module\SaveMem\exteeprom.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_crc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_aes.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_aes.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_can.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_cmp.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_adc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_def.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dmc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dvp.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_efm.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dac.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dcu.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dcu.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dbgc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_emb.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dvp.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_efm.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dac.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_cmp.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_clk.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_aos.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_aos.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_ctc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_can.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_clk.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_crc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_ctc.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dbgc.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dma.c</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dma.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dmc.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr0.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\CommAPI\CommFunc_API.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_i2s.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_cmp.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dbgc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_rtc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_i2c.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fmac.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmra.o</file>
+            <file>$PROJ_DIR$\output\debug\List\hc32f4a0pgtb.map</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dac.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_hash.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\hc32f4xx_conf.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_gpio.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_i2s.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\gd25q64c.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_gpio.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_wdt.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_utility.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dmc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_tmr2.o</file>
+            <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+            <file>$PROJ_DIR$\..\..\app\Module\SaveMem\SaveMem.h</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_efm.c</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_hrpwm.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f4a0_ll_interrupts_share.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\startup_hc32f4a0.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_emb.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_pwc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_sdioc.o</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_sdioc.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_icg.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_icg.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\board.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_spi.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Exe\hc32f4a0PETB.bin</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_eth.__cstat.et</file>
+            <file>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_timera.h</file>
+            <file>$PROJ_DIR$\output\debug\Obj\CommFunc.pbi</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_fcg.__cstat.et</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32_ll_dbgc.o</file>
+            <file>$PROJ_DIR$\output\debug\Exe\hc32f460PETB.bin</file>
+            <file>$PROJ_DIR$\output\debug\Exe\hc32f460keta.out</file>
+            <file>$PROJ_DIR$\output\debug\Obj\hc32f460_interrupts.o</file>
+        </outputs>
+        <file>
+            <name>[ROOT_NODE]</name>
+            <outputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 223 429</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\system_hc32f460.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 104</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 184</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 207</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_pwc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 23</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 86</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 24</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 38 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\output\debug\Exe\hc32f4a0pitb.out</name>
+            <outputs>
+                <tool>
+                    <name>OBJCOPY</name>
+                    <file> 131 225</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\cpuHC32F460.c</name>
+            <outputs>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 116</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 47</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\output\debug\Exe\hc32f460petb.out</name>
+            <outputs>
+                <tool>
+                    <name>OBJCOPY</name>
+                    <file> 455 131</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 109 371 68 101 258 46 50 188 269 201 160 211 268 181 213 41 121 226 460 267 10 35 182 270 147 40 227 253 245 174 235 127 228 114 85 75 151 166 156 94 21 124 448 248 51 425 449 170 67 48 62 12 440 237 224 428 59 64 357 150 83 36 93 65 446 192 202 250 4 111</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\startup_hc32f460keta.s</name>
+            <outputs>
+                <tool>
+                    <name>AARM</name>
+                    <file> 155</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_mpu.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 236</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 133</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 63</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 167 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_sram.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 260</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 66</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 122</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 179 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_spi.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 247</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 233</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 45</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 171 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_icg.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 25</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 73</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 252</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 140 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_interrupts.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 463</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 87</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 191</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 242 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\bsp_cpu_flash.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 68</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 221</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 11</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 196 58 125 168 92 88 239 126 254 262 212 95 5 79 44 209 193 119 441 56 153 27 215 70 178 137 195 200 140 242 38 171 179 457 217 69 382 271 134 89 421 30 22 373 229 146</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 89 254 88 179 168 74 146 92 70 119 368 196 367 30 60 125 95 217 387 271 382 373 457 126 239 212 195 27 215 56 386 383 98 441 421 229 58 193 200 262 79 44 178 140 38 153 22 348 5 209 137 242 171 69 134</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_adc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 220</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 183</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 164</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 178 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 27 215 56 95 125 168 70 119 153 126 262 212 217 441 254 92 88 239 178 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_gpio.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 433</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 172</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 54</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 200 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_event_port.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 148</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 80</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 108</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 219 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_clk.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 91</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 81</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 198</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 137 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 70 153 126 95 125 262 27 215 56 168 212 217 119 441 254 92 88 239 137 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_wdt.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 113</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 249</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 82</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 69 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\output\debug\Exe\hc32f4a0pgtb.out</name>
+            <outputs>
+                <tool>
+                    <name>OBJCOPY</name>
+                    <file> 225</file>
+                </tool>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 429</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 109 371 68 101 258 46 50 188 269 201 160 211 268 181 213 41 121 226 460 267 10 35 182 270 147 40 227 253 245 174 235 127 228 114 85 75 151 166 156 94 21 124 448 248 51 425 449 170 67 48 62 12 440 237 224 428 59 64 357 150 83 36 93 65 446 192 202 250 4 111</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_utility.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 438</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 130</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 117</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 217 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_timera.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 186</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 1</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 7</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 457 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_hrpwm.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 228</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 132</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 444</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 286 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 286 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_i2c.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 114</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 53</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 426</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 287 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 395 125 168 212 92 88 376 344 126 239 369 432 153 345 95 287 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fcm.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 245</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 52</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 241</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 304 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 395 125 153 345 168 212 95 369 432 344 126 92 88 239 376 304 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_icg.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 75</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 451</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 452</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 290 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 395 345 153 125 95 168 212 432 344 126 92 88 239 376 290 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_interrupts.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 151</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 110</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 72</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 292 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 239 432 344 126 168 212 125 92 88 376 369 395 153 345 95 292 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_keyscan.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 166</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 266</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 136</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 296 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 153 345 395 125 168 212 95 369 432 344 126 92 88 239 376 296 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fmac.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 174</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 279</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 427</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 305 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 305 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_fcg.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 253</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 99</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 459</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 306 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 153 345 432 125 395 168 212 95 369 344 126 92 88 239 376 306 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_i2s.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 85</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 422</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 434</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 288 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 288 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_mau.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 156</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 135</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 15</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 300 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 300 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_gpio.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 235</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 255</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 436</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 307 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 212 432 168 125 153 345 369 395 344 126 92 88 239 376 95 307 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_mpu.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 94</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 77</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 243</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 302 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 302 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_eth.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 40</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 157</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 456</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 303 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 303 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_event_port.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 227</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 194</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 244</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 283 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 283 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_hash.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 127</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 3</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 431</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 285 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 285 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_rmu.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 51</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 218</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 19</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 321 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 376 88 212 395 92 125 168 344 126 239 95 369 432 153 345 321 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_ots.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 124</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 370</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 26</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 334 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 334 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_swdt.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 62</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 257</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 55</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 323 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 323 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr0.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 12</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 264</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 420</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 324 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 432 125 153 345 168 212 369 395 344 126 92 88 239 376 95 324 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_sram.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 48</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 234</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 347</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 331 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 92 212 88 376 125 168 395 344 126 239 95 369 432 153 345 331 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_pwc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 448</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 102</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 190</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 342 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 239 344 126 168 432 212 125 92 88 376 369 395 153 345 95 342 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr4.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 237</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 138</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 9</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 339 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 339 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_sdioc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 449</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 31</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 450</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 319 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 319 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr6.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 224</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 259</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 115</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 340 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 340 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmr2.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 440</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 274</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 37</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 325 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 325 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_spi.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 67</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 78</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 454</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 322 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 432 125 168 212 92 88 376 344 126 239 369 395 153 345 95 322 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_smc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 170</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 162</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 18</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 314 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 314 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_rtc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 425</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 20</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 0</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 312 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 312 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_nfc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 21</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 149</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 261</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 441 125 168 92 88 239 126 56 327 395 153 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 126 168 212 395 369 56 432 344 376 95 327 92 88 239 153 345 441 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_qspi.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 248</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 42</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 142</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 333 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 333 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_tmra.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 428</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 232</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 118</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 352 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 344 126 239 369 432 153 345 95 352 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\cpu.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 258</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 107</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 61</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 88 307 395 30 394 367 92 168 432 74 89 375 60 58 125 392 368 387 271 382 373 384 126 239 212 209 322 324 22 386 383 98 441 421 229 240 344 352 378 376 5 418 306 292 342 358 153 345 134 348 95 79 44 369 410 408 398 304 287 296 321 331 354 56</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_usart.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 64</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 272</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 123</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 358 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 432 153 345 369 395 344 126 92 88 239 376 95 358 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_wdt.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 83</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 278</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 437</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 354 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 126 344 168 239 395 432 212 125 92 88 376 95 369 153 345 354 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\SimulateSci.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 65</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 165</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 105</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 58 395 89 394 74 375 60 125 168 432 367 30 307 92 88 392 384 368 387 271 382 373 126 239 212 209 322 324 22 240 386 383 98 441 421 229 344 352 378 376 5 418 306 292 342 358 153 345 134 348 95 79 44 369 410 408 398 304 287 296 321 331 354 56</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_usb.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 357</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 273</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 39</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 365 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 168 125 395 212 95 153 345 432 344 126 92 88 239 376 365 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\cpuHC32F4A0.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 46</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 230</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 187</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 395 383 168 394 421 344 376 432 382 441 240 378 392 125 384 386 98 30 229 352 209 322 324 22 368 74 387 367 271 89 373 375 60 58 307 126 92 88 239 212 5 418 306 292 342 358 153 345 134 348 95 79 44 369 410 408 398 304 287 296 321 331 354 56</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\main.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 93</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 97</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 43</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 92 367 395 394 30 307 88 168 432 74 89 375 60 58 125 392 368 387 271 382 373 384 126 239 212 209 322 324 22 386 383 98 441 421 229 240 344 352 378 376 5 418 306 292 342 358 153 345 134 348 95 79 44 369 410 408 398 304 287 296 321 331 354 56</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32f4a0_ll_interrupts_share.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 36</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 129</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 445</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 350 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 350 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_utility.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 150</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 13</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 360</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 369 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 168 125 212 92 88 376 95 395 344 126 239 432 153 345 369 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_trng.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 59</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 277</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 2</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 343 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 343 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\system_hc32f4a0.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 192</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 163</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 231</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 345 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 432</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 168 125 212 92 88 376 432 344 126 239 395 153 345 95 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\startup_hc32f4a0.s</name>
+            <outputs>
+                <tool>
+                    <name>AARM</name>
+                    <file> 446</file>
+                </tool>
+            </outputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\CommAPI\CommFunc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 101</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 458</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 84</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 395 98 394 30 352 168 432 386 441 229 125 392 383 382 421 240 344 378 376 209 322 324 22 368 74 387 367 271 89 373 375 60 58 384 307 126 92 88 239 212 5 418 306 292 342 358 153 345 134 348 95 79 44 369 410 408 398 304 287 296 321 331 354 56</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\bsp_cpu_flash.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 68</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 221</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 11</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 240 395 382 394 441 378 168 432 383 421 344 376 392 125 369 386 98 30 229 352 209 322 324 22 375 398 368 74 387 367 271 89 373 60 58 384 307 126 92 88 239 212 5 418 306 292 342 358 153 345 134 348 95 79 44 410 408 304 287 296 321 331 354 56</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_adc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 201</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 206</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 185</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 394 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 376 88 212 92 125 168 432 344 126 239 369 395 153 345 95 394 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\board\board.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 371</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 6</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 453</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 222 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 367 92 395 394 30 307 88 168 432 74 89 375 60 58 125 392 368 387 271 382 373 384 126 239 212 209 322 324 22 348 386 383 98 441 421 229 240 344 352 378 376 5 418 306 292 342 358 153 345 134 222 95 79 44 369 410 408 398 304 287 296 321 331 354 56</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\Module\SaveMem\gd25q64c.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 188</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 435</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 216</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375 372 442</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 375 60 44 74 168 89 58 410 432 367 30 307 92 88 369 304 352 395 442 368 387 271 382 373 384 126 239 212 79 398 287 344 56 372 386 383 98 441 421 229 240 378 376 95 408 296 321 331 354 348 5 209 394 392 418 306 292 342 322 324 358 153 345 134 22</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 269</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 33</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 177</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 384 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 394 168 392 125 395 322 324 212 369 418 306 307 292 342 358 153 345 432 378 410 408 398 304 287 296 321 331 352 354 344 126 92 88 239 376 95 384 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\Module\SaveMem\exteeprom.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 50</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 17</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 208</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 348 368 386 74 383 60 387 98 367 240 58 125 168 92 88 239 126 344 376 212 95 5 79 44 209 384 395 153 345 432 369 394 410 392 408 418 398 306 304 307 287 292 296 342 321 322 331 324 352 358 354 378 382 271 134 441 56 89 421 30 22 373 229 375 100 372 442</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 153 30 352 418 432 98 5 306 345 395 386 441 229 125 212 307 358 372 383 382 421 240 344 378 168 376 292 342 134 368 100 442 74 387 367 271 89 373 375 60 58 384 126 92 88 239 209 394 392 322 324 22 348 95 79 44 369 410 408 398 304 287 296 321 331 354 56</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_crc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 41</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 14</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 280</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 414 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 414 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_aes.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 160</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 144</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 263</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 390 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 390 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dvp.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 182</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 57</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 76</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 404 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 404 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dac.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 226</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 96</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 430</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 406 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 406 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dcu.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 267</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 210</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 128</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 400 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 400 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_emb.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 147</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 90</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 447</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 308 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 308 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_efm.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 270</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 34</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 103</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 398 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 126 344 168 432 239 212 125 92 88 376 369 395 153 345 95 398 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_cmp.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 213</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 423</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 161</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 393 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 393 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_aos.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 211</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 199</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 265</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 410 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 344 126 239 95 369 432 153 345 410 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_ctc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 121</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 203</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 145</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 415 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 415 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_can.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 268</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 256</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 246</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 392 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 344 126 239 369 432 153 345 95 392 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_clk.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 181</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 214</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 205</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 408 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 92 432 212 88 376 395 125 168 344 126 239 95 369 153 345 408 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dbgc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 460</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 424</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 28</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 402 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 402 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dma.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 10</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 141</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 204</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 418 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 212 88 376 92 125 168 395 344 126 239 369 432 153 345 95 418 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F4A0\Libraries\hc32_ll_dmc.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 35</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 439</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 173</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 396 395 153 125 168 92 88 239 126 212 344 376 95 5 79 44 209 345 432 369</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 125 168 212 92 88 376 395 432 344 126 239 95 369 153 345 396 5 209 79 44</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\hc32f460_efm.c</name>
+            <outputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 276</file>
+                </tool>
+                <tool>
+                    <name>BICOMP</name>
+                    <file> 143</file>
+                </tool>
+                <tool>
+                    <name>__cstat</name>
+                    <file> 16</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ICCARM</name>
+                    <file> 195 119 441 125 168 92 88 239 126 56 153 212 27 254 262 95 5 79 44 209 215 70 217</file>
+                </tool>
+            </inputs>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\output\debug\Exe\hc32f460keta.out</name>
+            <outputs>
+                <tool>
+                    <name>OBJCOPY</name>
+                    <file> 461</file>
+                </tool>
+            </outputs>
+            <inputs>
+                <tool>
+                    <name>ILINK</name>
+                    <file> 238 371 68 101 258 8 50 188 220 91 276 148 433 25 463 236 23 247 260 186 438 113 93 155 104 202 250 4 111</file>
+                </tool>
+            </inputs>
+        </file>
+        <forcedrebuild>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\Libraries\system_hc32f460.c</name>
+            <tool>ICCARM</tool>
+        </forcedrebuild>
+        <forcedrebuild>
+            <name>$PROJ_DIR$\..\..\app\system\cpu\HC32F460\cpuHC32F460.c</name>
+            <tool>ICCARM</tool>
+        </forcedrebuild>
+    </configuration>
+    <configuration>
+        <name>Release</name>
+        <outputs />
+        <forcedrebuild>
+            <name>[MULTI_TOOL]</name>
+            <tool>ILINK</tool>
+        </forcedrebuild>
+    </configuration>
+</project>
