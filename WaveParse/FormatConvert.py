@@ -122,7 +122,7 @@ class FormatConverter:
                     while True:
                         buffer = f_in.read(frame_in)
                         if len(buffer) < frame_in:
-                            print(f"转换完成，帧数：{frame_index}")
+                            # print(f"转换完成，帧数：{frame_index}")
                             break
                         if buffer[0] != 0x68 or buffer[-1] != 0x16:
                             print("格式错误")
@@ -146,7 +146,7 @@ class FormatConverter:
             while True:
                 buffer = f_in.read(frame_in)
                 if len(buffer) < frame_in:
-                    print(f"转换完成，帧数：{frame_index}")
+                    # print(f"转换完成，帧数：{frame_index}")
                     break
                 if buffer[0] != 0x68 or buffer[-1] != 0x16:
                     print("格式错误")
@@ -176,7 +176,7 @@ class FormatConverter:
             while True:
                 buffer = f_in.read(input_frame_size)
                 if len(buffer) < input_frame_size:
-                    print(f"转换完成，帧数：{frame_index}")
+                    # print(f"转换完成，帧数：{frame_index}")
                     break
                 if buffer[0] != 0x68 or buffer[-1] != 0x16:
                     print("格式错误")

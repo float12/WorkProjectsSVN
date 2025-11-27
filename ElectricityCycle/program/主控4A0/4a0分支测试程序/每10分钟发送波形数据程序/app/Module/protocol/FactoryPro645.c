@@ -982,14 +982,14 @@ WORD WriteFactoryExtPro(BYTE *pBuf)
 			}
 			else if (pBuf[0] == 0x02) // 校表
 			{
-				for (i = 0; i < SAMPLE_CHIP_NUM; i++)
-				{
+				// for (i = 0; i < SAMPLE_CHIP_NUM; i++)
+				// {
 					// AA  HF常数  AA  A相瞬时量  AA  B相瞬时量  AA  C相瞬时量  AA
-					if (api_ProcSampleAdjust(pBuf[9], pBuf + 10, i) != TRUE)
+					if (api_ProcSampleAdjust(pBuf[9], pBuf + 10, OpeSampleRegChipNo) != TRUE)
 					{
 						break;
 					}
-				}
+				// }
 				wReturnLen = 1;
 			}
 			else if (pBuf[0] == 0x03) //直流偶次谐波时间参数

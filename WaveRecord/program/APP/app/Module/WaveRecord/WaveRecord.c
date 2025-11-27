@@ -26,12 +26,6 @@
 //-----------------------------------------------
 //		本文件使用的结构体，共用体，枚举
 //-----------------------------------------------
-typedef enum
-{
-	ePOWER_DOWN,
-	eWRONG_FRAME,
-	eKEY_RELEASED,
-} eSaveMonitorDataType;
 
 //-----------------------------------------------
 //				全局使用的变量，常量
@@ -43,14 +37,13 @@ DWORD OneBufFullCnt = 0;
 DWORD TwoBufFullCnt = 0;
 DWORD ThreeBufFullCnt = 0;
 DWORD WriteToBufSkippedHalfWave = 0;// 上一次转存到sd卡未完成导致本次数据抛弃的计数
-DWORD WrongHalfWaveNo = 0;
 sTopoWaveTypedef sTopoWave = {0};
 DWORD CycleNumb = 0;// 全局周期计数
 
 //录波相关
 BYTE  WriteToSdCycleCount = 0; // 写到sd卡的周波计数
 BYTE  BufNum = 0;				 // 写到sd卡的缓冲区号,从0开始
-
+BYTE WaveReocodFlag = 0; // 是否开始录制 1开始 0停止
 BYTE ReverAddr[6] = {0};
 BYTE WAVE_Buffer[BUFF_COUNT][SAVE_TO_SD_CYCLE_NUM][WAVE_RECORD_PHASE_NUM][WAVE_FRAME_SIZE];		// 用来保存dma数据
 BYTE WAVE_BufferTo4G[BUFF_COUNT][SAVE_TO_SD_CYCLE_NUM][WAVE_RECORD_PHASE_NUM][WAVE_FRAME_SIZE]; // 用来保存4g需要采集的数据
@@ -75,7 +68,6 @@ BYTE isPressed = 0; // 按下按键为1
 static BYTE LastKeyLevel = 0;
 BYTE TFKeySmoothTimer = 0;
 
-FRESULT MonitorResult = FAT32_FR_OK;
 //-----------------------------------------------
 //				内部函数声明
 //-----------------------------------------------
@@ -501,14 +493,6 @@ void api_ParseHsdcWaveBuf(void)
 			}
 			else // 半波有问题使用前一个半波的倒序反向数据，并且保存一次错误序号到监视文件，记录最新的错误序号
 			{
-				if(sTopoWave.RxCnt == 2)
-				{
-					WrongHalfWaveNo = CycleNumb;
-				}
-				else//一个周波未收完 序号还没加所以错误序号需要+1
-				{
-					WrongHalfWaveNo = CycleNumb + 1;
-				}
 				UseLastHalfWave(phase, dest);
 			}
 		}
@@ -550,59 +534,6 @@ void api_ParseHsdcWaveBuf(void)
 		sTopoWave.RxCnt = 0;
 	}
 }
-
-//-----------------------------------------------
-// 函数功能:保存监视数据
-//
-// 参数:eSaveMonitorDataType
-//
-// 返回值:
-//
-// 备注:
-//-----------------------------------------------
-void SaveMonitorData(eSaveMonitorDataType type)
-{
-	BYTE buffer[1024] = {0};
-	DWORD bytesWritten = 0;
-
-	if (f_open(&monitorFile, "monitor.txt", FA_OPEN_ALWAYS | FA_WRITE) == FAT32_FR_OK)
-	{
-		if (f_lseek(&monitorFile, ((&monitorFile)->fsize)) == FAT32_FR_OK)
-		{
-			snprintf((char *)buffer, sizeof(buffer),
-			 "\nTime: %04u-%02u-%02u %02u:%02u:%02u\n"
-			 "currentFileName = %s\n"
-			 "CycleNumb = %lu\n"
-			 "BufWriteToTFSucCount = %lu\n"
-			 "OneBufFullCnt = %lu\n\n"
-			 "TwoBufFullCnt = %lu\n"
-			 "ThreeBufFullCnt = %lu\n"
-			 "WrongHalfWaveCount = %u\n"
-			 "WriteToBufSkippedHalfWave = %lu\n"
-			 "BufWriteToTFErrCount = %lu\n"
-			 "Write to tf FR_Result = %lu\n"
-			 "WrongHalfWaveNo = %lu\n",
-			 RealTimer.wYear, RealTimer.Mon, RealTimer.Day, RealTimer.Hour, RealTimer.Min, RealTimer.Sec,
-			 currentFileName, CycleNumb, BufWriteToTFSucCount, OneBufFullCnt, TwoBufFullCnt,
-			 ThreeBufFullCnt, WrongHalfWaveCount, WriteToBufSkippedHalfWave, BufWriteToTFErrCount,
-			 MonitorResult, WrongHalfWaveNo);
-					
-			if (type == eKEY_RELEASED)
-			{
-				strcat((char *)buffer, "key released,save monitor data\n\n\n");
-			}
-			else if (type == ePOWER_DOWN)
-			{
-				strcat((char *)buffer, "power down,save monitor data\n\n\n");
-			}
-			// 写入数据到文件
-			f_write(&monitorFile, buffer, strlen((char *)buffer), (UINT *)&bytesWritten);
-			f_close(&monitorFile);
-		}
-	}
-	memset(&monitorFile, 0, sizeof(monitorFile));
-}
-
 //-----------------------------------------------
 // 函数功能:上电或再次按下按钮创建新文件
 //
@@ -746,7 +677,6 @@ BYTE WriteDataToFile(FIL *file, const BYTE *buf, DWORD Size)
 		// fr_result = f_open(&DataFile, (char *)currentFileName, FA_OPEN_ALWAYS | FA_WRITE | FA_READ);
 		if (fr_result != FAT32_FR_OK)
 		{
-			MonitorResult = fr_result;
 			// 错误处理，无法打开新文件
 			return FALSE;
 		}
@@ -755,7 +685,6 @@ BYTE WriteDataToFile(FIL *file, const BYTE *buf, DWORD Size)
 	fr_result = f_write(file, buf, Size, (UINT *)&writtenBytes);
 	if ((fr_result != FAT32_FR_OK) || (writtenBytes != Size))
 	{
-		MonitorResult = fr_result;
 		// 错误处理，写入失败
 		return FALSE;
 	}
@@ -880,6 +809,25 @@ static KeyStatus DetectKey(void)
 		}
 	}
 }
+
+//-----------------------------------------------
+// 函数功能:停止录波处理
+//
+// 参数:
+//
+// 返回值:
+//
+// 备注:
+//-----------------------------------------------
+//-----------------------------------------------
+void StopRecording(void)
+{
+	CloseWaveFile(&DataFile);
+	memset(&DataFile, 0, sizeof(DataFile));
+	memset(&FileSystem, 0, sizeof(FileSystem));
+	f_mount(0, NULL); // 卸载文件系统
+}
+
 //-----------------------------------------------
 // 函数功能:掉电保存监视数据，防止断电后按键未弹起丢失监视数据
 //
@@ -891,11 +839,10 @@ static KeyStatus DetectKey(void)
 //-----------------------------------------------
 void api_PowerDownWaveRecord(void)
 {
-	if ((keyStatus == PRESSED_STATUS) && (isPressed == 1))
+	if (WaveReocodFlag == 1)
 	{
-		CloseWaveFile(&DataFile);
-		memset(&DataFile, 0, sizeof(DataFile));
-		SaveMonitorData(ePOWER_DOWN);
+		WaveReocodFlag = 0;
+		StopRecording();
 	}
 	TF_LED_LOW;
 }
@@ -913,15 +860,31 @@ void InitMonitorVariable(void)
 	DISABLE_CPU_INT;
 	BufWriteToTFSucCount = 0;
 	BufWriteToTFErrCount = 0;
-	MonitorResult = FAT32_FR_OK;
 	WrongHalfWaveCount = 0;
 	OneBufFullCnt = 0;
 	TwoBufFullCnt = 0;
 	ThreeBufFullCnt = 0;
 	WriteToBufSkippedHalfWave = 0;
-	WrongHalfWaveNo = 0;
 	ENABLE_CPU_INT;
 }
+//-----------------------------------------------
+// 函数功能:开始录波处理
+//
+// 参数:
+//
+// 返回值:
+//
+// 备注:
+//-----------------------------------------------
+void StartRecording(void)
+{
+	memset(&FileSystem, 0, sizeof(FileSystem));
+	memset(&DataFile, 0, sizeof(DataFile));
+	f_mount(0, &FileSystem);
+	CreateNextWaveFile();
+	InitMonitorVariable();
+}
+
 //-----------------------------------------------
 // 函数功能:按键处理
 //
@@ -933,26 +896,42 @@ void InitMonitorVariable(void)
 //-----------------------------------------------
 void KeyProcess(void)
 {
-
 	if ((keyStatus == PRESSED_STATUS) && (isPressed == 0))
 	{ // 每次按下后新建下一个文件
 		isPressed = 1;
-		memset(&FileSystem, 0, sizeof(FileSystem));
-		f_mount(0, &FileSystem);
-		CreateNextWaveFile();
-		InitMonitorVariable();
+		WaveReocodFlag = 1;
 	}
 	else if ((keyStatus == UNPRESSED_STATUS) && (isPressed == 1))
 	{
-		// 每次按键弹起保存监视数据
-		CloseWaveFile(&DataFile);
-		memset(&DataFile, 0, sizeof(DataFile));
 		isPressed = 0;
-		SaveMonitorData(eKEY_RELEASED);
-		f_mount(0, NULL); // 卸载文件系统
+		WaveReocodFlag = 0;
 	}
 }
-
+//-----------------------------------------------
+// 函数功能:检查录波开关并处理
+//
+// 参数:
+//
+// 返回值:
+//
+// 备注:
+//-----------------------------------------------
+void CheckRecordSign(void)
+{
+	static BYTE LastWaveReocodFlag = 0;
+	if(LastWaveReocodFlag != WaveReocodFlag)
+	{
+		LastWaveReocodFlag = WaveReocodFlag;
+		if(WaveReocodFlag == 1)
+		{
+			StartRecording();
+		}
+		else if(WaveReocodFlag == 0)
+		{
+			StopRecording();
+		}
+	}
+}
 //-----------------------------------------------
 // 函数功能: 准备并发送波形数据
 //
@@ -999,16 +978,16 @@ void TransferDataPerFlag(void)
 	{   
 		if (SWAVE_BufferFullFlag[WriteToSDBufNum] == 1)
 		{	
-			if ((DataFile.fs != NULL) && (isPressed == 1))
+			if ((DataFile.fs != NULL) && (WaveReocodFlag == 1))
 			{
 				LastTick = gsysTick;
 				result = WriteDataToFile(&DataFile, (BYTE *)&WAVE_Buffer[WriteToSDBufNum][0][0][0],
 										 WAVE_FRAME_SIZE * WAVE_RECORD_PHASE_NUM * SAVE_TO_SD_CYCLE_NUM);
 				#if (SEL_DEBUG_VERSION == YES)
-				if ((gsysTick - LastTick) > 200)
+				if ((gsysTick - LastTick) > 300)
 				{
 					// printf("\r\nTF Write Time:%lu ms", gsysTick - LastTick);
-					api_WriteFreeEvent(EVENT_TF_WRITE_200MS, (WORD)(gsysTick - LastTick)); // 写入时间超过200ms
+					api_WriteFreeEvent(EVENT_TF_WRITE_300MS, (WORD)(gsysTick - LastTick)); // 写入时间超过300ms
 				}
 				#endif
 				if (result == TRUE)
@@ -1046,6 +1025,7 @@ void api_WAVE_Task(void)
 	static DWORD LastSkipNum = 0,lastWrongHalfWaveCnt = 0;
 	keyStatus = DetectKey();
 	KeyProcess();
+	CheckRecordSign();
 	TransferDataPerFlag();
 	// 检测到跳过次数变化就写记录，传完数据后判断，防止传输中WriteToBufSkippedHalfWave变化
 	if ((WriteToBufSkippedHalfWave > 0) && (LastSkipNum != WriteToBufSkippedHalfWave))

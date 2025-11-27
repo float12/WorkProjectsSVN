@@ -18,6 +18,11 @@ import os
 from pyqtgraph.exporters import ImageExporter
 from _3p1pConvert import phaseNumConverter
 SAMPLE_NUM = 128
+
+class TimeAxis(pg.AxisItem):
+    def tickStrings(self, values, scale, spacing):
+         return [f"{int(v)%86400//3600:02d}:{(int(v)%3600)//60:02d}:{int(v)%60:02d}" 
+                for v in values]
 #print重定向
 class RedirectTextEdit(QTextEdit):
     def __init__(self):
@@ -118,7 +123,7 @@ class WaveDataProcessUI(QWidget):
         # 文件选择
         file_layout = QHBoxLayout()
         self.file_edit = QLineEdit()
-        self.file_button = QPushButton("选择波形解析bin文件")
+        self.file_button = QPushButton("选择波形处理文件或目录")
         file_layout.addWidget(self.file_edit)
         file_layout.addWidget(self.file_button)
         self.left_layout.addLayout(file_layout)
@@ -128,11 +133,6 @@ class WaveDataProcessUI(QWidget):
         self.endian_select.setCurrentIndex(0)  # 默认选择大端
         self.left_layout.addWidget(QLabel("波形数据大小端:"))
         self.left_layout.addWidget(self.endian_select)
-        # 增加文本输入框
-        self.text_input_label = QLabel("输入格式转换文件目录或文件：")
-        self.text_input = QLineEdit()
-        self.left_layout.addWidget(self.text_input_label)
-        self.left_layout.addWidget(self.text_input)
         # 系数输入区
         self.coeff_container = QWidget()
         self.coeff_layout = QGridLayout()
@@ -208,14 +208,22 @@ class WaveDataProcessUI(QWidget):
         sys.stdout = self.text_show
     #转成单相按钮回调函数
     def convert_to_1p(self):
-        if self.data_file_path != None:
-            converter = phaseNumConverter(mode="3p_to_1p", chunk_size=782,input_3p_file =self.data_file_path)
-            converter.run()
+        input_path = os.path.dirname(self.data_file_path)
+        if os.path.isfile(input_path):
+        # 输入的是单个文件
+            bin_files = [input_path]
+        elif os.path.isdir(input_path):
+        # 输入的是目录，遍历该目录下所有bin文件
+            bin_files = glob.glob(os.path.join(input_path, "*.bin"))
         else:
-            print("请选择文件")
+            print("请输入正确的文件路径或目录")
+            return
+        for input_file in bin_files:
+            converter = phaseNumConverter(mode="3p_to_1p", chunk_size=782,input_3p_file =input_file)
+            converter.run()
     #转成数据传输格式按钮回调函数
     def convert_to_data_transmit(self):
-        data_file_path = self.text_input.text()
+        data_file_path = os.path.dirname(self.data_file_path)
         if data_file_path != None:
             if os.path.isfile(data_file_path):
                 # 输入的是单个文件
@@ -226,6 +234,7 @@ class WaveDataProcessUI(QWidget):
             else:
                 print("请输入正确的文件路径或目录")
                 return
+            print("对目录中所有bin文件开始转换")
             output_dir = pathlib.Path("wlb_waveRecord_output")
             converter = FormatConverter()
             for input_file in bin_files:
@@ -248,7 +257,7 @@ class WaveDataProcessUI(QWidget):
                 # INSERT_YOUR_CODE
                 if os.path.exists(output_file):
                     os.remove(output_file)
-            print("转换结束")
+            print("所有文件转换结束,输出路径wlb_Transmit_output")
         else:
             print("请选择文件")
 
@@ -314,9 +323,9 @@ class WaveDataProcessUI(QWidget):
         else:
             self.choose_file_tip()
 
-    def print_average_every_100(self,label, data_list, max_group_count = 50):
+    def print_average_every_50(self,label, data_list, max_group_count = 50):
         """
-        每100个数据点计算一次平均值，并打印前 max_group_count 个平均值。
+        每50个数据点计算一次平均值，并打印前 max_group_count 个平均值。
 
         :param label: 字符串标签（如 "有功功率", "I RMS", "U RMS"）
         :param data_list: 要处理的数据列表
@@ -362,11 +371,11 @@ class WaveDataProcessUI(QWidget):
              i_len = len(self.plot_IA_rms_data)
              u_len = len(self.plot_UA_rms_data)
              p_len = len(wavePlotter.plot_ActPwr_data)
-             self.print_average_every_100("视在功率", wavePlotter.plot_AppPwr_data)
-             self.print_average_every_100("有功功率", wavePlotter.plot_ActPwr_data)
-             self.print_average_every_100("无功功率", wavePlotter.plot_ReactPwr_data)
-             self.print_average_every_100("I RMS", self.plot_IA_rms_data)
-             self.print_average_every_100("U RMS", self.plot_UA_rms_data)
+             self.print_average_every_50("视在功率", wavePlotter.plot_AppPwr_data)
+             self.print_average_every_50("有功功率", wavePlotter.plot_ActPwr_data)
+             self.print_average_every_50("无功功率", wavePlotter.plot_ReactPwr_data)
+             self.print_average_every_50("I RMS", self.plot_IA_rms_data)
+             self.print_average_every_50("U RMS", self.plot_UA_rms_data)
              # 处理功率数据
         elif self.phase_num == 3:
             self.plot_UA_data = wavePlotter.plot_UA_data
@@ -508,7 +517,7 @@ class WaveDataProcessUI(QWidget):
 
     # 增加plot
     def add_sub_plot(self, row, col, title, x_data,y_data, y_label,x_label):
-        plot = self.plot_widget.addPlot(row=row, col=col, title=title)
+        plot = self.plot_widget.addPlot(axisItems={'bottom': TimeAxis(orientation='bottom')},row=row, col=col, title=title)
         plot.plot(x_data, y_data, pen='r')
         plot.setMouseEnabled(x=True, y=False)
         # 设置横纵坐标的图例
@@ -575,73 +584,28 @@ class WaveDataProcessUI(QWidget):
             Cycle_x_values = self.plot_X_data[::SAMPLE_NUM]
 
             # 使用提取的函数来创建子图
-            self.add_sub_plot(0, 0, "UA（原始周波数据）", self.plot_X_data, self.plot_UA_data, 'Voltage (V)','time(ms)')
-            self.add_sub_plot(0, 1, "IA（原始周波数据）", self.plot_X_data, self.plot_IA_data, 'Current (A)','time(ms)')
-            self.add_sub_plot(1, 0, "UA-RMS（有效值ms级）", Cycle_x_values, self.plot_UA_rms_data, 'Voltage-RMS (V)','time(ms)')
-            self.add_sub_plot(1, 1, "IA-RMS（有效值ms级）", Cycle_x_values, self.plot_IA_rms_data, 'Current-RMS (A)','time(ms)')
+            self.add_sub_plot(0, 0, "UA（原始周波数据）", self.plot_X_data, self.plot_UA_data, 'Voltage (V)','time')
+            self.add_sub_plot(0, 1, "IA（原始周波数据）", self.plot_X_data, self.plot_IA_data, 'Current (A)','time')
+            self.add_sub_plot(1, 0, "UA-RMS（有效值ms级）", Cycle_x_values, self.plot_UA_rms_data, 'Voltage-RMS (V)','time')
+            self.add_sub_plot(1, 1, "IA-RMS（有效值ms级）", Cycle_x_values, self.plot_IA_rms_data, 'Current-RMS (A)','time')
 
             X_sec = range(0, len(self.plot_P_sec_level))
+            X_sec = [self.plot_X_data[0] + i for i in X_sec]
             print("绘图秒数")
             print(len(X_sec))
             # 添加秒级子图
-            self.add_sub_plot(2, 0, "UA-RMS (秒级数据)", X_sec, self.plot_U_sec_level, 'Voltage-RMS /50 (V)','time(s)')
-            self.add_sub_plot(2, 1, "IA-RMS (秒级数据)", X_sec, self.plot_I_sec_level, 'Current-RMS /50 (V)','time(s)')
-            self.add_sub_plot(3, 0, "P（周波数据）", Cycle_x_values, self.plot_ActPwr_data, 'P (W)', 'time(ms)')
-            self.add_sub_plot(3, 1, "P（秒级数据）", X_sec, self.plot_P_sec_level, 'P (W)','time(s)')
-
-            # folder = "subplots"
-            # os.makedirs(folder, exist_ok=True)
-            # # 删除目录中的所有文件
-            # for filename in os.listdir(folder):
-            #     file_path = os.path.join(folder, filename)
-            #     if os.path.isfile(file_path):
-            #         os.remove(file_path)
-            # i = 0
-            #
-            #
-            # # 假设 self.plot_widget 是 GraphicsLayoutWidget
-            # i = 1  # 子图编号
-            # folder = "output_folder"  # 替换为你的输出文件夹路径
-            #
-            # # 确保输出文件夹存在
-            # if not os.path.exists(folder):
-            #     os.makedirs(folder)
-            #
-            # for item in self.plot_widget.items():
-            #     if isinstance(item, pg.PlotItem):
-            #         # 设置白底红线（根据你的描述，修正为白色背景）
-            #         item.getViewBox().setBackgroundColor('w')  # 白色背景
-            #         for curve in item.listDataItems():
-            #             curve.setPen(pg.mkPen('r', width=2))  # 红色曲线，线宽2
-            #
-            #         # 初始化 ImageExporter，绑定到子图的场景
-            #         exporter = ImageExporter(item)  # 直接使用 PlotItem，而不是 item.scene()
-            #
-            #         # 设置导出参数
-            #         exporter.parameters()['width'] = 2000  # 设置宽度，高度自动按比例缩放
-            #
-            #         # 导出子图
-            #         filename = os.path.join(folder, f"subplot_{i}.png")
-            #         exporter.export(filename)
-            #         print(f"导出：{filename}")
-            #         i += 1
-            print()
-            print("秒级功率前四十个点")
-            print([f"{float(x):.5f}" for x in self.plot_P_sec_level[:30]])
-            print()
-            print("秒级电压前四十个点")
-            print([f"{float(x):.5f}" for x in self.plot_U_sec_level[:30]])
-            print()
-            print("秒级电流前四十个点")
-            print([f"{float(x):.5f}" for x in self.plot_I_sec_level[:30]])
+            self.add_sub_plot(2, 0, "UA-RMS (秒级数据)", X_sec, self.plot_U_sec_level, 'Voltage-RMS /50 (V)','time')
+            self.add_sub_plot(2, 1, "IA-RMS (秒级数据)", X_sec, self.plot_I_sec_level, 'Current-RMS /50 (V)','time')
+            self.add_sub_plot(3, 0, "P（ms级数据）", Cycle_x_values, self.plot_ActPwr_data, 'P (W)', 'time')
+            self.add_sub_plot(3, 1, "P（秒级数据）", X_sec, self.plot_P_sec_level, 'P (W)','time')
         elif self.phase_num == 3:
             # 使用提取的函数来创建三相数据的子图
-            self.add_sub_plot(0, 0, "UA", self.plot_X_data,self.plot_UA_data, 'Voltage (V)','time(ms)')
-            self.add_sub_plot(1, 0, "IA", self.plot_X_data,self.plot_IA_data, 'Current (A)','time(ms)')
-            self.add_sub_plot(0, 1, "UB", self.plot_X_data,self.plot_UB_data, 'Voltage (V)','time(ms)')
-            self.add_sub_plot(1, 1, "IB", self.plot_X_data,self.plot_IB_data, 'Current (A)','time(ms)')
-            self.add_sub_plot(0, 2, "UC", self.plot_X_data,self.plot_UC_data, 'Voltage (V)','time(ms)')
-            self.add_sub_plot(1, 2, "IC", self.plot_X_data,self.plot_IC_data, 'Current (A)','time(ms)')
+            self.add_sub_plot(0, 0, "UA", self.plot_X_data,self.plot_UA_data, 'Voltage (V)','time')
+            self.add_sub_plot(1, 0, "IA", self.plot_X_data,self.plot_IA_data, 'Current (A)','time')
+            self.add_sub_plot(0, 1, "UB", self.plot_X_data,self.plot_UB_data, 'Voltage (V)','time')
+            self.add_sub_plot(1, 1, "IB", self.plot_X_data,self.plot_IB_data, 'Current (A)','time')
+            self.add_sub_plot(0, 2, "UC", self.plot_X_data,self.plot_UC_data, 'Voltage (V)','time')
+            self.add_sub_plot(1, 2, "IC", self.plot_X_data,self.plot_IC_data, 'Current (A)','time')
 
     #更新最大值显示
     def update_max_values(self,rms_Umax,rms_Imax):

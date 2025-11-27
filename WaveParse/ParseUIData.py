@@ -103,10 +103,10 @@ class FrameParser(QObject):
         self.IsQT = 1 #控制打印信息，外部模块调用置0可向终端打印信息
         self.cur_sec = -1
         self.isLastFrame = 0
-        self.U_in_one_sec =[]
+        self.U_in_one_sec =[]#一秒内的rms电压
         self.I_in_one_sec = []
         self.P_in_one_sec = []
-        self.U_sec_level =[]
+        self.U_sec_level =[]#秒级数据，一秒一个点
         self.I_sec_level = []
         self.P_sec_level = []
         self.FirstSecond = -1
@@ -148,8 +148,8 @@ class FrameParser(QObject):
         start_of_year = datetime(current_year, 1, 1, 0, 0, 0)
         # 加上秒数
         target_time = start_of_year + timedelta(seconds=seconds)
-        # 格式化输出
         self.print(target_time.strftime("%Y-%m-%d %H:%M:%S"))
+
     # 计算一个周波有功功率
     def calculate_ActPower(self,U_data,I_data):
         sumdata = 0
@@ -305,7 +305,9 @@ class FrameParser(QObject):
 
         # 提取秒字段
         seconds = int.from_bytes(buffer[1:5], byteorder='little')
-
+        self.cur_sec = seconds
+        if self.FirstSecond == -1:
+            self.FirstSecond = seconds
         # 提取序号字段 (此处假设序号在数据部分)
         if IsHasNO:
             sequence_number = int.from_bytes(buffer[775:779], byteorder='little')
@@ -396,8 +398,8 @@ class FrameParser(QObject):
             self.rms_Imax = max(getattr(self, 'rms_Imax', 0), self.rms_I)
 
             # 如果是698帧格式，还需额外处理秒级数据缓存
-            if is_698:
-                self._update_sec_level_buffers()
+            # if is_698:
+            self._update_sec_level_buffers()
         return 0
 
     def _update_sec_level_buffers(self):
@@ -525,11 +527,12 @@ class WavePlotter:
         self.plot_IA_data = None
         self.plot_IB_data = None
         self.plot_IC_data = None
-        self.plot_UA_rms_data = None
-        self.plot_IA_rms_data = None
-        self.plot_ActPwr_data = None
-        self.plot_ReactPwr_data = None
-        self.plot_AppPwr_data = None
+        self.plot_time = []
+        self.plot_UA_rms_data = None #1个周波的urms数据
+        self.plot_IA_rms_data = None #1个周波的irms数据
+        self.plot_ActPwr_data = None #1个周波的有功功率数据
+        self.plot_ReactPwr_data = None #1个周波的无功功率数据
+        self.plot_AppPwr_data = None #1个周波的视在功率数据
         self.Cycle_cnt = 0
         self.plot_read_cnt = PLOT_TIME * 60 * 50 * self.phase_num  # 读取文件次数,每次读一帧
         self.init_plot()
@@ -589,8 +592,10 @@ class WavePlotter:
                 self.plot_IA_data[start:end] = self.frame_parser.current[::]
                 self.plot_UA_data[start:end] = self.frame_parser.voltage[::]
         elif self.phase_num == 1:
+            time = self.frame_parser.FirstSecond
             phase = 0
-            self.plot_X_data[start:end] = new_x[::]
+            new_x = [time + i*0.001 for i in new_x]
+            self.plot_X_data[start:end] =new_x[::]
             self.plot_IA_data[start:end] = self.frame_parser.current[::]
             self.plot_UA_data[start:end] = self.frame_parser.voltage[::]
             self.frame_parser.ParsedFrameNum += 1
@@ -650,14 +655,15 @@ class WavePlotter:
         phase = 0
         try:
             with open(self.data_file_path, "rb") as file:
-                data = file.read(53)
-                if data[0] == 0x68 and data[52] == 0x16 and self.frame_parser.type ==1:  # 如果有系数帧提取系数
+                data = file.read(54)
+                if data[0] == 0x68 and data[52] == 0x16  and data[53] == 0x68 and self.frame_parser.type ==1:  # 如果有系数帧提取系数
                     float1_bytes = bytes(data[39:43])
                     float2_bytes = bytes(data[44:48])
                     self.uiFactor[0] = struct.unpack('>f', float1_bytes)[0]
                     self.uiFactor[3] = struct.unpack('>f', float2_bytes)[0]
                     self.print(f"电压系数{self.uiFactor[0]}")
                     self.print(f"电流系数{self.uiFactor[3]}")
+                    file.seek(53)
                 else:
                     file.seek(0)
                 while True:

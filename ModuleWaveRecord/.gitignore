@@ -1,0 +1,7 @@
+/*
+!.gitignore
+!/program/
+*.i
+FLASH/
+build/
+Debug/

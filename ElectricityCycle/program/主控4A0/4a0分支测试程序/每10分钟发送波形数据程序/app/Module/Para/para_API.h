@@ -587,10 +587,10 @@ extern const BYTE HalfWaveDefCheckTime;
 #elif( SAMPLE_CHIP==CHIP_RN8302B )
 extern const WORD ZeroSampleCurrConst;
 extern const DWORD SampleCtrlAddr[18][2];
-extern const DWORD SampleAdjustAddr[27][2];
+extern const DWORD SampleAdjustAddr[33][2];
 //extern const BYTE SampleOffsetAddr[19];
 extern const DWORD SampleCtrlDefData[18];
-extern const DWORD SampleAdjustDefData[27];
+extern const DWORD SampleAdjustDefData[33];
 extern const DWORD SampleUIPGain[11];
 extern const TSampleUIK UIFactorConst;
 extern const TChargePara ChargeParaConst;

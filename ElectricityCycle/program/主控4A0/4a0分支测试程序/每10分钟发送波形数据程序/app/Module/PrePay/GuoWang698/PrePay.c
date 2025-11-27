@@ -581,6 +581,8 @@ void api_PrePayTask(void)
 		{
 			api_ClrRunHardFlag(eRUN_HARD_MAC_ERR_FLAG);
 			MacErrCounter = 0;
+			SysFREEMsgCounter = 0;
+			SysUNMsgCounter = 0;
 		}	
 	}
 	#endif

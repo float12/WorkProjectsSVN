@@ -794,7 +794,23 @@ static void PH_Adjust(BYTE Type, BYTE *Buf, BYTE chipNo)
 				SampleAdjustReg[chipNo].PHSI[i].d = td.d;
 				WriteSampleReg(PHSIA_EMU+i,td.b,4, chipNo);
 			}
-			
+			//----增加同步采样波形缓存通道相位校正----
+			SampleSpecCmdOp(0x15B, CmdWriteOpen,chipNo);
+			// 扩位校正，电压通道偏移值设置为0x200,同计量通道一致
+            if((td.d & 0x3FF) >= 0x200)
+            {
+				SampleAdjustReg[chipNo].PHS_U_WAVE[i].d = 0;
+				SampleAdjustReg[chipNo].PHS_I_WAVE[i].d = (td.d & 0x3FF) - 0x200;
+            }
+			else
+			{
+				SampleAdjustReg[chipNo].PHS_U_WAVE[i].d = 0x200-(td.d & 0x3FF);
+				SampleAdjustReg[chipNo].PHS_I_WAVE[i].d = 0;
+			}
+			// 第一级校正，填写与计量通道相同的偏移校正值
+			WriteSampleReg(PHS_UA_WAVE + i, SampleAdjustReg[chipNo].PHS_U_WAVE[i].b, 2,chipNo);
+			WriteSampleReg(PHS_IA_WAVE + i, td.b, 2,chipNo);
+			SampleSpecCmdOp(0x15B, CmdWriteClose,chipNo);
 		}
 		else//小电流
 		{

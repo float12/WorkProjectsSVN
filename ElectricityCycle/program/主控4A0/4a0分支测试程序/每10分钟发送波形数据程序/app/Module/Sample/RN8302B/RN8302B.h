@@ -121,6 +121,13 @@
 #define	PHSIB_EMU			0x0110		//IB通道相位校正寄存器				0x808080
 #define	PHSIC_EMU			0x0111		//IC通道相位校正寄存器				0x808080
 #define	PHSIN_EMU			0x0112		//IN通道相位校正寄存器				0x80
+#define	PHS_UA_WAVE			0x01D2		//同步采样UA波形缓存通道相位校正寄存器
+#define	PHS_UB_WAVE			0x01D3		//同步采样UB波形缓存通道相位校正寄存器	
+#define	PHS_UC_WAVE			0x01D4		//同步采样UC波形缓存通道相位校正寄存器	
+#define	PHS_IA_WAVE			0x01D5		//同步采样IA波形缓存通道相位校正寄存器
+#define	PHS_IB_WAVE			0x01D6		//同步采样IB波形缓存通道相位校正寄存器
+#define	PHS_IC_WAVE			0x01D7		//同步采样IC波形缓存通道相位校正寄存器
+#define	PHS_IN_WAVE			0x01D8		//同步采样IN波形缓存通道相位校正寄存器	
 //5%Ib,0.5L
 //其他
 #define	HFConst_EMU			0X0100	//高频脉冲常数寄存器
@@ -403,7 +410,8 @@ typedef struct TSampleAdjustReg_t
 	TFourByteUnion 	PHSI[3];		//电流通道相位校正
 	TFourByteUnion 	POS[3];			//有功功率偏置校正	
 	TFourByteUnion 	IOS[3];			//有功功率偏置校正
-	
+	TFourByteUnion 	PHS_U_WAVE[3];	//波形缓存电压通道相位校正
+	TFourByteUnion 	PHS_I_WAVE[3];	//波形缓存电流通道相位校正
 	DWORD 			CRC32;			//4字节校验
 }TSampleAdjustReg;
 

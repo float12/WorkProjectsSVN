@@ -709,6 +709,11 @@ WORD ReadFactoryExtPro(BYTE *pBuf)
 				memcpy(p, &TFTestStatus, sizeof(TFTestStatus));
 				wReturnLen = 2 + sizeof(TFTestStatus);
 			}
+			else if (pBuf[0] == 0x08)//是否在录波
+			{
+				memcpy(p, &WaveReocodFlag, sizeof(WaveReocodFlag));
+				wReturnLen = 2 + sizeof(WaveReocodFlag);
+			}
 			break;
 		default:
 			break;
@@ -1244,6 +1249,20 @@ WORD WriteFactoryExtPro(BYTE *pBuf)
 					wReturnLen = 1;
 				}
                 api_FreshParaRamFromEeprom(1);
+			}
+			break;
+		case 0x15:
+			if (pBuf[0] == 0x08)//录波开关
+			{
+				if(pBuf[8] == 0x01)
+				{
+					WaveReocodFlag = 1;
+				}
+				else if(pBuf[8] == 0x00)
+				{
+					WaveReocodFlag = 0;
+				}
+				wReturnLen = 1;
 			}
 			break;
 		case 0xF0:

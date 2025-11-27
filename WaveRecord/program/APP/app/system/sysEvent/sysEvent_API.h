@@ -177,8 +177,8 @@
 
 //tf卡缓冲区满，波形数据丢失
 #define EVENT_TF_BUF_FULL				75//0x4B
-//tf卡写入一次耗时大于200ms
-#define EVENT_TF_WRITE_200MS			76//0x4C
+//tf卡写入一次耗时大于300ms
+#define EVENT_TF_WRITE_300MS			76//0x4C
 //波形数据出现crc错误
 #define EVENT_WAVE_CRC_ERR				77//0x4D
 

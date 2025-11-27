@@ -85,7 +85,7 @@ const TSampleUIK UIFactorConst =
 const TChargePara ChargeParaConst =
 {
 	30,	//最大录波时间
-	10,	//充电结束电压
+	30,	//充电结束电压
 	0x00000000, //CRC32
 };
 
@@ -202,7 +202,7 @@ const DWORD SampleCtrlDefData[18] =
 };
 
 //采样芯片增益类寄存器地址
-const DWORD SampleAdjustAddr[27][2] = 
+const DWORD SampleAdjustAddr[33][2] = 
 {
 	//功率增益
 	{GPA_EMU,2},	{GPB_EMU,2},	{GPC_EMU,2},//2字节
@@ -214,10 +214,11 @@ const DWORD SampleAdjustAddr[27][2] =
 	{PHSIA_EMU,4},	{PHSIB_EMU,4},	{PHSIC_EMU,4},//3字节
 	{PAOS_EMU,2},	{PBOS_EMU,2},	{PCOS_EMU,2},//2字节
 	{IAOS_EMU,2},	{IBOS_EMU,2},	{ICOS_EMU,2},//2字节
-		
+	{PHS_UA_WAVE,2},{PHS_UB_WAVE,2},{PHS_UC_WAVE,2},//2字节
+	{PHS_IA_WAVE,2},{PHS_IB_WAVE,2},{PHS_IC_WAVE,2},//2字节
 };
 //采样芯片控制类寄存器默认数据
-const DWORD SampleAdjustDefData[27] = 
+const DWORD SampleAdjustDefData[33] = 
 {
 	0x00000000, 0x00000000, 0x00000000,	//GP
 	0x00000000, 0x00000000, 0x00000000,	//GQ
@@ -228,6 +229,8 @@ const DWORD SampleAdjustDefData[27] =
 	0x1E1785E0,	0x21284A11, 0x1DAF6BD9,	//PHSI
 	0x00000000, 0x00000000, 0x00000000,	//POS	
 	0x00000001, 0x00000001, 0x00000000,	//IOS
+	0x00000200, 0x00000200, 0x00000200,	//PHS_U_WAVE
+	0x00000000, 0x00000000, 0x00000000,	//PHS_I_WAVE
 };
 	
 #else
