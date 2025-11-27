@@ -515,6 +515,7 @@ namespace WindowsTest
             this.txbAfterUpGrade = new TX.Framework.WindowUI.Controls.TXButton();
             this.txbBeforeUpGrade = new TX.Framework.WindowUI.Controls.TXButton();
             this.tpTCP = new System.Windows.Forms.TabPage();
+            this.tcpServerPanel1 = new LeafSoft.PartPanel.TCPServerPanel();
             this.tpEncryptTest = new System.Windows.Forms.TabPage();
             this.txTabControl3 = new TX.Framework.WindowUI.Controls.TXTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -778,6 +779,7 @@ namespace WindowsTest
             this.btn_电表通信串口 = new TX.Framework.WindowUI.Controls.TXButton();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.timerSystem = new System.Windows.Forms.Timer(this.components);
+            this.DataSend1 = new LeafSoft.Units.DataSend();
             this.txTabControl1.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -882,6 +884,7 @@ namespace WindowsTest
             this.groupBox5.SuspendLayout();
             this.tabPage10.SuspendLayout();
             this.PartUpgrade.SuspendLayout();
+            this.tpTCP.SuspendLayout();
             this.tpEncryptTest.SuspendLayout();
             this.txTabControl3.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -6600,6 +6603,7 @@ namespace WindowsTest
             // 
             // tpTCP
             // 
+            this.tpTCP.Controls.Add(this.tcpServerPanel1);
             this.tpTCP.Location = new System.Drawing.Point(4, 33);
             this.tpTCP.Name = "tpTCP";
             this.tpTCP.Padding = new System.Windows.Forms.Padding(3);
@@ -6607,6 +6611,16 @@ namespace WindowsTest
             this.tpTCP.TabIndex = 8;
             this.tpTCP.Text = "TCP";
             this.tpTCP.UseVisualStyleBackColor = true;
+            // 
+            // tcpServerPanel1
+            // 
+            this.tcpServerPanel1.AutoSize = true;
+            this.tcpServerPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcpServerPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tcpServerPanel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tcpServerPanel1.Name = "tcpServerPanel1";
+            this.tcpServerPanel1.Size = new System.Drawing.Size(172, 14);
+            this.tcpServerPanel1.TabIndex = 0;
             // 
             // tpEncryptTest
             // 
@@ -9885,6 +9899,13 @@ namespace WindowsTest
             // 
             this.timerSystem.Tick += new System.EventHandler(this.timerSystem_Tick);
             // 
+            // DataSend1
+            // 
+            this.DataSend1.Location = new System.Drawing.Point(0, 0);
+            this.DataSend1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DataSend1.Name = "DataSend1";
+            this.DataSend1.Size = new System.Drawing.Size(471, 188);
+            this.DataSend1.TabIndex = 0;
             // winMain
             // 
             this.AllowDrop = true;
@@ -10031,6 +10052,8 @@ namespace WindowsTest
             this.tabPage10.PerformLayout();
             this.PartUpgrade.ResumeLayout(false);
             this.PartUpgrade.PerformLayout();
+            this.tpTCP.ResumeLayout(false);
+            this.tpTCP.PerformLayout();
             this.tpEncryptTest.ResumeLayout(false);
             this.txTabControl3.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
